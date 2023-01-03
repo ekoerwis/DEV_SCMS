@@ -54,9 +54,11 @@
             <div class=" col-xl-3 col-lg-3 col-md-3  text-right">
                 <button id="btn-search" class="btn btn-primary" style="width: 75px;"  onclick="doSearch()"><i class="fas fa-search"></i> Search</button>
                 &nbsp;
-                <!-- <button id="btn-searchReset" class="btn btn-danger" style="width: 75px;"  onclick="doSearchReset()"><i class="fas fa-eraser"></i> Clear</button> -->
-                <!-- &nbsp; -->
+                <button id="btn-searchReset" class="btn btn-danger" style="width: 75px;"  onclick="doSearchReset()"><i class="fas fa-eraser"></i> Clear</button>
+                &nbsp;
                 <button id="btn-print" class="btn btn-success" style="width: 75px;" onclick="exportDataExcel()" ><i class="fas fa-print"></i> .Xlsx</button>
+                &nbsp;
+                <button id="btn-print" class="btn btn-warning" style="width: 75px;" onclick="exportPdf()" ><i class="fas fa-print"></i> .Pdf</button>
             </div>
         </div>
 
@@ -139,31 +141,31 @@
 
 
         // JS Searching and Reset
-        // function doSearch() {
+        function doSearch() {
 
-        //     var monthNumber = $('#cg-MonthNumber').combogrid('getValue');
-        //     var yearNumber =  $('#tb-Year').numberbox('getValue');
+            var dateParam = $('#dt-tdate').datebox('getValue');
+            // var yearNumber =  $('#tb-Year').numberbox('getValue');
 
-        //     if( monthNumber.trim() == '' || monthNumber.trim() == null ){
-        //         alert('"Month" Harus Di Isi Dahulu');
-        //         $('#cg-MonthNumber').textbox('textbox').focus();
-        //         exit;   
-        //     } 
+            if( dateParam.trim() == '' || dateParam.trim() == null ){
+                alert('"Tanggal" Harus Di Isi Dahulu');
+                $('#dt-tdate').datebox('textbox').focus();
+                exit;   
+            } 
 
-        //     if( yearNumber.trim() == '' || yearNumber.trim() == null ){
-        //         alert('"Year" Harus Di Isi Dahulu');
-        //         $('#tb-Year').textbox('textbox').focus();
-        //         exit;   
-        //     } 
+            // if( yearNumber.trim() == '' || yearNumber.trim() == null ){
+            //     alert('"Year" Harus Di Isi Dahulu');
+            //     $('#tb-Year').textbox('textbox').focus();
+            //     exit;   
+            // } 
 
-        //     $('#dg').datagrid('load', {
-        //         MONTHNUMBER: $('#cg-MonthNumber').combogrid('getValue'),
-        //         YEARNUMBER: $('#tb-Year').numberbox('getValue'),
-        //     });
-        // }
+            $('#dg').datagrid('load', {
+                TDATE: $('#dt-tdate').datebox('getValue'),
+                // YEARNUMBER: $('#tb-Year').numberbox('getValue'),
+            });
+        }
 
         function doSearchReset() {
-            // $('#cg-MonthNumber').combogrid('reset');
+            $('#dt-tdate').datebox('reset');
             // $('#tb-Year').numberbox('reset');
 
         }
