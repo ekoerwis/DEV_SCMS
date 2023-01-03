@@ -22,7 +22,7 @@ class logSheetSterilizer extends \App\Controllers\BaseController
 		
 		$this->logSheetSterilizerModel = new logSheetSterilizerModel;
 
-		$this->data['site_title'] = 'Log Sheet Fertilizer';
+		$this->data['site_title'] = 'LogSheet Fertilizer ';
 
 		$this->addStyle ( $this->config->baseURL . 'public/vendors/jquery-easyui-1.9.12/themes/icon.css');
 		// $this->addStyle ( $this->config->baseURL . 'public/vendors/jquery-easyui-1.9.12/themes/default/easyui.css');
