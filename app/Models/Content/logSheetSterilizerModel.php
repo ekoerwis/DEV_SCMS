@@ -37,7 +37,7 @@ class logSheetSterilizerModel extends \App\Models\BaseModel
 		}
 
         $sqlReport = $this->reportSqlString($data_db['TDATE']);
-        
+
         $mainSql="SELECT * FROM ($sqlReport) WHERE ROWNUM > 0";
 
         $limit = $page*$rows;
@@ -66,10 +66,17 @@ class logSheetSterilizerModel extends \App\Models\BaseModel
     {   
         $sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'UEP';
         $order = isset($_POST['order']) ? strval($_POST['order']) : 'ASC';
+        
+
+        if (empty($_GET['TDATE'])) {
+			$data_db['TDATE'] = '';
+		} else {
+			$data_db['TDATE'] =  date("d/M/Y", strtotime($_GET['TDATE']));
+		}
 
         $result = array();
 
-        $sqlReport = $this->reportSqlString();
+        $sqlReport = $this->reportSqlString($data_db['TDATE']);
         $sql = "SELECT * FROM ( $sqlReport ) WHERE ROWNUM > 0
         ORDER BY $sort $order ";
         

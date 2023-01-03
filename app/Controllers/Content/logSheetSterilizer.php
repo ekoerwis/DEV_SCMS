@@ -75,6 +75,13 @@ class logSheetSterilizer extends \App\Controllers\BaseController
         $data = $this->data;
         $data_parameter = $this->logSheetSterilizerModel->dataListExcel();
 
+        
+        if (empty($_GET['TDATE'])) {
+			$data_db['TDATE'] = '';
+		} else {
+			$data_db['TDATE'] =  date("d/M/Y", strtotime($_GET['TDATE']));
+		}
+
         $userOrganisasi = $this->session->get('userOrganisasi');
         $userid = $userOrganisasi['LOGINID'];
         
@@ -82,40 +89,128 @@ class logSheetSterilizer extends \App\Controllers\BaseController
         $fileName = 'writable/filedownload/logSheetSterilizer_'.$userid.'.xlsx';
         $spreadsheet = new Spreadsheet();
 
+        $spreadsheet->getActiveSheet()->setShowGridlines(false);
+
+        $spreadsheet
+        ->getActiveSheet()
+        ->getStyle('A5:N6')
+        ->getBorders()
+        ->getAllBorders()
+        ->setBorderStyle(Border::BORDER_THIN);
+
+        $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(33, 'px');
+        $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(90, 'px');
+        $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(73, 'px');
+        $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(73, 'px');
+        $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(73, 'px');
+        $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(73, 'px');
+        $spreadsheet->getActiveSheet()->getColumnDimension('G')->setWidth(73, 'px');
+        $spreadsheet->getActiveSheet()->getColumnDimension('H')->setWidth(73, 'px');
+        $spreadsheet->getActiveSheet()->getColumnDimension('I')->setWidth(73, 'px');
+        $spreadsheet->getActiveSheet()->getColumnDimension('J')->setWidth(73, 'px');
+        $spreadsheet->getActiveSheet()->getColumnDimension('K')->setWidth(73, 'px');
+        $spreadsheet->getActiveSheet()->getColumnDimension('L')->setWidth(108, 'px');
+        $spreadsheet->getActiveSheet()->getColumnDimension('M')->setWidth(140, 'px');
+        $spreadsheet->getActiveSheet()->getColumnDimension('N')->setWidth(220, 'px');
+
+        $spreadsheet->getActiveSheet()->getStyle('A5:N6')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $spreadsheet->getActiveSheet()->getStyle('A5:N6')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+
+        $spreadsheet->getActiveSheet()->getStyle('F3:J3')->getFont()->setBold(true);
+        $spreadsheet->getActiveSheet()->getStyle('F3:J3')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+
         
         $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setCellValue('A1', 'CRTTS');
-        $sheet->setCellValue('B1', 'CRTBY');
-        $sheet->setCellValue('C1', 'SVRDT');
-        $sheet->setCellValue('D1', 'POSTDT');
-        $sheet->setCellValue('E1', 'ORG_ID');
-        $sheet->setCellValue('F1', 'ORG_CODE');
-        $sheet->setCellValue('G1', 'ORG_CODE_PR');
-        $sheet->setCellValue('H1', 'DT_ID');
-        $sheet->setCellValue('I1', 'DT_UEP');
-        $sheet->setCellValue('J1', 'DT_DIV');
-        $sheet->setCellValue('K1', 'DT_ADD');
-        $sheet->setCellValue('L1', 'DT_VAL');
-        $sheet->setCellValue('M1', 'DT_TYPE');
-        $sheet->setCellValue('N1', 'TDATETIME');
+        
+        // HEADER
+        $sheet->mergeCells('A1:D1');
+        $sheet->setCellValue('A1', 'UNION SAMPOERNA TRIPUTRA PERSADA');
+        $sheet->mergeCells('A2:D2');
+        $sheet->setCellValue('A2', 'PT. SMG');
+        $sheet->mergeCells('A3:D3');
+        $sheet->setCellValue('A3', 'PALM OIL MILL');
 
-        $rows = 2;
+        $sheet->mergeCells('F3:J3');
+        $sheet->setCellValue('F3', 'STERILIZER STATION LOG SHEET');
 
+        $sheet->setCellValue('M1', 'HARI/TANGGAL');
+        $sheet->setCellValue('M2', 'SHIFT');
+        $sheet->setCellValue('M3', 'JAM KERJA');
+        
+        $sheet->setCellValue('N1', ': '.$data_db['TDATE']);
+        $sheet->setCellValue('N2', ': ');
+        $sheet->setCellValue('N3', ': ');
+        // BATAS HEADER
+
+        // TABLE HEADER
+        $sheet->mergeCells('A5:A6');
+        $sheet->setCellValue('A5', 'NO');
+        $sheet->mergeCells('B5:B6');
+        $sheet->setCellValue('B5', 'STERILIZER');
+        
+        $sheet->mergeCells('C5:D5');
+        $sheet->setCellValue('C5', 'BUAH MASUK');
+        $sheet->setCellValue('C6', 'START');
+        $sheet->setCellValue('D6', 'STOP');
+        $sheet->mergeCells('E5:E6');
+        $spreadsheet->getActiveSheet()->getStyle('E5:E6')->getAlignment()->setWrapText(true);
+        $sheet->setCellValue('E5', 'WAKTU (MENIT)');
+
+        $sheet->mergeCells('F5:G5');
+        $sheet->setCellValue('F5', 'BUAH MASUK');
+        $sheet->setCellValue('F6', 'START');
+        $sheet->setCellValue('G6', 'STOP');
+        $sheet->mergeCells('H5:H6');
+        $spreadsheet->getActiveSheet()->getStyle('H5:H6')->getAlignment()->setWrapText(true);
+        $sheet->setCellValue('H5', 'WAKTU (MENIT)');
+
+        $sheet->mergeCells('I5:J5');
+        $sheet->setCellValue('I5', 'BUAH KELUAR');
+        $sheet->setCellValue('I6', 'START');
+        $sheet->setCellValue('J6', 'STOP');
+        $sheet->mergeCells('K5:K6');
+        $spreadsheet->getActiveSheet()->getStyle('K5:K6')->getAlignment()->setWrapText(true);
+        $sheet->setCellValue('K5', 'WAKTU (MENIT)');
+
+        $sheet->mergeCells('L5:L6');
+        $spreadsheet->getActiveSheet()->getStyle('L5:L6')->getAlignment()->setWrapText(true);
+        $sheet->setCellValue('L5', 'TOTAL WAKTU (MENIT)');
+
+        $sheet->mergeCells('M5:M6');
+        $sheet->setCellValue('M5', 'PARAF MANDOR');
+
+        $sheet->mergeCells('N5:N6');
+        $sheet->setCellValue('N5', 'KETERANGAN');
+
+        // BATAS TABLE HEADER
+
+        $rows = 7;
+
+        $numData=0;
         foreach ($data_parameter as $val) {
-            $sheet->setCellValue('A' . $rows, $val['CRTTS']);
-            $sheet->setCellValue('B' . $rows, $val['CRTBY']);
-            $sheet->setCellValue('C' . $rows, $val['SVRDT']);
-            $sheet->setCellValue('D' . $rows, $val['POSTDT']);
-            $sheet->setCellValue('E' . $rows, $val['ORG_ID']);
-            $sheet->setCellValue('F' . $rows, $val['ORG_CODE']);
-            $sheet->setCellValue('G' . $rows, $val['ORG_CODE_PR']);
-            $sheet->setCellValue('H' . $rows, $val['DT_ID']);
-            $sheet->setCellValue('I' . $rows, $val['DT_UEP']);
-            $sheet->setCellValue('J' . $rows, $val['DT_DIV']);
-            $sheet->setCellValue('K' . $rows, $val['DT_ADD']);
-            $sheet->setCellValue('L' . $rows, $val['DT_VAL']);
-            $sheet->setCellValue('M' . $rows, $val['DT_TYPE']);
-            $sheet->setCellValue('N' . $rows, $val['TDATETIME']);
+            $spreadsheet
+            ->getActiveSheet()
+            ->getStyle('A7:N' . $rows)
+            ->getBorders()
+            ->getAllBorders()
+            ->setBorderStyle(Border::BORDER_THIN);
+
+            $numData++;
+
+            $sheet->setCellValue('A' . $rows, $numData);
+            $sheet->setCellValue('B' . $rows, $val['STZID']);
+            $sheet->setCellValue('C' . $rows, $val['STZIN_ST']);
+            $sheet->setCellValue('D' . $rows, $val['STZIN_ED']);
+            $sheet->setCellValue('E' . $rows, $val['STZIN_MN']);
+            $sheet->setCellValue('F' . $rows, $val['STZPRO_ST']);
+            $sheet->setCellValue('G' . $rows, $val['STZPRO_ED']);
+            $sheet->setCellValue('H' . $rows, $val['STZPRO_MN']);
+            $sheet->setCellValue('I' . $rows, $val['STZOUT_ST']);
+            $sheet->setCellValue('J' . $rows, $val['STZOUT_ED']);
+            $sheet->setCellValue('K' . $rows, $val['STZOUT_MN']);
+            $sheet->setCellValue('L' . $rows, $val['STZTM_TOT']);
+            $sheet->setCellValue('M' . $rows, $val['STZACC']);
+            $sheet->setCellValue('N' . $rows, $val['STZNOTE']);
 
 
             $rows++;

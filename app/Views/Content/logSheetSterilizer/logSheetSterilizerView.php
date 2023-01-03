@@ -182,25 +182,16 @@
 
         function exportDataExcel() {
         
-            // var monthNumber = $('#cg-MonthNumber').combogrid('getValue');
+            var dateParam = $('#dt-tdate').datebox('getValue');
             // var yearNumber =  $('#tb-Year').numberbox('getValue');
 
-            // if( monthNumber.trim() == '' || monthNumber.trim() == null ){
-            //     alert('"Month" Harus Di Isi Dahulu');
-            //     $('#cg-MonthNumber').textbox('textbox').focus();
-            //     exit;   
-            // } 
+            if( dateParam.trim() == '' || dateParam.trim() == null ){
+                alert('"Tanggal" Harus Di Isi Dahulu');
+                $('#dt-tdate').datebox('textbox').focus();
+                exit;   
+            } 
 
-            // if( yearNumber.trim() == '' || yearNumber.trim() == null ){
-            //     alert('"Year" Harus Di Isi Dahulu');
-            //     $('#tb-Year').textbox('textbox').focus();
-            //     exit;   
-            // } 
-            
-            // MONTHNUMBER= $('#cg-MonthNumber').combogrid('getValue');
-            // YEARNUMBER= $('#tb-Year').numberbox('getValue');
-
-        var url = "<?php  echo site_url() . '/../Content/logSheetSterilizer/exportExcelFile'; ?>";
+        var url = "<?php  echo site_url() . '/../Content/logSheetSterilizer/exportExcelFile?TDATE='; ?>"+dateParam;
         window.open(url, "_blank");
     }
 
