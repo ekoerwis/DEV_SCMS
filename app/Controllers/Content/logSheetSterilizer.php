@@ -41,7 +41,7 @@ class logSheetSterilizer extends \App\Controllers\BaseController
 		// tambahan untuk client paging
         $this->addJs($this->config->baseURL . 'public/themes/modern/js/easyui-dg-client-pagination-custom.js');
 		
-		helper(['cookie', 'form']);
+		helper(['cookie', 'form', 'stringSQLrep', 'mpdfCustom']);
 	}
 
 	public function index(){
@@ -239,6 +239,108 @@ class logSheetSterilizer extends \App\Controllers\BaseController
         echo "<script>window.close();</script>";
 
         exit;
+    }
+
+    public function exportPDFFile()
+    {
+        $this->cekHakAkses('READ_DATA');
+
+		// $exportType=isset($_GET['exportType']) ? strval($_GET['exportType']) : '';
+		// $BUDGETYEAR = isset($_GET['YEARNUMBER']) ? strval($_GET['YEARNUMBER']) : '';
+		// $PERIOD = isset($_GET['MONTHNUMBER']) ? strval($_GET['MONTHNUMBER']) : '';
+		// $SITE_ID = isset($_GET['SITE_ID']) ? strval($_GET['SITE_ID']) : '';
+		// $TARGETTYPE = isset($_GET['TARGETTYPE']) ? strval($_GET['TARGETTYPE']) : '';
+
+        if (empty($_GET['TDATE'])) {
+			$TDATE = '';
+		} else {
+			$TDATE =  date("d/M/Y", strtotime($_GET['TDATE']));
+		}
+
+
+		$data['Judul'] = 'Laporan LogSheet';
+		$data['data_sql'] = $this->logSheetSterilizerModel->dataListExcel();
+
+        $mpdf = new \Mpdf\Mpdf([
+            'mode' => 'utf-8', 
+            'format' => 'A4-P', 
+            'setAutoTopMargin' => 'stretch', 
+            'setAutoBottomMargin' => 'stretch',
+            'shrink_tables_to_fit'=>'false'
+        ]);
+
+        // $mpdf->shrink_tables_to_fit=-1;
+
+        $headerPdf = '<table style="width:100%;">
+        <tr>
+            <td style=" width:33.33%; text-align: left;"> 
+                <table style="font-size: 8pt;">
+                    <tr><td  style="font-size: 7pt;color: #0000ff;"><b>UNION SAMPOERNA TRIPUTRA PERSADA</b></td></tr>
+                    <tr><td>PT. ...........</td></tr>
+                    <tr><td>PALM OIL MILL</td></tr>
+                </table>
+            </td>
+            <td style="width:33.33%; text-align:center;">  
+                STERILIZER STATION LOGSHEET
+            </td>
+            <td style="width:33.33%; text-align:right;">  
+                <table style="float:right;font-size: 8pt;">
+                    <tr><td style="text-align:left;">Hari/Tanggal</td><td>:</td><td>'.$TDATE.'</td></tr>
+                    <tr><td style="text-align:left;">Shift</td><td>:</td><td style="text-align:left;">........</td></tr>
+                    <tr><td style="text-align:left;">Jam Kerja</td><td>:</td><td style="text-align:left;">........</td></tr>
+                </table>
+            </td>
+        </tr>
+        </table>
+        <hr style="height:2px;border-width:0;color:gray;background-color:gray">';
+
+        // <tr><td style="text-align:left;">Jam Kerja</td><td>:</td><td>{PAGENO} of {nbpg}</td></tr>
+
+        $mpdf->SetHTMLHeader($headerPdf);
+
+        $footerPdf = '<table style="width:100%;font-size: 6pt; border-collapse: collapse;">
+        <tr>
+            <td colspan=2 style=" width:12.5%; text-align: center;border: 1px solid black;">Dibuat</td>
+            <td colspan=2 style=" width:12.5%; text-align: center;border: 1px solid black;">Diperiksa</td>
+            <td style=" width:12.5%; text-align: center;border: 1px solid black;">Disetujui </td>
+            <td style=" width:12.5%; text-align: center;border: 1px solid black;">Diketahui</td>
+            <td colspan=2 style=" width:12.5%; text-align: center;"> </td>
+        </tr>
+        <tr>
+            <td style=" width:12.5%;height:60px;border: 1px solid black;"></td>
+            <td style=" width:12.5%;height:60px;border: 1px solid black;"></td>
+            <td style=" width:12.5%;height:60px;border: 1px solid black;"></td>
+            <td style=" width:12.5%;height:60px;border: 1px solid black;"></td>
+            <td style=" width:12.5%;height:60px;border: 1px solid black;"></td>
+            <td style=" width:12.5%;height:60px;border: 1px solid black;"></td>
+            <td colspan=2 style="width:12.5%;height:60px; text-align: center;vertical-align: top;">FM Condensate</td>
+        </tr>
+        <tr>
+            <td style=" width:12.5%;text-align: center;border: 1px solid black;">Opt. Proses A</td>
+            <td style=" width:12.5%;text-align: center;border: 1px solid black;">Opt. Proses B</td>
+            <td style=" width:12.5%;text-align: center;border: 1px solid black;">Ast. Proses A</td>
+            <td style=" width:12.5%;text-align: center;border: 1px solid black;">Ast. Proses B</td>
+            <td style=" width:12.5%;text-align: center;border: 1px solid black;">Asst Mill</td>
+            <td style=" width:12.5%;text-align: center;border: 1px solid black;">Mill Manager</td>
+            <td style=" width:12.5%;"></td>
+            <td style=" width:12.5%;"></td>
+        </tr>
+        </table>
+        ';
+
+        // <tr><td style="text-align:left;">Jam Kerja</td><td>:</td><td>{PAGENO} of {nbpg}</td></tr>
+
+        $mpdf->SetHTMLFooter($footerPdf);
+
+        $mpdf->AddPage();
+
+        $html = view('Content/logSheetSterilizer/pdfView.php', $data);
+        $mpdf->WriteHTML($html);
+        $this->response->setHeader('Content-Type', 'application/pdf');
+        $mpdf->Output($data['Judul'].'.pdf', 'I'); // opens in browser
+        //$mpdf->Output('arjun.pdf','D'); // it downloads the file into the user system, with give name
+        //return view('welcome_message');
+		
     }
 
 

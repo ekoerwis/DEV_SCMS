@@ -44,6 +44,7 @@
         <div class='col-xl-12 col-lg-12 col-md-12 row'>
             <div class="col-xl-9 col-lg-9 col-md-9 row">
                 <input id="dt-tdate" name="TDATE" class="easyui-datebox" style="width: 200px;"  data-options="required:true">
+                <input id="cb-dt_div" name="DT_DIV" class="" style="width:200px;" >
                 <!-- <div class="col-xl-3 col-lg-3 col-md-3 row"> -->
                     <!-- <input id="tb-Year" name="YEARNUMBER" class="easyui-numberbox " style="width: 100px;"  data-options="required:true" prompt="Year"> -->
                     <!-- <input id="cg-MonthNumber" name="MONTHNUMBER" class="easyui-combogrid" style="width: 200px;"  data-options="required:true" prompt="Month"> -->
@@ -58,7 +59,7 @@
                 &nbsp;
                 <button id="btn-print" class="btn btn-success" style="width: 75px;" onclick="exportDataExcel()" ><i class="fas fa-print"></i> .Xlsx</button>
                 &nbsp;
-                <button id="btn-print" class="btn btn-warning" style="width: 75px;" onclick="exportPdf()" ><i class="fas fa-print"></i> .Pdf</button>
+                <button id="btn-print" class="btn btn-warning" style="width: 75px;" onclick="exportDataPDF()" ><i class="fas fa-print"></i> .Pdf</button>
             </div>
         </div>
 
@@ -69,38 +70,35 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
-            settingCalendarTDATE();
+            settingCalendarTDATE();            
 
-            // $('#cg-MonthNumber').combogrid({
-            //     panelWidth: 350,
-            //     url: "<?php echo site_url() . '/../Content/logSheetSterilizer/getParameterValueByParameterCode?id=GLB04'; ?>",
-            //     idField: 'PARAMETERVALUECODE',
-            //     textField: 'PARAMETERVALUE',
-            //     mode: 'remote',
-            //     loadMsg: 'Loading',
-            //     pagination: true,
-            //     fitColumns: true,
-            //     multiple: false,
-            //     pageSize:50,
-            //     columns: [
-            //         [{
-            //                 field: 'PARAMETERVALUECODE',
-            //                 title: 'Month',
-            //                 width: 100
-            //             },
-            //             {
-            //                 field: 'PARAMETERVALUE',
-            //                 title: 'Name',
-            //                 width: 200
-            //             }
-            //         ]
-            //     ],
-            //     onSelect: function(index, row) {
-            //     }
-            // });
-
-
-            // doSearch();
+            $('#cb-dt_div').combobox({
+                valueField: 'id',
+                textField: 'text',
+                prompt:"DT_DIV",
+                data :[
+                    {
+                        "id": '1',
+                        "text": '1'
+                    },
+                    {
+                        "id": '2',
+                        "text": '2'
+                    },
+                    {
+                        "id": '3',
+                        "text": '3'
+                    },
+                    {
+                        "id": '4',
+                        "text": '4'
+                    },
+                    {
+                        "id": '5',
+                        "text": '5'
+                    },
+                ]
+            });
 
         });
 
@@ -160,13 +158,13 @@
 
             $('#dg').datagrid('load', {
                 TDATE: $('#dt-tdate').datebox('getValue'),
-                // YEARNUMBER: $('#tb-Year').numberbox('getValue'),
+                DT_DIV: $('#cb-dt_div').combobox('getValue'),
             });
         }
 
         function doSearchReset() {
             $('#dt-tdate').datebox('reset');
-            // $('#tb-Year').numberbox('reset');
+            $('#cb-dt_div').combobox('reset');
 
         }
 
@@ -183,7 +181,7 @@
         function exportDataExcel() {
         
             var dateParam = $('#dt-tdate').datebox('getValue');
-            // var yearNumber =  $('#tb-Year').numberbox('getValue');
+            var dtDivParam =  $('#cb-dt_div').combobox('getValue');
 
             if( dateParam.trim() == '' || dateParam.trim() == null ){
                 alert('"Tanggal" Harus Di Isi Dahulu');
@@ -191,8 +189,23 @@
                 exit;   
             } 
 
-        var url = "<?php  echo site_url() . '/../Content/logSheetSterilizer/exportExcelFile?TDATE='; ?>"+dateParam;
-        window.open(url, "_blank");
+            var url = "<?php  echo site_url() . '/../Content/logSheetSterilizer/exportExcelFile?TDATE='; ?>"+dateParam+"&DT_DIV="+dtDivParam;
+            window.open(url, "_blank");
+        }
+
+        function exportDataPDF() {
+        
+            var dateParam = $('#dt-tdate').datebox('getValue');
+            var dtDivParam =  $('#cb-dt_div').combobox('getValue');
+
+            if( dateParam.trim() == '' || dateParam.trim() == null ){
+                alert('"Tanggal" Harus Di Isi Dahulu');
+                $('#dt-tdate').datebox('textbox').focus();
+                exit;   
+            } 
+
+            var url = "<?php  echo site_url() . '/../Content/logSheetSterilizer/exportPDFFile?TDATE='; ?>"+dateParam+"&DT_DIV="+dtDivParam;
+            window.open(url, "_blank");
     }
 
     </script>   

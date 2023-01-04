@@ -9,9 +9,20 @@ class logSheetSterilizerModel extends \App\Models\BaseModel
 		parent::__construct();
 	}
 
-    public function reportSqlString($tdate='' ){
+    public function reportSqlString($tdate='' ,$dt_div=''){
 
-        $sql="SELECT LGSID, UEP,TO_CHAR(TO_DATE('01/01/1970 00:00:00', 'DD/MM/YYYY HH24:MI:SS') + NUMTODSINTERVAL(UEP / 1000,'SECOND'), 'DD/MON/YYYY HH24:MI:SS') TDATE_UEP, COMP_ID, SITE_ID, POSTDT, STZID, STZIN_ST, STZIN_ED, STZIN_MN, STZPRO_ST, STZPRO_ED, STZPRO_MN, STZOUT_ST, STZOUT_ED, STZOUT_MN, STZTM_TOT, STZACC, STZNOTE FROM POM_LGS_STZ
+        $w_tdate = " ";
+        $w_dt_div = " ";
+
+        if($tdate != ""){
+            $w_tdate = " AND POSTDT = '$tdate' ";
+        }
+        
+        if($dt_div != ""){
+            $w_dt_div = " AND STZID = '$dt_div' ";
+        }
+
+        $sql="SELECT LGSID, UEP,TO_DATE( TO_CHAR(FROM_TZ( CAST( (TO_DATE('19700101', 'YYYYMMDD') + ( 1 / 24 / 60 / 60 / 1000) * UEP) AS TIMESTAMP ), 'UTC' ) AT TIME ZONE '+07:00','YYYY-MM-DD HH24:MI:SS') , 'YYYY-MM-DD HH24:MI:SS') TDATE_UEP_DATEF,TO_CHAR(FROM_TZ( CAST( (TO_DATE('19700101', 'YYYYMMDD') + ( 1 / 24 / 60 / 60 / 1000) * UEP) AS TIMESTAMP ), 'UTC' ) AT TIME ZONE '+07:00','DD/MON/YYYY HH24:MI:SS')  TDATE_UEP, COMP_ID, SITE_ID, POSTDT, STZID, STZIN_ST, STZIN_ED, STZIN_MN, STZPRO_ST, STZPRO_ED, STZPRO_MN, STZOUT_ST, STZOUT_ED, STZOUT_MN, STZTM_TOT, STZACC, STZNOTE FROM POM_LGS_STZ WHERE  ROWNUM > 0 $w_tdate $w_dt_div
         ";
 
         return $sql;
@@ -31,12 +42,14 @@ class logSheetSterilizerModel extends \App\Models\BaseModel
         $sess_site= $userOrganisasi['COMPANYSITEID'];
 
         if (empty($_POST['TDATE'])) {
-			$data_db['TDATE'] = '';
+			$TDATE  = '';
 		} else {
-			$data_db['TDATE'] =  date("d/M/Y", strtotime($_POST['TDATE']));
+			$TDATE  =  date("d/M/Y", strtotime($_POST['TDATE']));
 		}
 
-        $sqlReport = $this->reportSqlString($data_db['TDATE']);
+        $DT_DIV = isset($_POST['DT_DIV']) ? strval($_POST['DT_DIV']) : '';
+
+        $sqlReport = $this->reportSqlString($TDATE, $DT_DIV );
 
         $mainSql="SELECT * FROM ($sqlReport) WHERE ROWNUM > 0";
 
@@ -52,7 +65,7 @@ class logSheetSterilizerModel extends \App\Models\BaseModel
         $result["total"] = $sql['JUMLAH'];
         
 
-        $sql = "SELECT * FROM (SELECT LGSID, UEP, TDATE_UEP, COMP_ID, SITE_ID, POSTDT, STZID, STZIN_ST, STZIN_ED, STZIN_MN, STZPRO_ST, STZPRO_ED, STZPRO_MN, STZOUT_ST, STZOUT_ED, STZOUT_MN, STZTM_TOT, STZACC, STZNOTE, ROWNUM AS RNUM FROM ( $mainSql ORDER BY $sort $order) WHERE ROWNUM <= $limit) WHERE RNUM > $offset";
+        $sql = "SELECT * FROM (SELECT LGSID, UEP, TDATE_UEP_DATEF, TDATE_UEP, COMP_ID, SITE_ID, POSTDT, STZID, STZIN_ST, STZIN_ED, STZIN_MN, STZPRO_ST, STZPRO_ED, STZPRO_MN, STZOUT_ST, STZOUT_ED, STZOUT_MN, STZTM_TOT, STZACC, STZNOTE, ROWNUM AS RNUM FROM ( $mainSql ORDER BY $sort $order) WHERE ROWNUM <= $limit) WHERE RNUM > $offset";
         
         $sql = $this->db->query($sql)->getResultArray();
 
@@ -69,14 +82,16 @@ class logSheetSterilizerModel extends \App\Models\BaseModel
         
 
         if (empty($_GET['TDATE'])) {
-			$data_db['TDATE'] = '';
+			$TDATE  = '';
 		} else {
-			$data_db['TDATE'] =  date("d/M/Y", strtotime($_GET['TDATE']));
+			$TDATE  =  date("d/M/Y", strtotime($_GET['TDATE']));
 		}
+
+        $DT_DIV = isset($_GET['DT_DIV']) ? strval($_GET['DT_DIV']) : '';
 
         $result = array();
 
-        $sqlReport = $this->reportSqlString($data_db['TDATE']);
+        $sqlReport = $this->reportSqlString($TDATE, $DT_DIV);
         $sql = "SELECT * FROM ( $sqlReport ) WHERE ROWNUM > 0
         ORDER BY $sort $order ";
         
