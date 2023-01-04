@@ -76,41 +76,7 @@
 
 </style>
 
-
-<!-- <div id="containerReport" class="card"> -->
-<?php //echo isset($PARAM['BUDGETYEAR']) ? strval($PARAM['BUDGETYEAR']) : ''; ?>
-
 <div id="containerReport" class="reportContent">
-<?php  if(isset($viewFormat) AND $viewFormat=='Web') {?>
-    <div id="tb-pv" class="pb-2">        
-        <div class='col-xl-12 col-lg-12 col-md-12 row pt-2 ml-2'>
-            <div class="col-xl-9 col-lg-9 col-md-9 row">
-            <!-- <form method="post" action=""> -->
-                <input id="tb-Year" name="YEARNUMBER" class="easyui-numberbox" style="width:80px;" data-options="required:true" prompt="Year">&nbsp;
-                <input id="cg-MonthNumber" name="MONTHNUMBER" class="" style="width: 100px;" data-options="" prompt="Month">&nbsp;
-                <input id="cg-SiteID" name="SITE_ID" class="" style="width: 100px;" data-options="" prompt="Site">&nbsp;
-                <input id="cg-TargetType" name="TARGETTYPE" class=""  data-options="" style="width: 100px;" prompt="Target Type">                
-                <!-- <input id="cg-TargetCode" name="TARGETCODE" class="easyui-combogrid" style="width: 25%;"  data-options="" prompt="Target Code"> -->
-            </div>
-            
-            <div class=" row">
-                <button type="submit" name="SubmitSearch" onclick="doSearch()" class="btn btn-primary btnSearch" value="SubmitSearch" style="height:30px;" ><i class="fas fa-search"></i> Search</button>
-            <!-- </form> -->
-                &nbsp;&nbsp;&nbsp;
-                <button  class="btn btn-danger btnResetSearch" onclick="doSearchReset()" style="height:30px;"><i class="fas fa-eraser" ></i> Clear</button>
-                &nbsp;&nbsp;&nbsp;
-                <!-- <button  class="btn btn-warning " onclick="exportDataPdf()" style="height:30px;"><i class="fas fa-print"></i> *.Pdf</button>
-                &nbsp;&nbsp;&nbsp;
-                <button id="btn-print" class="btn btn-success btnDownloadXls" style="height:30px;" onclick="exportDataExcel()" ><i class="fas fa-print"></i> .Xlsx</button> -->
-                <button  class="btn btn-warning " onclick="exportData('pdf')" style="height:30px;"><i class="fas fa-print"></i> *.Pdf</button>
-                &nbsp;&nbsp;&nbsp;
-                <button id="btn-print" class="btn btn-success btnDownloadXls" style="height:30px;" onclick="exportData('Spreadsheet')" ><i class="fas fa-print"></i> .Xlsx</button>
-            </div>
-        </div>
-
-        <hr>
-    </div>
-<?php } ?>
 
     
 <?php
@@ -119,19 +85,19 @@
 ?>
 
     <table id="dataTable" class="table1">
-        <thead >
+        <thead style="">
             <tr class="trHeadTable1">
-                <th class="thTable1" rowspan=2 style="border: 1px solid black;border-collapse: collapse;text-align: center;" width="30px">No</th>
-                <th class="thTable1" rowspan=2  style="border: 1px solid black;border-collapse: collapse;text-align: center;" width="70px">STERILIZER</th>
-                <th class="thTable1" colspan=2 style="border: 1px solid black;border-collapse: collapse;text-align: center;">MASUK BUAH</th>
-                <th class="thTable1" rowspan=2  style="border: 1px solid black;border-collapse: collapse;text-align: center;" width="50px">WAKTU (MENIT)</th>
-                <th class="thTable1" colspan=2 style="border: 1px solid black;border-collapse: collapse;text-align: center;">MEREBUS</th>
-                <th class="thTable1" rowspan=2  style="border: 1px solid black;border-collapse: collapse;text-align: center;" width="50px">WAKTU (MENIT)</th>
-                <th class="thTable1" colspan=2 style="border: 1px solid black;border-collapse: collapse;text-align: center;">KELUAR BUAH</th>
-                <th class="thTable1" rowspan=2  style="border: 1px solid black;border-collapse: collapse;text-align: center;" width="50px">WAKTU (MENIT)</th>
-                <th class="thTable1" rowspan=2  style="border: 1px solid black;border-collapse: collapse;text-align: center;" width="50px">TOTAL WAKTU (MENIT)</th>
-                <th class="thTable1" rowspan=2  style="border: 1px solid black;border-collapse: collapse;text-align: center;" width="100px">PARAF MANDOR</th>
-                <th class="thTable1" rowspan=2  style="border: 1px solid black;border-collapse: collapse;text-align: center;" width="100px">KETERANGAN</th>
+                <th class="thTable1" rowspan=2 style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="30px">No</th>
+                <th class="thTable1" rowspan=2  style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="70px">STERILIZER</th>
+                <th class="thTable1" colspan=2 style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;">MASUK BUAH</th>
+                <th class="thTable1" rowspan=2  style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px">WAKTU (MENIT)</th>
+                <th class="thTable1" colspan=2 style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;">MEREBUS</th>
+                <th class="thTable1" rowspan=2  style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px">WAKTU (MENIT)</th>
+                <th class="thTable1" colspan=2 style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;">KELUAR BUAH</th>
+                <th class="thTable1" rowspan=2  style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px">WAKTU (MENIT)</th>
+                <th class="thTable1" rowspan=2  style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px">TOTAL WAKTU (MENIT)</th>
+                <th class="thTable1" rowspan=2  style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="100px">PARAF MANDOR</th>
+                <th class="thTable1" rowspan=2  style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="100px">KETERANGAN</th>
             </tr>
             <tr class="trHeadTable1">
                 <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center;" width="50px">START</th>

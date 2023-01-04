@@ -79,7 +79,9 @@ class logSheetSterilizer extends \App\Controllers\BaseController
         if (empty($_GET['TDATE'])) {
 			$data_db['TDATE'] = '';
 		} else {
-			$data_db['TDATE'] =  date("d/M/Y", strtotime($_GET['TDATE']));
+			$data_db['TDATE'] =  date("d-M-y", strtotime($_GET['TDATE']));
+
+            $hari = $this->indonesiaDays(date("l", strtotime($_GET['TDATE'])));
 		}
 
         $userOrganisasi = $this->session->get('userOrganisasi');
@@ -126,7 +128,7 @@ class logSheetSterilizer extends \App\Controllers\BaseController
         $sheet->mergeCells('A1:D1');
         $sheet->setCellValue('A1', 'UNION SAMPOERNA TRIPUTRA PERSADA');
         $sheet->mergeCells('A2:D2');
-        $sheet->setCellValue('A2', 'PT. SMG');
+        $sheet->setCellValue('A2', 'PT. .....................');
         $sheet->mergeCells('A3:D3');
         $sheet->setCellValue('A3', 'PALM OIL MILL');
 
@@ -137,7 +139,7 @@ class logSheetSterilizer extends \App\Controllers\BaseController
         $sheet->setCellValue('M2', 'SHIFT');
         $sheet->setCellValue('M3', 'JAM KERJA');
         
-        $sheet->setCellValue('N1', ': '.$data_db['TDATE']);
+        $sheet->setCellValue('N1', ': '.$hari.','.$data_db['TDATE']);
         $sheet->setCellValue('N2', ': ');
         $sheet->setCellValue('N3', ': ');
         // BATAS HEADER
@@ -254,11 +256,13 @@ class logSheetSterilizer extends \App\Controllers\BaseController
         if (empty($_GET['TDATE'])) {
 			$TDATE = '';
 		} else {
-			$TDATE =  date("d/M/Y", strtotime($_GET['TDATE']));
+			$TDATE =  date("d-M-y", strtotime($_GET['TDATE']));
+
+            $hari = $this->indonesiaDays(date("l", strtotime($_GET['TDATE'])));
 		}
 
 
-		$data['Judul'] = 'Laporan LogSheet';
+		$data['Judul'] = 'Laporan LogSheet ';
 		$data['data_sql'] = $this->logSheetSterilizerModel->dataListExcel();
 
         $mpdf = new \Mpdf\Mpdf([
@@ -285,7 +289,7 @@ class logSheetSterilizer extends \App\Controllers\BaseController
             </td>
             <td style="width:33.33%; text-align:right;">  
                 <table style="float:right;font-size: 8pt;">
-                    <tr><td style="text-align:left;">Hari/Tanggal</td><td>:</td><td>'.$TDATE.'</td></tr>
+                    <tr><td style="text-align:left;">Hari/Tanggal</td><td>:</td><td>'.$hari.', '.$TDATE.'</td></tr>
                     <tr><td style="text-align:left;">Shift</td><td>:</td><td style="text-align:left;">........</td></tr>
                     <tr><td style="text-align:left;">Jam Kerja</td><td>:</td><td style="text-align:left;">........</td></tr>
                 </table>
@@ -341,6 +345,30 @@ class logSheetSterilizer extends \App\Controllers\BaseController
         //$mpdf->Output('arjun.pdf','D'); // it downloads the file into the user system, with give name
         //return view('welcome_message');
 		
+    }
+
+    public function indonesiaDays($longDays=''){
+
+        if($longDays == 'Monday'){
+            $indonesiaD = 'Senin';
+        } else if($longDays == 'Tuesday'){
+            $indonesiaD = 'Selasa';
+        }  else if($longDays == 'Wednesday'){
+            $indonesiaD = 'Rabu';
+        }  else if($longDays == 'Thursday'){
+            $indonesiaD = 'Kamis';
+        }  else if($longDays == 'Friday'){
+            $indonesiaD = 'Jumat';
+        }  else if($longDays == 'Saturday'){
+            $indonesiaD = 'Sabtu';
+        }  else if($longDays == 'Sunday'){
+            $indonesiaD = 'Minggu';
+        } else {
+            $indonesiaD = '';
+        }
+
+        return $indonesiaD;
+        
     }
 
 
