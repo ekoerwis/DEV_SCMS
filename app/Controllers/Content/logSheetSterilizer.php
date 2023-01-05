@@ -68,6 +68,13 @@ class logSheetSterilizer extends \App\Controllers\BaseController
 		echo json_encode($this->logSheetSterilizerModel->dataList());        
 	}
 
+    
+
+    public function cekDataexportExcelFile(){
+        $this->cekHakAkses('READ_DATA');
+		echo json_encode($this->logSheetSterilizerModel->dataListExcel());        
+	}
+
 
 	public function exportExcelFile()
     {
@@ -201,16 +208,16 @@ class logSheetSterilizer extends \App\Controllers\BaseController
 
             $sheet->setCellValue('A' . $rows, $numData);
             $sheet->setCellValue('B' . $rows, $val['STZID']);
-            $sheet->setCellValue('C' . $rows, $val['STZIN_ST']);
-            $sheet->setCellValue('D' . $rows, $val['STZIN_ED']);
-            $sheet->setCellValue('E' . $rows, $val['STZIN_MN']);
-            $sheet->setCellValue('F' . $rows, $val['STZPRO_ST']);
-            $sheet->setCellValue('G' . $rows, $val['STZPRO_ED']);
-            $sheet->setCellValue('H' . $rows, $val['STZPRO_MN']);
-            $sheet->setCellValue('I' . $rows, $val['STZOUT_ST']);
-            $sheet->setCellValue('J' . $rows, $val['STZOUT_ED']);
-            $sheet->setCellValue('K' . $rows, $val['STZOUT_MN']);
-            $sheet->setCellValue('L' . $rows, $val['STZTM_TOT']);
+            $sheet->setCellValue('C' . $rows, $val['STZIN_ST_TIME']);
+            $sheet->setCellValue('D' . $rows, $val['STZIN_ED_TIME']);
+            $sheet->setCellValue('E' . $rows, $val['STZIN_MN_2']);
+            $sheet->setCellValue('F' . $rows, $val['STZPRO_ST_TIME']);
+            $sheet->setCellValue('G' . $rows, $val['STZPRO_ED_TIME']);
+            $sheet->setCellValue('H' . $rows, $val['STZPRO_MN_2']);
+            $sheet->setCellValue('I' . $rows, $val['STZOUT_ST_TIME']);
+            $sheet->setCellValue('J' . $rows, $val['STZOUT_ED_TIME']);
+            $sheet->setCellValue('K' . $rows, $val['STZOUT_MN_2']);
+            $sheet->setCellValue('L' . $rows, $val['STZTM_TOT_2']);
             $sheet->setCellValue('M' . $rows, $val['STZACC']);
             $sheet->setCellValue('N' . $rows, $val['STZNOTE']);
 

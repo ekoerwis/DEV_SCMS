@@ -85,7 +85,7 @@
 ?>
 
     <table id="dataTable" class="table1">
-        <thead style="">
+        <thead>
             <tr class="trHeadTable1">
                 <th class="thTable1" rowspan=2 style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="30px">No</th>
                 <th class="thTable1" rowspan=2  style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="70px">STERILIZER</th>
@@ -128,20 +128,19 @@
             ?>
             <tr>
                 <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?=$numData?></td>
-                <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STZID'] ?></td>
-                <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STZIN_ST'] ?></td>
-                <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STZIN_ED'] ?></td>
-                <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STZIN_MN'] ?></td>
-                <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STZPRO_ST'] ?></td>
-                <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STZPRO_ED'] ?></td>
-                <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STZPRO_MN'] ?></td>
-                <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STZOUT_ST'] ?></td>
-                <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STZOUT_ED'] ?></td>
-                <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STZOUT_MN'] ?></td>
-                <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STZTM_TOT'] ?></td>
+                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STZID'] ?></td>
+                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STZIN_ST_TIME'] ?></td>
+                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STZIN_ED_TIME'] ?></td>
+                <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STZIN_MN_2'] ?></td>
+                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STZPRO_ST_TIME'] ?></td>
+                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STZPRO_ED_TIME'] ?></td>
+                <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STZPRO_MN_2'] ?></td>
+                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STZOUT_ST_TIME'] ?></td>
+                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STZOUT_ED_TIME'] ?></td>
+                <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STZOUT_MN_2'] ?></td>
+                <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STZTM_TOT_2'] ?></td>
                 <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STZACC'] ?></td>
                 <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STZNOTE'] ?></td>
-                <!-- <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?=number_format((float)$data_sql[$i]['MANDAYS'], 2, '.', ',') ?></td> -->
             </tr>
 <?php
             
