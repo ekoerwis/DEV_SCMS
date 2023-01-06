@@ -18,7 +18,7 @@
                     ">
         <thead>
             <tr>
-                <th field="STZID" halign="center" data-options="sortable:false,width:80,align:'left' " formatter="" rowspan="2"><b>Fertilizer</b></th>
+                <th field="STZID" halign="center" data-options="sortable:false,width:80,align:'left' " formatter="" rowspan="2"><b>Sterilizer</b></th>
                 <th colspan="2"><b>Buah Masuk</b></th>
                 <th field="STZIN_MN_2" halign="center" data-options="sortable:false,width:80,align:'right' " formatter="" rowspan="2"><b>Waktu (Menit)</b></th>
                 <th colspan="2"><b>Merebus</b></th>
