@@ -23,7 +23,8 @@ class scdTrMonitorModel extends \App\Models\BaseModel
         }
 
         $sql="SELECT CRTTS, CRTBY, UPDTS, UPDBY, TRM, UTC_MW, UTC_MTU, SVRDT, POSTDT, ORG_ID, ORG_CODE, ORG_CODE_PR, DT_ID, DT_UEP, DT_DIV, DT_ADD, DT_VAL, DT_TYPE,
-        TO_CHAR(FROM_TZ( CAST( (TO_DATE('19700101', 'YYYYMMDD') + ( 1 / 24 / 60 / 60 / 1000) * DT_UEP) AS TIMESTAMP ), 'UTC' ) AT TIME ZONE '+07:00','DD/MON/YYYY HH24:MI:SS') TDATETIME
+        FS_CONV_UTCUEP2WIB(DT_UEP) DT_EUP_LOCAL,
+        TO_CHAR(FS_CONV_UTCUEP2WIB(DT_UEP) ,'DD/MON/YYYY HH24:MI:SS') TDATETIME
         FROM SCD_TRMONITOR WHERE  ROWNUM > 0 $w_tdate $w_dt_div
         ";
 
@@ -67,7 +68,7 @@ class scdTrMonitorModel extends \App\Models\BaseModel
         $result["total"] = $sql['JUMLAH'];
         
 
-        $sql = "SELECT * FROM (SELECT CRTTS, CRTBY, UPDTS, UPDBY, TRM, UTC_MW, UTC_MTU, SVRDT, POSTDT, ORG_ID, ORG_CODE, ORG_CODE_PR, DT_ID, DT_UEP, DT_DIV, DT_ADD, DT_VAL, DT_TYPE, TDATETIME, ROWNUM AS RNUM FROM ( $mainSql ORDER BY $sort $order) WHERE ROWNUM <= $limit) WHERE RNUM > $offset";
+        $sql = "SELECT * FROM (SELECT CRTTS, CRTBY, UPDTS, UPDBY, TRM, UTC_MW, UTC_MTU, SVRDT, POSTDT, ORG_ID, ORG_CODE, ORG_CODE_PR, DT_ID, DT_UEP, DT_DIV, DT_ADD, DT_VAL, DT_TYPE, DT_EUP_LOCAL, TDATETIME, ROWNUM AS RNUM FROM ( $mainSql ORDER BY $sort $order) WHERE ROWNUM <= $limit) WHERE RNUM > $offset";
         
         $sql = $this->db->query($sql)->getResultArray();
 
