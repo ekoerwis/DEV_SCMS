@@ -64,7 +64,7 @@ class SterilizerStation extends \App\Controllers\BaseController
 			$data['tinggi_dg']= 'height:'.$tinggiContent.'px';
 		}
 
-        $data['srcView'] = 'http://10.20.38.95:1880/ui';
+        $data['srcView'] = 'https://10.20.38.95:6063/';
 
 		$this->view('Content/LiveMonitoring/SterilizerStation/SterilizerLiveFrameView.php', $data);
 
