@@ -19,12 +19,12 @@
         <thead>
             <tr>
                 <th field="STZID" halign="center" data-options="sortable:false,width:80,align:'left' " formatter="" rowspan="2"><b>Sterilizer</b></th>
-                <th colspan="2"><b>Buah Masuk</b></th>
-                <th field="STZIN_MN" halign="center" data-options="sortable:false,width:80,align:'center' " formatter="" rowspan="2"><b>Waktu</b></th>
-                <th colspan="2"><b>Merebus</b></th>
-                <th field="STZPRO_MN" halign="center" data-options="sortable:false,width:80,align:'center' " formatter="" rowspan="2"><b>Waktu</b></th>
-                <th colspan="2"><b>Keluar Buah</b></th>
-                <th field="STZOUT_MN" halign="center" data-options="sortable:false,width:80,align:'center' " formatter="" rowspan="2"><b>Waktu</b></th>
+                <th colspan="3"><b>Buah Masuk</b></th>
+                <!-- <th field="STZIN_MN" halign="center" data-options="sortable:false,width:80,align:'center' " formatter="" rowspan="2"><b>Waktu</b></th> -->
+                <th colspan="3"><b>Merebus</b></th>
+                <!-- <th field="STZPRO_MN" halign="center" data-options="sortable:false,width:80,align:'center' " formatter="" rowspan="2"><b>Waktu</b></th> -->
+                <th colspan="3"><b>Keluar Buah</b></th>
+                <!-- <th field="STZOUT_MN" halign="center" data-options="sortable:false,width:80,align:'center' " formatter="" rowspan="2"><b>Waktu</b></th> -->
                 <th field="STZTM_TOT" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="" rowspan="2"><b>Total Waktu</b></th>
                 <th field="STZACC" halign="center" data-options="sortable:false,width:100,align:'left' " formatter="" rowspan="2"><b>Paraf Mandor</b></th>
                 <th field="STZNOTE" halign="center" data-options="sortable:false,width:200,align:'left' " formatter="" rowspan="2"><b>Keterangan</b></th>
@@ -32,10 +32,13 @@
             <tr>
                 <th field="STZIN_ST_TIME" halign="center" data-options="sortable:false,width:80,align:'center' " formatter=""><b>Start</b></th>
                 <th field="STZIN_ED_TIME" halign="center" data-options="sortable:false,width:80,align:'center' " formatter=""><b>Stop</b></th>
+                <th field="STZIN_MN" halign="center" data-options="sortable:false,width:80,align:'center' " formatter=""><b>Waktu</b></th>
                 <th field="STZPRO_ST_TIME" halign="center" data-options="sortable:false,width:80,align:'center' " formatter=""><b>Start</b></th>
                 <th field="STZPRO_ED_TIME" halign="center" data-options="sortable:false,width:80,align:'center' " formatter=""><b>Stop</b></th>
+                <th field="STZPRO_MN" halign="center" data-options="sortable:false,width:80,align:'center' " formatter=""><b>Waktu</b></th>
                 <th field="STZOUT_ST_TIME" halign="center" data-options="sortable:false,width:80,align:'center' " formatter=""><b>Start</b></th>
                 <th field="STZOUT_ED_TIME" halign="center" data-options="sortable:false,width:80,align:'center' " formatter=""><b>Stop</b></th>
+                <th field="STZOUT_MN" halign="center" data-options="sortable:false,width:80,align:'center' " formatter=""><b>Waktu</b></th>
             </tr>
         </thead>
     </table>

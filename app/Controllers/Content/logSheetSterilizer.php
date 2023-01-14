@@ -157,29 +157,30 @@ class logSheetSterilizer extends \App\Controllers\BaseController
         $sheet->mergeCells('B5:B6');
         $sheet->setCellValue('B5', 'STERILIZER');
         
-        $sheet->mergeCells('C5:D5');
+        $sheet->mergeCells('C5:E5');
         $sheet->setCellValue('C5', 'BUAH MASUK');
         $sheet->setCellValue('C6', 'START');
         $sheet->setCellValue('D6', 'STOP');
-        $sheet->mergeCells('E5:E6');
-        $spreadsheet->getActiveSheet()->getStyle('E5:E6')->getAlignment()->setWrapText(true);
-        $sheet->setCellValue('E5', 'WAKTU');
+        $sheet->setCellValue('E6', 'WAKTU');
+        // $sheet->mergeCells('E5:E6');
+        // $spreadsheet->getActiveSheet()->getStyle('E5:E6')->getAlignment()->setWrapText(true);
+        // $sheet->setCellValue('E5', 'WAKTU');
 
-        $sheet->mergeCells('F5:G5');
+        $sheet->mergeCells('F5:H5');
         $sheet->setCellValue('F5', 'BUAH MASUK');
         $sheet->setCellValue('F6', 'START');
         $sheet->setCellValue('G6', 'STOP');
-        $sheet->mergeCells('H5:H6');
-        $spreadsheet->getActiveSheet()->getStyle('H5:H6')->getAlignment()->setWrapText(true);
-        $sheet->setCellValue('H5', 'WAKTU');
+        // $sheet->mergeCells('H5:H6');
+        // $spreadsheet->getActiveSheet()->getStyle('H5:H6')->getAlignment()->setWrapText(true);
+        $sheet->setCellValue('H6', 'WAKTU');
 
-        $sheet->mergeCells('I5:J5');
+        $sheet->mergeCells('I5:K5');
         $sheet->setCellValue('I5', 'BUAH KELUAR');
         $sheet->setCellValue('I6', 'START');
         $sheet->setCellValue('J6', 'STOP');
-        $sheet->mergeCells('K5:K6');
-        $spreadsheet->getActiveSheet()->getStyle('K5:K6')->getAlignment()->setWrapText(true);
-        $sheet->setCellValue('K5', 'WAKTU');
+        // $sheet->mergeCells('K5:K6');
+        // $spreadsheet->getActiveSheet()->getStyle('K5:K6')->getAlignment()->setWrapText(true);
+        $sheet->setCellValue('K6', 'WAKTU');
 
         $sheet->mergeCells('L5:L6');
         $spreadsheet->getActiveSheet()->getStyle('L5:L6')->getAlignment()->setWrapText(true);

@@ -89,12 +89,12 @@
             <tr class="trHeadTable1">
                 <th class="thTable1" rowspan=2 style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="30px">No</th>
                 <th class="thTable1" rowspan=2  style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="70px">STERILIZER</th>
-                <th class="thTable1" colspan=2 style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;">MASUK BUAH</th>
-                <th class="thTable1" rowspan=2  style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px">WAKTU</th>
-                <th class="thTable1" colspan=2 style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;">MEREBUS</th>
-                <th class="thTable1" rowspan=2  style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px">WAKTU</th>
-                <th class="thTable1" colspan=2 style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;">KELUAR BUAH</th>
-                <th class="thTable1" rowspan=2  style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px">WAKTU</th>
+                <th class="thTable1" colspan=3 style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;">MASUK BUAH</th>
+                <!-- <th class="thTable1" rowspan=2  style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px">WAKTU</th> -->
+                <th class="thTable1" colspan=3 style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;">MEREBUS</th>
+                <!-- <th class="thTable1" rowspan=2  style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px">WAKTU</th> -->
+                <th class="thTable1" colspan=3 style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;">KELUAR BUAH</th>
+                <!-- <th class="thTable1" rowspan=2  style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px">WAKTU</th> -->
                 <th class="thTable1" rowspan=2  style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px">TOTAL WAKTU</th>
                 <th class="thTable1" rowspan=2  style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="100px">PARAF MANDOR</th>
                 <th class="thTable1" rowspan=2  style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="100px">KETERANGAN</th>
@@ -102,10 +102,13 @@
             <tr class="trHeadTable1">
                 <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center;" width="50px">START</th>
                 <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center;" width="50px">STOP</th>
+                <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center;" width="50px">WAKTU</th>
                 <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center;" width="50px">START</th>
                 <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center;" width="50px">STOP</th>
+                <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center;" width="50px">WAKTU</th>
                 <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center;" width="50px">START</th>
                 <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center;" width="50px">STOP</th>
+                <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center;" width="50px">WAKTU</th>
             </tr>
         </thead>
         <tbody>
