@@ -163,7 +163,7 @@ class logSheetSterilizer extends \App\Controllers\BaseController
         $sheet->setCellValue('D6', 'STOP');
         $sheet->mergeCells('E5:E6');
         $spreadsheet->getActiveSheet()->getStyle('E5:E6')->getAlignment()->setWrapText(true);
-        $sheet->setCellValue('E5', 'WAKTU (MENIT)');
+        $sheet->setCellValue('E5', 'WAKTU');
 
         $sheet->mergeCells('F5:G5');
         $sheet->setCellValue('F5', 'BUAH MASUK');
@@ -171,7 +171,7 @@ class logSheetSterilizer extends \App\Controllers\BaseController
         $sheet->setCellValue('G6', 'STOP');
         $sheet->mergeCells('H5:H6');
         $spreadsheet->getActiveSheet()->getStyle('H5:H6')->getAlignment()->setWrapText(true);
-        $sheet->setCellValue('H5', 'WAKTU (MENIT)');
+        $sheet->setCellValue('H5', 'WAKTU');
 
         $sheet->mergeCells('I5:J5');
         $sheet->setCellValue('I5', 'BUAH KELUAR');
@@ -179,11 +179,11 @@ class logSheetSterilizer extends \App\Controllers\BaseController
         $sheet->setCellValue('J6', 'STOP');
         $sheet->mergeCells('K5:K6');
         $spreadsheet->getActiveSheet()->getStyle('K5:K6')->getAlignment()->setWrapText(true);
-        $sheet->setCellValue('K5', 'WAKTU (MENIT)');
+        $sheet->setCellValue('K5', 'WAKTU');
 
         $sheet->mergeCells('L5:L6');
         $spreadsheet->getActiveSheet()->getStyle('L5:L6')->getAlignment()->setWrapText(true);
-        $sheet->setCellValue('L5', 'TOTAL WAKTU (MENIT)');
+        $sheet->setCellValue('L5', 'TOTAL WAKTU');
 
         $sheet->mergeCells('M5:M6');
         $sheet->setCellValue('M5', 'PARAF MANDOR');
@@ -210,14 +210,14 @@ class logSheetSterilizer extends \App\Controllers\BaseController
             $sheet->setCellValue('B' . $rows, $val['STZID']);
             $sheet->setCellValue('C' . $rows, $val['STZIN_ST_TIME']);
             $sheet->setCellValue('D' . $rows, $val['STZIN_ED_TIME']);
-            $sheet->setCellValue('E' . $rows, $val['STZIN_MN_2']);
+            $sheet->setCellValue('E' . $rows, $val['STZIN_MN']);
             $sheet->setCellValue('F' . $rows, $val['STZPRO_ST_TIME']);
             $sheet->setCellValue('G' . $rows, $val['STZPRO_ED_TIME']);
-            $sheet->setCellValue('H' . $rows, $val['STZPRO_MN_2']);
+            $sheet->setCellValue('H' . $rows, $val['STZPRO_MN']);
             $sheet->setCellValue('I' . $rows, $val['STZOUT_ST_TIME']);
             $sheet->setCellValue('J' . $rows, $val['STZOUT_ED_TIME']);
-            $sheet->setCellValue('K' . $rows, $val['STZOUT_MN_2']);
-            $sheet->setCellValue('L' . $rows, $val['STZTM_TOT_2']);
+            $sheet->setCellValue('K' . $rows, $val['STZOUT_MN']);
+            $sheet->setCellValue('L' . $rows, $val['STZTM_TOT']);
             $sheet->setCellValue('M' . $rows, $val['STZACC']);
             $sheet->setCellValue('N' . $rows, $val['STZNOTE']);
 

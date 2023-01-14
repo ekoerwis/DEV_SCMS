@@ -20,12 +20,12 @@
             <tr>
                 <th field="STZID" halign="center" data-options="sortable:false,width:80,align:'left' " formatter="" rowspan="2"><b>Sterilizer</b></th>
                 <th colspan="2"><b>Buah Masuk</b></th>
-                <th field="STZIN_MN_2" halign="center" data-options="sortable:false,width:80,align:'right' " formatter="" rowspan="2"><b>Waktu (Menit)</b></th>
+                <th field="STZIN_MN" halign="center" data-options="sortable:false,width:80,align:'center' " formatter="" rowspan="2"><b>Waktu</b></th>
                 <th colspan="2"><b>Merebus</b></th>
-                <th field="STZPRO_MN_2" halign="center" data-options="sortable:false,width:80,align:'right' " formatter="" rowspan="2"><b>Waktu (Menit)</b></th>
+                <th field="STZPRO_MN" halign="center" data-options="sortable:false,width:80,align:'center' " formatter="" rowspan="2"><b>Waktu</b></th>
                 <th colspan="2"><b>Keluar Buah</b></th>
-                <th field="STZOUT_MN_2" halign="center" data-options="sortable:false,width:80,align:'right' " formatter="" rowspan="2"><b>Waktu (Menit)</b></th>
-                <th field="STZTM_TOT_2" halign="center" data-options="sortable:false,width:100,align:'right' " formatter="" rowspan="2"><b>Total Waktu (Menit)</b></th>
+                <th field="STZOUT_MN" halign="center" data-options="sortable:false,width:80,align:'center' " formatter="" rowspan="2"><b>Waktu</b></th>
+                <th field="STZTM_TOT" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="" rowspan="2"><b>Total Waktu</b></th>
                 <th field="STZACC" halign="center" data-options="sortable:false,width:100,align:'left' " formatter="" rowspan="2"><b>Paraf Mandor</b></th>
                 <th field="STZNOTE" halign="center" data-options="sortable:false,width:200,align:'left' " formatter="" rowspan="2"><b>Keterangan</b></th>
             </tr>
@@ -42,7 +42,7 @@
 
     <div id="tb-pv" class="pb-1 pt-1">        
         <div class='col-xl-12 col-lg-12 col-md-12 row'>
-            <div class="col-xl-9 col-lg-9 col-md-9 row">
+            <div class="col row">
                 <input id="dt-tdate" name="TDATE" class="easyui-datebox" style="width: 200px;"  data-options="required:true">
                 <input id="cb-dt_div" name="DT_DIV" class="" style="width:200px;" >
                 <!-- <div class="col-xl-3 col-lg-3 col-md-3 row"> -->
@@ -52,7 +52,7 @@
                 <!-- </div> -->
             </div>
             
-            <div class=" col-xl-3 col-lg-3 col-md-3  text-right">
+            <div class=" col-md-auto  text-right">
                 <button id="btn-search" class="btn btn-primary" style="width: 75px;"  onclick="doSearch()"><i class="fas fa-search"></i> Search</button>
                 &nbsp;
                 <button id="btn-searchReset" class="btn btn-danger" style="width: 75px;"  onclick="doSearchReset()"><i class="fas fa-eraser"></i> Clear</button>
