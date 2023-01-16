@@ -26,8 +26,8 @@
                 <th colspan="3"><b>Keluar Buah</b></th>
                 <!-- <th field="STZOUT_MN" halign="center" data-options="sortable:false,width:80,align:'center' " formatter="" rowspan="2"><b>Waktu</b></th> -->
                 <th field="STZTM_TOT" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="" rowspan="2"><b>Total Waktu</b></th>
-                <th field="STZACC" halign="center" data-options="sortable:false,width:100,align:'left' " formatter="" rowspan="2"><b>Paraf Mandor</b></th>
-                <th field="STZNOTE" halign="center" data-options="sortable:false,width:200,align:'left' " formatter="" rowspan="2"><b>Keterangan</b></th>
+                <!-- <th field="STZACC" halign="center" data-options="sortable:false,width:100,align:'left' " formatter="" rowspan="2"><b>Paraf Mandor</b></th> -->
+                <!-- <th field="STZNOTE" halign="center" data-options="sortable:false,width:200,align:'left' " formatter="" rowspan="2"><b>Keterangan</b></th> -->
             </tr>
             <tr>
                 <th field="STZIN_ST_TIME" halign="center" data-options="sortable:false,width:80,align:'center' " formatter=""><b>Start</b></th>
@@ -46,8 +46,8 @@
     <div id="tb-pv" class="pb-1 pt-1">        
         <div class='col-xl-12 col-lg-12 col-md-12 row'>
             <div class="col row">
-                <input id="dt-tdate" name="TDATE" class="easyui-datebox" style="width: 200px;"  data-options="required:true">
-                <input id="cb-dt_div" name="DT_DIV" class="" style="width:200px;" >
+                <input id="dt-tdate" name="TDATE" class="easyui-datebox" style="width: 150px;"  data-options="required:true">
+                <input id="cb-dt_div" name="DT_DIV" class="" style="width:100px;" >
                 <!-- <div class="col-xl-3 col-lg-3 col-md-3 row"> -->
                     <!-- <input id="tb-Year" name="YEARNUMBER" class="easyui-numberbox " style="width: 100px;"  data-options="required:true" prompt="Year"> -->
                     <!-- <input id="cg-MonthNumber" name="MONTHNUMBER" class="easyui-combogrid" style="width: 200px;"  data-options="required:true" prompt="Month"> -->
@@ -82,7 +82,8 @@
                 data :[
                     {
                         "id": '1',
-                        "text": '1'
+                        "text": '1',
+                        "selected":true
                     },
                     {
                         "id": '2',
@@ -103,7 +104,7 @@
                 ]
             });
 
-            doSearch();
+            // doSearch();
 
         });
 
@@ -133,13 +134,13 @@
 
             $('#dt-tdate').datebox().datebox('calendar').calendar('moveTo', new Date(enddate));
 
-            $('#dt-tdate').datebox().datebox('calendar').calendar({
-                validator: function(date){
-                    var d = new Date();
-                    var d2 = d.setDate(d.getDate() - 1);
-                    return date <= d2;
-                }
-            });
+            // $('#dt-tdate').datebox().datebox('calendar').calendar({
+            //     validator: function(date){
+            //         var d = new Date();
+            //         var d2 = d.setDate(d.getDate() - 1);
+            //         return date <= d2;
+            //     }
+            // });
         }
 
 

@@ -83,12 +83,12 @@ SELECT LGSID, UEP,
         $sess_site= $userOrganisasi['COMPANYSITEID'];
 
         if (empty($_POST['TDATE'])) {
-			$TDATE  = '';
+			$TDATE  = date("d/M/Y", strtotime('yesterday'));
 		} else {
 			$TDATE  =  date("d/M/Y", strtotime($_POST['TDATE']));
 		}
 
-        $DT_DIV = isset($_POST['DT_DIV']) ? strval($_POST['DT_DIV']) : '';
+        $DT_DIV = isset($_POST['DT_DIV']) ? strval($_POST['DT_DIV']) : '1';
 
         $sqlReport = $this->reportSqlString($TDATE, $DT_DIV );
 
