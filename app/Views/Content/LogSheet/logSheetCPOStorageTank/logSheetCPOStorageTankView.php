@@ -18,33 +18,33 @@
                     ">
         <thead>
             <tr>
-                <th rowspan="3" field="WEIGHT"halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>JAM</b></th>
+                <th rowspan="3" field="TIME_DISP"halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>JAM</b></th>
                 <th colspan="6"><b>STANDARD</b></th>
                 <th colspan="12"><b>DATA SAMPLING</b></th>
             </tr>
             <tr>
-                <th rowspan="2" field="STGLVCM" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>LEVEL cm</b></th>
-                <th rowspan="2" field="STGLVMM" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>LEVEL mm</b></th>
-                <th rowspan="2" field="STGTMPINTAVG" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>SUHU</b></th>
-                <th rowspan="2" field="BJ" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>BERAT JENIS</b></th>
-                <th rowspan="2" field="CORECTIONF" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>MUAI RUANG</b></th>
-                <th rowspan="2" field="WEIGHT" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>BERAT (Kg)</b></th>
-                <th rowspan="2" field="WEIGHT" halign="center" data-options="sortable:false,width:80,align:'center' " ><b>WAKTU</b></th>
+                <th rowspan="2" field="STGLVCM" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>LEVEL cm</b></th>
+                <th rowspan="2" field="STGLVMM" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>LEVEL mm</b></th>
+                <th rowspan="2" field="STGTMPINTAVG" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>SUHU</b></th>
+                <th rowspan="2" field="BJ" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>BERAT JENIS</b></th>
+                <th rowspan="2" field="CORECTIONF" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>MUAI RUANG</b></th>
+                <th rowspan="2" field="WEIGHT" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostumBilanganBulat"><b>BERAT (Kg)</b></th>
+                <th rowspan="2" field="SUMSTGID_UEP_TIME" halign="center" data-options="sortable:false,width:150,align:'center' " ><b>WAKTU</b></th>
                 <th colspan="6"><b>SUHU INTERNAL</b></th>
                 <th colspan="5"><b>SUHU EXTERNAL</b></th>
             </tr>
             <tr>
-                <th field="STGTMPINT1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>1</b></th>
-                <th field="STGTMPINT2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>2</b></th>
-                <th field="STGTMPINT3" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>3</b></th>
-                <th field="STGTMPINT4" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>4</b></th>
-                <th field="STGTMPINT5" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>5</b></th>
-                <th field="STGTMPINTAVG" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>AVG</b></th>
-                <th field="STGTMPEXT1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>1</b></th>
-                <th field="STGTMPEXT2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>2</b></th>
-                <th field="STGTMPEXT3" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>3</b></th>
-                <th field="STGTMPEXTF" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>SCALA</b></th>
-                <th field="STGTMPEXTAVG" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>AVG</b></th>
+                <th field="STGTMPINT1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>1</b></th>
+                <th field="STGTMPINT2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>2</b></th>
+                <th field="STGTMPINT3" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>3</b></th>
+                <th field="STGTMPINT4" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>4</b></th>
+                <th field="STGTMPINT5" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>5</b></th>
+                <th field="STGTMPINTAVG" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>AVG</b></th>
+                <th field="STGTMPEXT1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>1</b></th>
+                <th field="STGTMPEXT2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>2</b></th>
+                <th field="STGTMPEXT3" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>3</b></th>
+                <th field="STGTMPEXTF" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>SCALA</b></th>
+                <th field="STGTMPEXTAVG" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>AVG</b></th>
             </tr>
         </thead>
     </table>
@@ -85,6 +85,7 @@
                 valueField: 'ID',
                 textField: 'DESCRIPTION',
                 prompt:"Storage ID",
+                required:true,
                 url: "<?php echo site_url() . '/../Content/LogSheet/LogSheetCPOStorageTank/getStg'; ?>",
             });
 
@@ -132,11 +133,17 @@
         function doSearch() {
 
             var dateParam = $('#dt-tdate').datebox('getValue');
-            // var yearNumber =  $('#tb-Year').numberbox('getValue');
+            var stgIdParam =  $('#cb-stg_id').combobox('getValue');
 
             if( dateParam.trim() == '' || dateParam.trim() == null ){
                 alert('"Tanggal" Harus Di Isi Dahulu');
                 $('#dt-tdate').datebox('textbox').focus();
+                exit;   
+            } 
+
+            if( stgIdParam.trim() == '' || stgIdParam.trim() == null ){
+                alert('"Storage" Harus Di Isi Dahulu');
+                $('#cb-stg_id').combobox('textbox').focus();
                 exit;   
             } 
 
@@ -161,6 +168,15 @@
             return  returnVal;
         }
 
+        function formatNumberColumnCostumBilanganBulat(val,row){
+            // return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            var returnVal ='';
+            if(val != null){
+                returnVal = parseFloat(val).format(0, 3, ',', '.');
+            } 
+            return  returnVal;
+        }
+
 
         function exportDataExcel() {
         
@@ -170,6 +186,12 @@
             if( dateParam.trim() == '' || dateParam.trim() == null ){
                 alert('"Tanggal" Harus Di Isi Dahulu');
                 $('#dt-tdate').datebox('textbox').focus();
+                exit;   
+            } 
+
+            if( stgIdParam.trim() == '' || stgIdParam.trim() == null ){
+                alert('"Storage" Harus Di Isi Dahulu');
+                $('#cb-stg_id').combobox('textbox').focus();
                 exit;   
             } 
 
@@ -188,8 +210,14 @@
                 exit;   
             } 
 
+            if( stgIdParam.trim() == '' || stgIdParam.trim() == null ){
+                alert('"Storage" Harus Di Isi Dahulu');
+                $('#cb-stg_id').combobox('textbox').focus();
+                exit;   
+            } 
+
             var url = "<?php  echo site_url() . '/../Content/LogSheet/logSheetCPOStorageTank/exportPDFFile?TDATE='; ?>"+dateParam+"&STG_ID="+stgIdParam;
-            var url = "<?php  echo site_url() . '/../Content/LogSheet/logSheetCPOStorageTank/cekPdfView?TDATE='; ?>"+dateParam+"&STG_ID="+stgIdParam;
+            // var url = "<?php // echo site_url() . '/../Content/LogSheet/logSheetCPOStorageTank/cekPdfView?TDATE='; ?>"+dateParam+"&STG_ID="+stgIdParam;
             window.open(url, "_blank");
     }
 

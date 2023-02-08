@@ -124,26 +124,26 @@
                 <th colspan="12" class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" ><b>DATA SAMPLING</b></th>
             </tr>
             <tr class="trHeadTable1">
-                <th rowspan="2" class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="40px"><b>LEVEL cm</b></th>
-                <th rowspan="2" class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="40px"><b>LEVEL mm</b></th>
+                <th rowspan="2" class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px"><b>LEVEL cm</b></th>
+                <th rowspan="2" class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px"><b>LEVEL mm</b></th>
                 <th rowspan="2" class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px"><b>SUHU</b></th>
                 <th rowspan="2" class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px"><b>BERAT JENIS</b></th>
                 <th rowspan="2" class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px"><b>MUAI RUANG</b></th>
                 <th rowspan="2" class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px"><b>BERAT (Kg)</b></th>
-                <th rowspan="2" class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px"><b>WAKTU</b></th>
+                <th rowspan="2" class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="120px"><b>WAKTU</b></th>
                 <th colspan="6" class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;"><b>SUHU INTERNAL</b></th>
                 <th colspan="5" class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;"><b>SUHU EXTERNAL</b></th>
             </tr>
             <tr class="trHeadTable1">
-                <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="30px"><b>1</b></th>
-                <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="30px"><b>2</b></th>
-                <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="30px"><b>3</b></th>
-                <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="30px"><b>4</b></th>
-                <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="30px"><b>5</b></th>
+                <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px"><b>1</b></th>
+                <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px"><b>2</b></th>
+                <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px"><b>3</b></th>
+                <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px"><b>4</b></th>
+                <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px"><b>5</b></th>
                 <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px"><b>AVG</b></th>
-                <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="30px"><b>1</b></th>
-                <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="30px"><b>2</b></th>
-                <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="30px"><b>3</b></th>
+                <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px"><b>1</b></th>
+                <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px"><b>2</b></th>
+                <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px"><b>3</b></th>
                 <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px"><b>SCALA</b></th>
                 <th class="thTable1" style="border: 1px solid black;border-collapse: collapse;text-align: center; font-size: 7pt;" width="50px"><b>AVG</b></th>
             </tr>
@@ -155,25 +155,25 @@
                     $numData++;
             ?>
             <tr>
-                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STGLVCM'] ?></td>
-                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STGLVCM'] ?></td>
-                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STGLVMM'] ?></td>
-                <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STGTMPINTAVG'] ?></td>
-                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['BJ'] ?></td>
-                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['CORECTIONF'] ?></td>
-                <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['WEIGHT'] ?></td>
-                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['UEP'] ?></td>
-                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STGTMPINT1'] ?></td>
-                <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STGTMPINT2'] ?></td>
-                <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STGTMPINT3'] ?></td>
-                <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STGTMPINT4'] ?></td>
-                <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STGTMPINT5'] ?></td>
-                <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STGTMPINTAVG'] ?></td>
-                <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STGTMPEXT1'] ?></td>
-                <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STGTMPEXT2'] ?></td>
-                <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STGTMPEXT3'] ?></td>
-                <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STGTMPEXTF'] ?></td>
-                <td class="tdTable1" style="text-align: right;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['STGTMPEXTAVG'] ?></td>
+                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['TIME_DISP'] ?></td>
+                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= number_format($data_sql[$i]['STGLVCM'],2,".",",") ?></td>
+                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= number_format($data_sql[$i]['STGLVMM'],2,".",",") ?></td>
+                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= number_format($data_sql[$i]['STGTMPINTAVG'],2,".",",") ?></td>
+                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= number_format($data_sql[$i]['BJ'],2,".",",") ?></td>
+                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= number_format($data_sql[$i]['CORECTIONF'],2,".",",") ?></td>
+                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= number_format($data_sql[$i]['WEIGHT'],0,".",",") ?></td>
+                <td class="tdTable1" style="text-align: left;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= $data_sql[$i]['SUMSTGID_UEP_TIME'] ?></td>
+                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= number_format($data_sql[$i]['STGTMPINT1'],2,".",",") ?></td>
+                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= number_format($data_sql[$i]['STGTMPINT2'],2,".",",") ?></td>
+                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= number_format($data_sql[$i]['STGTMPINT3'],2,".",",") ?></td>
+                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= number_format($data_sql[$i]['STGTMPINT4'],2,".",",") ?></td>
+                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= number_format($data_sql[$i]['STGTMPINT5'],2,".",",") ?></td>
+                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= number_format($data_sql[$i]['STGTMPINTAVG'],2,".",",") ?></td>
+                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= number_format($data_sql[$i]['STGTMPEXT1'],2,".",",") ?></td>
+                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= number_format($data_sql[$i]['STGTMPEXT2'],2,".",",") ?></td>
+                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= number_format($data_sql[$i]['STGTMPEXT3'],2,".",",") ?></td>
+                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= number_format($data_sql[$i]['STGTMPEXTF'],2,".",",") ?></td>
+                <td class="tdTable1" style="text-align: center;border-collapse: collapse; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;"><?= number_format($data_sql[$i]['STGTMPEXTAVG'],2,".",",") ?></td>
             </tr>
 <?php
             

@@ -260,12 +260,6 @@ class logSheetCPOStorageTank extends \App\Controllers\BaseController
     {
         $this->cekHakAkses('READ_DATA');
 
-		// $exportType=isset($_GET['exportType']) ? strval($_GET['exportType']) : '';
-		// $BUDGETYEAR = isset($_GET['YEARNUMBER']) ? strval($_GET['YEARNUMBER']) : '';
-		// $PERIOD = isset($_GET['MONTHNUMBER']) ? strval($_GET['MONTHNUMBER']) : '';
-		// $SITE_ID = isset($_GET['SITE_ID']) ? strval($_GET['SITE_ID']) : '';
-		// $TARGETTYPE = isset($_GET['TARGETTYPE']) ? strval($_GET['TARGETTYPE']) : '';
-
         if (empty($_GET['TDATE'])) {
 			$TDATE = '';
 		} else {
@@ -274,13 +268,14 @@ class logSheetCPOStorageTank extends \App\Controllers\BaseController
             $hari = $this->indonesiaDays(date("l", strtotime($_GET['TDATE'])));
 		}
 
+        $STG_ID = isset($_GET['STG_ID']) ? strval($_GET['STG_ID']) : '';
 
 		$data['Judul'] = 'Laporan LogSheet ';
 		$data['data_sql'] = $this->logSheetCPOStorageTankModel->dataListExcel();
 
         $mpdf = new \Mpdf\Mpdf([
             'mode' => 'utf-8', 
-            'format' => 'A4-P', 
+            'format' => 'A4-L', 
             'setAutoTopMargin' => 'stretch', 
             'setAutoBottomMargin' => 'stretch',
             'shrink_tables_to_fit'=>'false'
@@ -298,7 +293,9 @@ class logSheetCPOStorageTank extends \App\Controllers\BaseController
                 </table>
             </td>
             <td style="width:33.33%; text-align:center;">  
-                STERILIZER STATION LOGSHEET
+                CPO STORAGE TANK
+                <br>
+                '.$STG_ID.'
             </td>
             <td style="width:33.33%; text-align:right;">  
                 <table style="float:right;font-size: 8pt;">
@@ -347,7 +344,8 @@ class logSheetCPOStorageTank extends \App\Controllers\BaseController
 
         // <tr><td style="text-align:left;">Jam Kerja</td><td>:</td><td>{PAGENO} of {nbpg}</td></tr>
 
-        $mpdf->SetHTMLFooter($footerPdf);
+        // dimatikan karena tidak tahu footernya apa
+        // $mpdf->SetHTMLFooter($footerPdf);
 
         $mpdf->AddPage();
 
