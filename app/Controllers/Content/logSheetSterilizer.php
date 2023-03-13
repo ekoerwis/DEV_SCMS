@@ -167,7 +167,7 @@ class logSheetSterilizer extends \App\Controllers\BaseController
         // $sheet->setCellValue('E5', 'WAKTU');
 
         $sheet->mergeCells('F5:H5');
-        $sheet->setCellValue('F5', 'BUAH MASUK');
+        $sheet->setCellValue('F5', 'MEREBUS');
         $sheet->setCellValue('F6', 'START');
         $sheet->setCellValue('G6', 'STOP');
         // $sheet->mergeCells('H5:H6');
