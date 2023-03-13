@@ -33,35 +33,40 @@ SELECT LGSID, UEP,
         WHEN STZIN_ST IS NOT NULL AND STZIN_ED IS NOT NULL
         THEN
         to_char(to_date(STP1,'sssss'),'hh24:mi:ss')
-        ELSE '00:00:00' END STZIN_MN,
+        ELSE '' END STZIN_MN,
+        /* ELSE '00:00:00' END STZIN_MN,*/
         STZWS_ST, TO_CHAR(STZWS_ST,'HH24:MI:SS') STZWS_ST_TIME, 
         STZWS_ED, TO_CHAR(STZWS_ED,'HH24:MI:SS')STZWS_ED_TIME, 
         CASE 
         WHEN STZWS_ST IS NOT NULL AND STZWS_ED IS NOT NULL
         THEN
         to_char(to_date(STP1,'sssss'),'hh24:mi:ss')
-        ELSE '00:00:00' END STZWS_MN,
+        ELSE '' END STZWS_MN,
+        /* ELSE '00:00:00' END STZWS_MN,*/
         STZPRO_ST,TO_CHAR(STZPRO_ST,'HH24:MI:SS') STZPRO_ST_TIME,
         STZPRO_ED, TO_CHAR(STZPRO_ED,'HH24:MI:SS') STZPRO_ED_TIME,
         CASE 
         WHEN STZPRO_ST IS NOT NULL AND STZPRO_ED IS NOT NULL
         THEN
         to_char(to_date(STP3,'sssss'),'hh24:mi:ss')
-        ELSE '00:00:00' END STZPRO_MN,
+        ELSE '' END STZPRO_MN,
+        /* ELSE '00:00:00' END STZPRO_MN,*/
         STZWO_ST, TO_CHAR(STZWO_ST,'HH24:MI:SS') STZWO_ST_TIME, 
         STZWO_ED, TO_CHAR(STZWO_ED,'HH24:MI:SS')STZWO_ED_TIME, 
         CASE 
         WHEN STZWO_ST IS NOT NULL AND STZWO_ED IS NOT NULL
         THEN
         to_char(to_date(STP1,'sssss'),'hh24:mi:ss')
-        ELSE '00:00:00' END STZWO_MN,
+        ELSE '' END STZWO_MN,
+        /* ELSE '00:00:00' END STZWO_MN,*/
         STZOUT_ST, TO_CHAR(STZOUT_ST,'HH24:MI:SS') STZOUT_ST_TIME,
         STZOUT_ED, TO_CHAR(STZOUT_ED,'HH24:MI:SS') STZOUT_ED_TIME,
         CASE 
         WHEN STZOUT_ST IS NOT NULL AND STZOUT_ED IS NOT NULL
         THEN
         to_char(to_date(STP5,'sssss'),'hh24:mi:ss')
-        ELSE '00:00:00' END STZOUT_MN,
+        ELSE '' END STZOUT_MN,
+        /* ELSE '00:00:00' END STZOUT_MN,*/
         to_char(to_date((NVL(STP1,0)+NVL(STP3,0)+NVL(STP5,0)),'sssss'),'hh24:mi:ss') STZTM_TOT, 
         STZACC, STZNOTE, STP1,STP2,STP3,STP4,STP5 FROM POM_LGS_STZ WHERE  ROWNUM > 0  $w_tdate $w_dt_div
         ";
