@@ -52,18 +52,18 @@
                 <th field="PRSSP_CNP4" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NO.4</b></th>
                 <th field="PRSSP_CNP5" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NO.5</b></th>
                 <th field="PRSSP_CNP6" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NO.6</b></th>
-                <th field="PRSSP_SRT1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
-                <th field="PRSSP_END1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
-                <th field="PRSSP_SRT2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
-                <th field="PRSSP_END2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
-                <th field="PRSSP_SRT3" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
-                <th field="PRSSP_END3" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
-                <th field="PRSSP_SRT4" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
-                <th field="PRSSP_END4" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
-                <th field="PRSSP_SRT5" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
-                <th field="PRSSP_END5" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
-                <th field="PRSSP_SRT6" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
-                <th field="PRSSP_END6" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
+                <th field="PRSSP_SRT1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="imageTrue"><b>START</b></th>
+                <th field="PRSSP_END1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="imageFalse"><b>STOP</b></th>
+                <th field="PRSSP_SRT2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="imageTrue"><b>START</b></th>
+                <th field="PRSSP_END2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="imageFalse"><b>STOP</b></th>
+                <th field="PRSSP_SRT3" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="imageTrue"><b>START</b></th>
+                <th field="PRSSP_END3" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="imageFalse"><b>STOP</b></th>
+                <th field="PRSSP_SRT4" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="imageTrue"><b>START</b></th>
+                <th field="PRSSP_END4" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="imageFalse"><b>STOP</b></th>
+                <th field="PRSSP_SRT5" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="imageTrue"><b>START</b></th>
+                <th field="PRSSP_END5" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="imageFalse"><b>STOP</b></th>
+                <th field="PRSSP_SRT6" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="imageTrue"><b>START</b></th>
+                <th field="PRSSP_END6" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="imageFalse"><b>STOP</b></th>
             </tr>
         </thead>
     </table>
@@ -72,7 +72,7 @@
         <div class='col-xl-12 col-lg-12 col-md-12 row'>
             <div class="col row">
                 <input id="dt-tdate" name="TDATE" class="easyui-datebox" style="width: 150px;"  data-options="required:true">
-                <!-- <input id="cb-stg_id" name="STG_ID" class="" style="width:100px;" > -->
+                <input id="cb-prsid" name="PRSID" class="" style="width:100px;" >
                 <!-- <div class="col-xl-3 col-lg-3 col-md-3 row"> -->
                     <!-- <input id="tb-Year" name="YEARNUMBER" class="easyui-numberbox " style="width: 100px;"  data-options="required:true" prompt="Year"> -->
                     <!-- <input id="cg-MonthNumber" name="MONTHNUMBER" class="easyui-combogrid" style="width: 200px;"  data-options="required:true" prompt="Month"> -->
@@ -100,13 +100,13 @@
 
             settingCalendarTDATE();            
 
-            // $('#cb-stg_id').combobox({
-            //     valueField: 'ID',
-            //     textField: 'DESCRIPTION',
-            //     prompt:"Storage ID",
-            //     required:true,
-            //     url: "<?php // echo site_url() . '/../Content/LogSheet/LogSheetCPOStorageTank/getStg'; ?>",
-            // });
+            $('#cb-prsid').combobox({
+                valueField: 'ID',
+                textField: 'DESCRIPTION',
+                prompt:"Press ID",
+                required:true,
+                url: "<?php  echo site_url() . '/../Content/LogSheet/logsheetpressstation/getPress'; ?>",
+            });
 
             // doSearch();
 
@@ -152,7 +152,7 @@
         function doSearch() {
 
             var dateParam = $('#dt-tdate').datebox('getValue');
-            // var stgIdParam =  $('#cb-stg_id').combobox('getValue');
+            var idParam =  $('#cb-prsid').combobox('getValue');
 
             if( dateParam.trim() == '' || dateParam.trim() == null ){
                 // alert('"Tanggal" Harus Di Isi Dahulu');
@@ -164,15 +164,19 @@
                 exit;   
             } 
 
-            // if( stgIdParam.trim() == '' || stgIdParam.trim() == null ){
-            //     alert('"Storage" Harus Di Isi Dahulu');
-            //     $('#cb-stg_id').combobox('textbox').focus();
-            //     exit;   
-            // } 
+            if( idParam.trim() == '' || idParam.trim() == null ){
+                // alert('"Storage" Harus Di Isi Dahulu');
+                $.messager.alert({    
+                    title: 'Info',
+                    msg: 'Pilih Press ID Dahulu ! '
+                });
+                $('#cb-prsid').combobox('textbox').focus();
+                exit;   
+            } 
 
             $('#dg').datagrid('load', {
                 TDATE: $('#dt-tdate').datebox('getValue'),
-                // STG_ID: $('#cb-stg_id').combobox('getValue'),
+                PRSID: $('#cb-prsid').combobox('getValue'),
             });
         }
 
@@ -200,14 +204,31 @@
             return  returnVal;
         }
 
+        function imageTrue(val,row){
+
+            var returnVal ='';
+            if(val > 0){
+                returnVal = '<i class="fas fa-check"></i>';
+            } 
+            return  returnVal;
+        }
+
+        function imageFalse(val,row){
+
+            var returnVal ='';
+            if(val < 1){
+                returnVal = '<i class="fas fa-times"></i>';
+            } 
+            return  returnVal;
+        }
+
 
         function exportDataExcel() {
         
             var dateParam = $('#dt-tdate').datebox('getValue');
-            // var stgIdParam =  $('#cb-stg_id').combobox('getValue');
+            var idParam =  $('#cb-prsid').combobox('getValue');
 
             if( dateParam.trim() == '' || dateParam.trim() == null ){
-                // alert('"Tanggal" Harus Di Isi Dahulu');
                 $.messager.alert({    
                     title: 'Info',
                     msg: 'Tanggal Harus Di Isi Dahulu ! '
@@ -216,24 +237,25 @@
                 exit;   
             } 
 
-            // if( stgIdParam.trim() == '' || stgIdParam.trim() == null ){
-            //     alert('"Storage" Harus Di Isi Dahulu');
-            //     $('#cb-stg_id').combobox('textbox').focus();
-            //     exit;   
-            // } 
+            if( idParam.trim() == '' || idParam.trim() == null ){
+                $.messager.alert({    
+                    title: 'Info',
+                    msg: 'Pilih Press ID Dahulu ! '
+                });
+                $('#cb-prsid').combobox('textbox').focus();
+                exit;   
+            } 
 
-            var url = "<?php  echo site_url() . '/../Content/LogSheet/logSheetPressStation/exportExcelFile?TDATE='; ?>"+dateParam;
-            // +"&STG_ID="+stgIdParam;
+            var url = "<?php  echo site_url() . '/../Content/LogSheet/logSheetPressStation/exportExcelFile?TDATE='; ?>"+dateParam+"&PRSID="+idParam;
             window.open(url, "_blank");
         }
 
         function exportDataPDF() {
         
             var dateParam = $('#dt-tdate').datebox('getValue');
-            // var stgIdParam =  $('#cb-stg_id').combobox('getValue');
+            var idParam =  $('#cb-prsid').combobox('getValue');
 
             if( dateParam.trim() == '' || dateParam.trim() == null ){
-                // alert('"Tanggal" Harus Di Isi Dahulu');
                 $.messager.alert({    
                     title: 'Info',
                     msg: 'Tanggal Harus Di Isi Dahulu ! '
@@ -242,17 +264,17 @@
                 exit;   
             } 
 
-            // if( stgIdParam.trim() == '' || stgIdParam.trim() == null ){
-            //     alert('"Storage" Harus Di Isi Dahulu');
-            //     $('#cb-stg_id').combobox('textbox').focus();
-            //     exit;   
-            // } 
+            if( idParam.trim() == '' || idParam.trim() == null ){
+                $.messager.alert({    
+                    title: 'Info',
+                    msg: 'Pilih Press ID Dahulu ! '
+                });
+                $('#cb-prsid').combobox('textbox').focus();
+                exit;   
+            } 
 
-             var url = "<?php  echo site_url() . '/../Content/LogSheet/logSheetPressStation/exportPDFFile?TDATE='; ?>"+dateParam;
-            // +"&STG_ID=";
-            // +stgIdParam;
-            // var url = "<?php // echo site_url() . '/../Content/LogSheet/logSheetPressStation/cekPdfView?TDATE='; ?>"+dateParam;
-            // +"&STG_ID="+stgIdParam;
+             var url = "<?php  echo site_url() . '/../Content/LogSheet/logSheetPressStation/exportPDFFile?TDATE='; ?>"+dateParam+"&PRSID="+idParam;
+            // var url = "<?php // echo site_url() . '/../Content/LogSheet/logSheetPressStation/cekPdfView?TDATE='; ?>"+dateParam+"&PRSID="+idParam;
             window.open(url, "_blank");
     }
 

@@ -63,10 +63,10 @@ class logSheetPressStation extends \App\Controllers\BaseController
 		$this->view('Content/LogSheet/logSheetPressStation/logSheetPressStationView.php', $data);
 	}
 
-    // public function getStg(){
-    //     $this->cekHakAkses('READ_DATA');
-	// 	echo json_encode($this->logSheetPressStationModel->getStg());     
-    // }
+    public function getPress(){
+        $this->cekHakAkses('READ_DATA');
+		echo json_encode($this->logSheetPressStationModel->getPress());     
+    }
 
     public function dataList(){
         $this->cekHakAkses('READ_DATA');

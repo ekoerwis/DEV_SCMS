@@ -9,7 +9,7 @@ class logSheetPressStationModel extends \App\Models\BaseModel
 		parent::__construct();
 	}
 
-    public function reportSqlString($tdate='' ,$dt_div=''){
+    public function reportSqlString($tdate='' ,$id=''){
 
         // $w_tdate = " ";
         // $w_dt_div = " ";
@@ -22,7 +22,7 @@ class logSheetPressStationModel extends \App\Models\BaseModel
         //     $w_dt_div = " AND STGID = '$dt_div' ";
         // }
 
-        $sql=" SELECT A.TIME_F, A.TIME_DISP, B.LGSID, B.UEP, B.COMP_ID, B.SITE_ID, B.POSTDT, B.PRSID, B.PRSHR, B.LGSID_UEP ,LGSID_UEP_TIME, B.LGSID_UEP_TIME_H, B.LGSID_UEP_TIME_MIN,
+        $sql=" SELECT A.TIME_F, A.TIME_DISP, B.LGSID, B.UEP, B.COMP_ID, B.SITE_ID, B.POSTDT, B.PRSID, B.PRSHR, 
         B.PRSDG_TMP1, B.PRSDG_TMP2, B.PRSDG_TMP3, B.PRSDG_TMP4, B.PRSDG_TMP5, B.PRSDG_TMP6,  (PRSDG_TMP1+PRSDG_TMP2+PRSDG_TMP3+PRSDG_TMP4+PRSDG_TMP5+PRSDG_TMP6)/6 PRSDG_TMP_AVG,
         B.PRSDG_AMP1, B.PRSDG_AMP2, B.PRSDG_AMP3, B.PRSDG_AMP4, B.PRSDG_AMP5, B.PRSDG_AMP6,
         B.PRSDG_SRT1, B.PRSDG_SRT2, B.PRSDG_SRT3, B.PRSDG_SRT4, B.PRSDG_SRT5, B.PRSDG_SRT6, 
@@ -82,9 +82,9 @@ class logSheetPressStationModel extends \App\Models\BaseModel
                 UNION ALL
                 SELECT TO_CHAR(TO_DATE('$tdate','dd/mon/yyyy') + INTERVAL '1' DAY,'DDMONYY')||'06' TIME_F,'06' TIME_DISP FROM DUAL
                 ) A LEFT JOIN (
-        SELECT LGSID, UEP, COMP_ID, SITE_ID, POSTDT, PRSID, PRSHR, LGSID_UEP ,LGSID_UEP_TIME, LGSID_UEP_TIME_H, LGSID_UEP_TIME_MIN,
-        PRSDG_TMP1, PRSDG_TMP2, PRSDG_TMP3, PRSDG_TMP4, PRSDG_TMP5, PRSDG_TMP6, 
-        PRSDG_AMP1, PRSDG_AMP2, PRSDG_AMP3, PRSDG_AMP4, PRSDG_AMP5, PRSDG_AMP6, 
+                SELECT  LGSID, UEP, COMP_ID, SITE_ID, POSTDT, PRSID, PRSHR,  TO_CHAR(POSTDT,'DDMONYY')||LPAD(PRSHR,2,'0') PRSDTHR, 
+        PRSDG_TMP1, PRSDG_TMP2, PRSDG_TMP3, PRSDG_TMP4, PRSDG_TMP5, PRSDG_TMP6,  
+        PRSDG_AMP1, PRSDG_AMP2, PRSDG_AMP3, PRSDG_AMP4, PRSDG_AMP5, PRSDG_AMP6,
         PRSDG_SRT1, PRSDG_SRT2, PRSDG_SRT3, PRSDG_SRT4, PRSDG_SRT5, PRSDG_SRT6, 
         PRSDG_END1, PRSDG_END2, PRSDG_END3, PRSDG_END4, PRSDG_END5, PRSDG_END6, 
         PRSSP_CNP1, PRSSP_CNP2, PRSSP_CNP3, PRSSP_CNP4, PRSSP_CNP5, PRSSP_CNP6, 
@@ -93,47 +93,31 @@ class logSheetPressStationModel extends \App\Models\BaseModel
         PRSDG_HMS1, PRSDG_HMS2, PRSDG_HMS3, PRSDG_HMS4, PRSDG_HMS5, PRSDG_HMS6, 
         PRSDG_HMP1, PRSDG_HMP2, PRSDG_HMP3, PRSDG_HMP4, PRSDG_HMP5, PRSDG_HMP6, 
         PRSCB_HMS1, PRSCB_HMS2, PRSCB_HMS3, PRSCB_HMP1, PRSCB_HMP2, PRSCB_HMP3
-                FROM (
-        SELECT LGSID, UEP, COMP_ID, SITE_ID, POSTDT, PRSID, PRSHR,
-        REGEXP_SUBSTR(LGSID,'[^|]+',1,2) LGSID_UEP,
-        TO_CHAR(FS_CONV_UTCUEP2WIB(REGEXP_SUBSTR(LGSID,'[^|]+',1,2)),'DD/MON/YYYY HH24:MI:SS')  LGSID_UEP_TIME,
-        TO_CHAR(FS_CONV_UTCUEP2WIB(REGEXP_SUBSTR(LGSID,'[^|]+',1,2)),'DDMONYYHH24')  LGSID_UEP_TIME_H,
-        MIN(REGEXP_SUBSTR(LGSID,'[^|]+',1,2)) OVER (PARTITION BY TO_CHAR(FS_CONV_UTCUEP2WIB(REGEXP_SUBSTR(LGSID,'[^|]+',1,2)),'DDMONYYHH24')) LGSID_UEP_TIME_MIN,
-        PRSDG_TMP1, PRSDG_TMP2, PRSDG_TMP3, PRSDG_TMP4, PRSDG_TMP5, PRSDG_TMP6, 
-        PRSDG_AMP1, PRSDG_AMP2, PRSDG_AMP3, PRSDG_AMP4, PRSDG_AMP5, PRSDG_AMP6, 
-        PRSDG_SRT1, PRSDG_SRT2, PRSDG_SRT3, PRSDG_SRT4, PRSDG_SRT5, PRSDG_SRT6, 
-        PRSDG_END1, PRSDG_END2, PRSDG_END3, PRSDG_END4, PRSDG_END5, PRSDG_END6, 
-        PRSSP_CNP1, PRSSP_CNP2, PRSSP_CNP3, PRSSP_CNP4, PRSSP_CNP5, PRSSP_CNP6, 
-        PRSSP_SRT1, PRSSP_SRT2, PRSSP_SRT3, PRSSP_SRT4, PRSSP_SRT5, PRSSP_SRT6, 
-        PRSSP_END1, PRSSP_END2, PRSSP_END3, PRSSP_END4, PRSSP_END5, PRSSP_END6, 
-        PRSDG_HMS1, PRSDG_HMS2, PRSDG_HMS3, PRSDG_HMS4, PRSDG_HMS5, PRSDG_HMS6, 
-        PRSDG_HMP1, PRSDG_HMP2, PRSDG_HMP3, PRSDG_HMP4, PRSDG_HMP5, PRSDG_HMP6, 
-        PRSCB_HMS1, PRSCB_HMS2, PRSCB_HMS3, PRSCB_HMP1, PRSCB_HMP2, PRSCB_HMP3
-        FROM POM_LGS_PRS WHERE  ROWNUM > 0 AND POSTDT = TO_DATE('$tdate','dd/mon/yyyy')
-        ) WHERE LGSID_UEP_TIME_MIN = LGSID_UEP
-        ) B
-                ON A.TIME_F = B.LGSID_UEP_TIME_H
+FROM POM_LGS_PRS WHERE PRSID = '$id'
+AND POSTDT BETWEEN TO_DATE('$tdate','dd/mon/yyyy') AND TO_DATE('$tdate','dd/mon/yyyy')+ 1
+                ) B
+                ON A.TIME_F = B.PRSDTHR
                 ORDER BY A.TIME_F
         ";
 
         return $sql;
     }
 
-    // public function getStg()
-    // {
+    public function getPress()
+    {
         
-    //     $userOrganisasi=$this->session->get('userOrganisasi');
-    //     $sess_comp=$userOrganisasi['COMPANYID'];
-    //     $sess_site= $userOrganisasi['COMPANYSITEID'];        
+        $userOrganisasi=$this->session->get('userOrganisasi');
+        $sess_comp=$userOrganisasi['COMPANYID'];
+        $sess_site= $userOrganisasi['COMPANYSITEID'];        
 
-    //     $sql = " SELECT DISTINCT TRIM(STGID) ID, TRIM(STGID) DESCRIPTION FROM POM_LGS_STG_CPO ORDER BY 1";
+        $sql = " SELECT DISTINCT TRIM(PRSID) ID, TRIM(PRSID) DESCRIPTION FROM POM_LGS_PRS ORDER BY 1";
         
-    //     $sql = $this->db->query($sql)->getResultArray();
+        $sql = $this->db->query($sql)->getResultArray();
 
-    //     $result = $sql;
+        $result = $sql;
     
-    //     return $result;
-    // }
+        return $result;
+    }
          
     public function dataList()
     {
@@ -154,9 +138,9 @@ class logSheetPressStationModel extends \App\Models\BaseModel
 			$TDATE  =  date("d/M/Y", strtotime($_POST['TDATE']));
 		}
 
-        $STG_ID = isset($_POST['STG_ID']) ? strval($_POST['STG_ID']) : '';
+        $id = isset($_POST['PRSID']) ? strval($_POST['PRSID']) : '';
 
-        $sqlReport = $this->reportSqlString($TDATE, $STG_ID );
+        $sqlReport = $this->reportSqlString($TDATE, $id );
 
         $mainSql="SELECT * FROM ($sqlReport) WHERE ROWNUM > 0";
 
@@ -172,7 +156,7 @@ class logSheetPressStationModel extends \App\Models\BaseModel
         $result["total"] = $sql['JUMLAH'];
         
 
-        $sql = "SELECT * FROM (SELECT TIME_F, TIME_DISP, LGSID, UEP, COMP_ID, SITE_ID, POSTDT, PRSID, PRSHR, LGSID_UEP ,LGSID_UEP_TIME, LGSID_UEP_TIME_H, LGSID_UEP_TIME_MIN,
+        $sql = "SELECT * FROM (SELECT TIME_F, TIME_DISP, LGSID, UEP, COMP_ID, SITE_ID, POSTDT, PRSID, PRSHR,
         PRSDG_TMP1, PRSDG_TMP2, PRSDG_TMP3, PRSDG_TMP4, PRSDG_TMP5, PRSDG_TMP6, PRSDG_TMP_AVG, 
         PRSDG_AMP1, PRSDG_AMP2, PRSDG_AMP3, PRSDG_AMP4, PRSDG_AMP5, PRSDG_AMP6,
         PRSDG_SRT1, PRSDG_SRT2, PRSDG_SRT3, PRSDG_SRT4, PRSDG_SRT5, PRSDG_SRT6, 
@@ -205,7 +189,7 @@ class logSheetPressStationModel extends \App\Models\BaseModel
 			$TDATE  =  date("d/M/Y", strtotime($_GET['TDATE']));
 		}
 
-        $STG_ID = isset($_GET['STG_ID']) ? strval($_GET['STG_ID']) : '';
+        $STG_ID = isset($_GET['STG_ID']) ? strval($_GET['STG_ID']) : '1';
 
         $result = array();
 
