@@ -105,10 +105,11 @@
                 textField: 'DESCRIPTION',
                 prompt:"Press ID",
                 required:true,
+                value:"1",
                 url: "<?php  echo site_url() . '/../Content/LogSheet/logsheetpressstation/getPress'; ?>",
             });
 
-            // doSearch();
+            doSearch();
 
         });
 
