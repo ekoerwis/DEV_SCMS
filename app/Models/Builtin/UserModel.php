@@ -67,7 +67,7 @@ class UserModel extends \App\Models\BaseModel
 		$tot = $start + $length;
 
 		// $sql = 'SELECT * FROM user LEFT JOIN role USING(id_role) ' . $where . $order_by . ' LIMIT ' . $start . ' ' . $length;
-		//$sql = 'SELECT * FROM {prefix_portal}users LEFT JOIN {prefix_portal}role USING(id_role) '  ;
+		// $sql = 'SELECT * FROM {prefix_portal}users LEFT JOIN {prefix_portal}role USING(id_role) '  ;
 		// echo $sql;
 		$sql = "SELECT * FROM (
 			SELECT ROWNUM RN,ID_ROLE, ID_USER, EMAIL, USERNAME, 
@@ -135,10 +135,31 @@ class UserModel extends \App\Models\BaseModel
 		} else {
 			$data_db['AKTIF'] = 1;
 
+			// TAMBAHAN 14 APRIL 2023
+			$sqlLastIdUser = "SELECT MAX(ID_USER)+1 LAST_ID_USER FROM USERS";
+			$resultLastIdUser = $this->db->query($sqlLastIdUser)->getRowArray();
+
+			$data_db['ID_USER'] =$resultLastIdUser['LAST_ID_USER'];
+			$data_db['CREATED'] =date("d/M/Y H:i:s");
+	
+			$EMAIL = $data_db['EMAIL'];
+			$USERNAME =  $data_db['USERNAME'];
+			$NAMA = $data_db['NAMA'];
+			$PASSWORD = $data_db['PASSWORD'];
+			$AKTIF = $data_db['AKTIF'];
+			$ID_USER = $data_db['ID_USER'];
+			$CREATED = $data_db['CREATED'];
+			$ID_ROLE = $data_db['ID_ROLE'];
+			// BATAS TAMBAHAN 14 APRIL 2023
+
 			$tablename = '{prefix_portal}USERS' ;
 			$tablename=$this->ubahPrefix($tablename);
 
-			$save = $this->db->table($tablename)->insert($data_db);
+			// $save = $this->db->table($tablename)->insert($data_db);
+
+			// SCRIPT save DIGANTI 14 APRIL 2023
+			$sqlInput = "INSERT INTO USERS (ID_USER, USERNAME, PASSWORD, NAMA, EMAIL, AKTIF, CREATED, ID_ROLE) VALUES ($ID_USER, '$USERNAME', '$PASSWORD', '$NAMA', '$EMAIL', $AKTIF, TO_DATE('$CREATED','DD/MON/YYYY HH24:MI:SS'), $ID_ROLE)";
+            $save = $this->db->query($sqlInput);
 			// dimatikan eko
 			// $id_user = $this->db->insertID();
 		}
@@ -210,18 +231,19 @@ class UserModel extends \App\Models\BaseModel
 		$tablename = '{prefix_portal}USERS' ;
 		$tablename=$this->ubahPrefix($tablename);
 
-		$this->db->table($tablename)->delete(['ID_USER' => $this->request->getPost('id')]);
+		$prosesDelete=$this->db->table($tablename)->delete(['ID_USER' => $this->request->getPost('id')]);
 
 		// tambahan eko 15 Jun 2022
 
 		$tablename2 = '{prefix_portal}USER_ROLE' ;
 		$tablename2=$this->ubahPrefix($tablename2);
 
-		$this->db->table($tablename2)->delete(['ID_USER' => $this->request->getPost('id')]);
+		$prosesDelete2=$this->db->table($tablename2)->delete(['ID_USER' => $this->request->getPost('id')]);
 
 		// batas tambahan eko 15 Jun 2022
 
-		return $this->db->affectedRows();
+		// return $this->db->affectedRows();
+		return $prosesDelete && $prosesDelete2;
 	}
 	
 	public function countAllUsers() {

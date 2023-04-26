@@ -63,10 +63,11 @@ class ModuleModel extends \App\Models\BaseModel
 
 		$idModule = $this->request->getPost('id');
 		$sqlUpdate ="UPDATE MENU SET ID_MODULE = 0 WHERE ID_MODULE = $idModule"; 
-		$this->db->query($sqlUpdate);
+		$proses = $this->db->query($sqlUpdate);
 		// batas tambahan eko 15 Jun 2022
 
-		return $this->db->affectedRows();
+		// return $this->db->affectedRows();
+		return $proses;
 	}
 	
 	public function updateStatus() {
@@ -118,11 +119,26 @@ class ModuleModel extends \App\Models\BaseModel
 
 			$save = $this->db->table($tablename)->update($data_db, ['ID_MODULE' => $_POST['id']]);
 		} else {
-			$tablename = '{prefix_portal}MODULE';
-			$tablename = $this->ubahPrefix($tablename);
+			// $tablename = '{prefix_portal}MODULE';
+			// $tablename = $this->ubahPrefix($tablename);
 
-			$save = $this->db->table($tablename)->insert($data_db);
-			$id_module = $this->db->insertID();
+			// $save = $this->db->table($tablename)->insert($data_db);
+			// $id_module = $this->db->insertID();
+
+			// Query save diganti tanggal 16 April 2023
+			$sqlLastIdModule = "SELECT MAX(ID_MODULE)+1 LAST_ID_MODULE FROM MODULE";
+			$resultLastIdModule = $this->db->query($sqlLastIdModule)->getRowArray();
+
+			$ID_MODULE =$resultLastIdModule['LAST_ID_MODULE'];
+			$NAMA_MODULE= $this->request->getPost('NAMA_MODULE');
+			$JUDUL_MODULE= $this->request->getPost('JUDUL_MODULE');
+			$DESKRIPSI= $this->request->getPost('DESKRIPSI');
+			$ID_MODULE_STATUS= $this->request->getPost('ID_MODULE_STATUS');
+			$sqlInput = "INSERT INTO MODULE (ID_MODULE, NAMA_MODULE, JUDUL_MODULE, DESKRIPSI, ID_MODULE_STATUS) VALUES ('$ID_MODULE', '$NAMA_MODULE', '$JUDUL_MODULE', '$DESKRIPSI', '$ID_MODULE_STATUS')";
+            $save = $this->db->query($sqlInput);
+			// Batas query save diganti tanggal 16 April 2023
+
+
 			// diganti eko (dimatikan dahulu gunakan default karena menggunakan seq pada DB)
 			// $id_module = $this->request->getPost('id_module');
 		}
@@ -130,7 +146,7 @@ class ModuleModel extends \App\Models\BaseModel
 		if ($save) {
 			$result['status'] = 'ok';
 			$result['message'] = 'Data berhasil disimpan';
-			$result['id_module'] = $id_module;
+			$result['id_module'] = $ID_MODULE;
 		} else {
 			$result['status'] = 'error';
 			$result['message'] = 'Data gagal disimpan';

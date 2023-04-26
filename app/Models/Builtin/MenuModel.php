@@ -101,36 +101,59 @@ class MenuModel extends \App\Models\BaseModel
 		if ($id) {
 			$tablename='{prefix_portal}MENU';
 			$tablename= $this->ubahPrefix($tablename);
-			$this->db->table($tablename)->update($data_db, 'ID_MENU = ' . $id);
-			return $this->db->affectedRows();
+			$proses =  $this->db->table($tablename)->update($data_db, 'ID_MENU = ' . $id);
+			
+			// return $this->db->affectedRows();
+			return $proses;
 		} else {
 			// tambahan eko dimatikan karena menggunakan seq pada DB
 			// $data_db['id_menu'] = $_POST['id_menu'];
 			// batas tambahan
-			$tablename='{prefix_portal}MENU';
-			$tablename= $this->ubahPrefix($tablename);
-			$save = $this->db->table($tablename)->insert($data_db);
+
+			// $tablename='{prefix_portal}MENU';
+			// $tablename= $this->ubahPrefix($tablename);
+			// $save = $this->db->table($tablename)->insert($data_db);
 
 			// diganti eko
-			$insert_id = $this->db->insertID();
+			
+			// $insert_id = $this->db->insertID();
+
+
 			// dimatikan karena menggunakan seq pada DB
 			 // $insert_id = $_POST['id_menu'];
+
+			$sqlLastIdMenu = "SELECT MAX(ID_MENU)+1 LAST_ID_MENU FROM MENU";
+			$resultLastIdMenu = $this->db->query($sqlLastIdMenu)->getRowArray();
+
+			$data_db['ID_MENU'] =$resultLastIdMenu['LAST_ID_MENU'];
+
+			 $NAMA_MENU = $data_db['NAMA_MENU'] ;
+			 $ID_MODULE = $data_db['ID_MODULE'] ;
+			 $URL = $data_db['URL'] ;
+			 $AKTIF = $data_db['AKTIF'] ;
+			 $CLASS = $data_db['CLASS'] ;
+			 $ID_MENU = $data_db['ID_MENU'] ;
+
+			$sqlInput = "INSERT INTO MENU (ID_MENU, NAMA_MENU, CLASS, URL, ID_MODULE, AKTIF) VALUES ('$ID_MENU','$NAMA_MENU', '$CLASS', '$URL', '$ID_MODULE', '$AKTIF')";
+            $save = $this->db->query($sqlInput);
 		}
 	}
 	
 	public function deleteData() {
 		$tablename='{prefix_portal}MENU';
 		$tablename= $this->ubahPrefix($tablename);
-		$this->db->table($tablename)->delete(['ID_MENU' => $this->request->getPost('id')]);
+		$prosesDelete=$this->db->table($tablename)->delete(['ID_MENU' => $this->request->getPost('id')]);
 
 		// tambahan eko 15 Jun 2022
 		$tablename2='{prefix_portal}MENU_ROLE';
 		$tablename2= $this->ubahPrefix($tablename2);
-		$this->db->table($tablename2)->delete(['ID_MENU' => $this->request->getPost('id')]);
+		$prosesDelete2=$this->db->table($tablename2)->delete(['ID_MENU' => $this->request->getPost('id')]);
 		//batas tambahan eko 15 Jun 2022
 
 
-		return $this->db->affectedRows();
+		// return $this->db->affectedRows();
+		// diubah tanggal16 April 2023
+		return $prosesDelete && $prosesDelete2;
 	}
 	
 	public function getAllMenu() {

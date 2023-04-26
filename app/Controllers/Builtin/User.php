@@ -7,6 +7,7 @@ class User extends \App\Controllers\BaseController
 {
 	protected $model;
 	protected $moduleURL;
+	protected $formValidation;
 	
 	public function __construct() {
 		
@@ -242,7 +243,7 @@ class User extends \App\Controllers\BaseController
 				$allowed = ['image/png', 'image/jpeg', 'image/jpg'];
 				
 				if (!in_array($type, $allowed)) {
-					$form_errors['avatar'] = 'Tipe file harus ' . join($allowed, ', ');
+					$form_errors['avatar'] = 'Tipe file harus ' . join($allowed, [', ']);
 				}
 				
 				if ($file->getSize() > 300 * 1024) {

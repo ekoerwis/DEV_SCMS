@@ -8,6 +8,7 @@ use App\Config\Database;
 
 class UserImportEPMS extends BaseController
 {
+	protected $UserImportEPMSModel;
 
 	public function __construct() {
 		

@@ -25,7 +25,14 @@ class RoleModel extends \App\Models\BaseModel
 	}
 	
 	public function listModuleRole() {
-		$sql = 'SELECT * FROM {prefix_portal}module_role LEFT JOIN {prefix_portal}module USING(id_module) ORDER BY NAMA_MODULE';
+
+		// $sql ="SELECT * FROM MODULE_ROLE LEFT JOIN MODULE USING(ID_MODULE) ORDER BY NAMA_MODULE";
+
+		// SQL DI GANTI TANGGAL 14 APR 2023 untuk menghilangkan bugs bila modul tidak cocok
+		$sql = 'SELECT A.* FROM (
+			SELECT * FROM MODULE_ROLE LEFT JOIN MODULE USING(ID_MODULE) ORDER BY NAMA_MODULE) A
+			, MODULE B, ROLE C
+			WHERE A.ID_MODULE = B.ID_MODULE AND A.ID_ROLE = C.ID_ROLE';
 		$sql=$this->ubahPrefix($sql);
 
 		$result = $this->db->query($sql)->getResultArray();
@@ -33,7 +40,35 @@ class RoleModel extends \App\Models\BaseModel
 	}
 	
 	public function getAllRole() {
-		$sql = 'SELECT * FROM {prefix_portal}role';
+		// $sql = 'SELECT * FROM {prefix_portal}role';
+
+		// SQL DI GANTI TANGGAL 14 APR 2023 untuk menghilangkan bugs bila modul tidak cocok
+		$sql = 'SELECT A.ID_ROLE, A.NAMA_ROLE, A.JUDUL_ROLE, A.KETERANGAN, A.ID_MODULE FROM ROLE A , MODULE B WHERE A.ID_MODULE=B.ID_MODULE';
+		// $sql = 'SELECT A.ID_ROLE, A.NAMA_ROLE, A.JUDUL_ROLE, A.KETERANGAN, A.ID_MODULE FROM ROLE A ';
+		$sql=$this->ubahPrefix($sql);
+
+		$result = $this->db->query($sql)->getResultArray();
+		return $result;
+	}
+
+	// TAMBAHAN 16 APRIL 2023
+	public function getAllRoleNew() {
+
+		$sql = "SELECT A.ID_ROLE, A.NAMA_ROLE, A.JUDUL_ROLE, A.KETERANGAN, A.ID_MODULE , B.NAMA_MODULE
+		FROM ROLE A
+		LEFT JOIN MODULE B
+		ON A.ID_MODULE = B.ID_MODULE
+		WHERE A.ID_ROLE =1
+		UNION ALL
+		(
+		SELECT * FROM (
+		SELECT A.ID_ROLE, A.NAMA_ROLE, A.JUDUL_ROLE, A.KETERANGAN, A.ID_MODULE , B.NAMA_MODULE
+		FROM ROLE A
+		LEFT JOIN MODULE B
+		ON A.ID_MODULE = B.ID_MODULE
+		WHERE A.ID_ROLE <>1
+		ORDER BY UPPER(NAMA_ROLE) ASC)
+		)";
 		$sql=$this->ubahPrefix($sql);
 
 		$result = $this->db->query($sql)->getResultArray();
@@ -87,7 +122,25 @@ class RoleModel extends \App\Models\BaseModel
 			$tablename = '{prefix_portal}ROLE';
 			$tablename=$this->ubahPrefix($tablename);
 
-			$save = $this->db->table($tablename)->insert($data_db);
+			// TAMBAHAN 14 APR 2023
+
+			$sqlLastIdRole = "SELECT MAX(ID_ROLE)+1 LAST_ID_ROLE FROM ROLE";
+        	$resultLastIdRole = $this->db->query($sqlLastIdRole)->getRowArray();
+
+        	$ID_ROLE =$resultLastIdRole['LAST_ID_ROLE'];
+
+			$NAMA_ROLE = $this->request->getPost('NAMA_ROLE');
+			$JUDUL_ROLE=$this->request->getPost('JUDUL_ROLE');
+			$KETERANGAN = $this->request->getPost('KETERANGAN');
+			$ID_MODULE = $this->request->getPost('ID_MODULE');
+
+			$sqlInput = "INSERT INTO ROLE (ID_ROLE, NAMA_ROLE, JUDUL_ROLE, KETERANGAN, ID_MODULE) VALUES ($ID_ROLE, '$NAMA_ROLE', '$JUDUL_ROLE', '$KETERANGAN', '$ID_MODULE')";
+            $save = $this->db->query($sqlInput);
+
+			// BATAS TAMBAHAN 14 APR 2023
+
+			// script insert diubah 14 apr 2023 menjadi manual tidak menggunakan sequense oracle DB
+			// $save = $this->db->table($tablename)->insert($data_db);
 			// diganti eko
 			// $id_role = $this->db->insertID();
 			// $id_role = $this->request->getPost('id_role');
@@ -117,26 +170,27 @@ class RoleModel extends \App\Models\BaseModel
 		$tablename = '{prefix_portal}ROLE';
 		$tablename=$this->ubahPrefix($tablename);
 
-		$this->db->table($tablename)->delete(['ID_ROLE' => $this->request->getPost('id')]);
+		$prosesDelete = $this->db->table($tablename)->delete(['ID_ROLE' => $this->request->getPost('id')]);
 
 		// tambahan eko 15 jun 2022
 		$tablename2 = '{prefix_portal}MENU_ROLE';
 		$tablename2=$this->ubahPrefix($tablename2);
 
-		$this->db->table($tablename2)->delete(['ID_ROLE' => $this->request->getPost('id')]);
+		$prosesDelete2 = $this->db->table($tablename2)->delete(['ID_ROLE' => $this->request->getPost('id')]);
 
 		$tablename3 = '{prefix_portal}MODULE_ROLE';
 		$tablename3=$this->ubahPrefix($tablename3);
 
-		$this->db->table($tablename3)->delete(['ID_ROLE' => $this->request->getPost('id')]);
+		$prosesDelete3 = $this->db->table($tablename3)->delete(['ID_ROLE' => $this->request->getPost('id')]);
 
 		$tablename4 = '{prefix_portal}USER_ROLE';
 		$tablename4=$this->ubahPrefix($tablename4);
 
-		$this->db->table($tablename4)->delete(['ID_ROLE' => $this->request->getPost('id')]);
+		$prosesDelete4 = $this->db->table($tablename4)->delete(['ID_ROLE' => $this->request->getPost('id')]);
 		//batas tambahan eko 15 jun 2022
 
-		return $this->db->affectedRows();
+		// return $this->db->affectedRows();
+		return $prosesDelete && $prosesDelete2 && $prosesDelete3 && $prosesDelete4 ;
 	}
 }
 ?>

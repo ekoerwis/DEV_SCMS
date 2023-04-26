@@ -41,6 +41,9 @@ class Role extends \App\Controllers\BaseController
 		
 		$data['module'] = $this->model->getAllModules();
 		$data['result'] = $this->model->getAllRole();
+
+	// TAMBAHAN 16 APRIL 2023
+		$data['resultNew'] = $this->model->getAllRoleNew();
 		
 		$this->view('builtin/role-result.php', $data);
 	}
