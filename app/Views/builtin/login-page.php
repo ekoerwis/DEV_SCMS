@@ -121,23 +121,27 @@ if (!empty($js)) {
 <script>
 	$(document).ready(function() {
 
-		if ($('#username').val() != '') {
-			var username = $('#username').val();
-			generateCompany(username);
+		if(<?php echo $tipeLoginCompSite; ?>){
+			if ($('#username').val() != '') {
+				var username = $('#username').val();
+				generateCompany(username);
+			}
+
+			$('#username').change(function() {
+
+				var username = $('#username').val();
+
+				// alert(username);
+				if (username != '') {
+					generateCompany(username);
+				} else {
+					$('#COMPANYID').val('');
+				}
+				$('#COMPANYSITEID').val('');
+			});
 		}
 
-		$('#username').change(function() {
-
-			var username = $('#username').val();
-
-			// alert(username);
-			if (username != '') {
-				generateCompany(username);
-			} else {
-				$('#COMPANYID').val('');
-			}
-			$('#COMPANYSITEID').val('');
-		});
+		
 
 		$('#COMPANYID').change(function() {
 
