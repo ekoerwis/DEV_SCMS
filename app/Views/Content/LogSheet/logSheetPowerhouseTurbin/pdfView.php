@@ -33,7 +33,7 @@
     border: 1px solid black;
     border-collapse: collapse;
     text-align: center;
-    font-size: 7pt;
+    font-size: 6pt;
 }
 
 .tdTable1 {
@@ -44,6 +44,7 @@
     border-left: 1px solid black;
     /* border-bottom: 1px solid black; */
     text-align: center;
+    font-size: 7pt;
     
 }
 
@@ -82,39 +83,39 @@
     <table id="dataTable" class="table1">
         <thead>
             <tr class="trHeadTable1">
-                <th rowspan="3" class="thTable1"  width="50px"><b>JAM</b></th>
-                <th class="thTable1" rowspan="3" field="TMP1" width="60px"><b>NOZZLE PREASURE</b></th>
-                <th class="thTable1" rowspan="3" field="TMP2" width="60px"><b>INLET PREASURE</b></th>
-                <th class="thTable1" rowspan="3" field="VCM1" width="60px"><b>EXHAUST PREASURE</b></th>
-                <th class="thTable1" rowspan="3" field="VCM2" width="60px"><b>GEAR BOX PREASURE</b></th>
-                <th class="thTable1" rowspan="3" field="CSTTMP1" width="60px"><b>TURBIN OIL PREASURE</b></th>
-                <th class="thTable1" rowspan="3" field="CSTTMP2" width="60px"><b>TEMP STEAM</b></th>
-                <th class="thTable1" rowspan="3" field="CSTTMP3" width="60px"><b>TEMP OIL</b></th>
-                <th class="thTable1" colspan="4"><b>BEARING OIL TEMP (C)</b></th>
-                <th class="thTable1" rowspan="3" field="CSTTMP4" width="60px"><b>GOVERNOR LOAD LIMIT</b></th>
-                <th class="thTable1" rowspan="3" field="CSTTMP5" width="60px"><b>RPM</b></th>
-                <th class="thTable1" rowspan="3" field="CSTTMP6" width="60px"><b>HZ</b></th>
-                <th class="thTable1" rowspan="3" field="CSTOLY1" width="60px"><b>VOLT</b></th>
-                <th class="thTable1" rowspan="3" field="CSTOLY2" width="60px"><b>COST</b></th>
+                <th rowspan="3" class="thTable1"  width="35px"><b>JAM</b></th>
+                <th class="thTable1" rowspan="3" field="TMP1" width="40px"><b>NOZZLE PREASURE</b></th>
+                <th class="thTable1" rowspan="3" field="TMP2" width="40px"><b>INLET PREASURE</b></th>
+                <th class="thTable1" rowspan="3" field="VCM1" width="40px"><b>EXHAUST PREASURE</b></th>
+                <th class="thTable1" rowspan="3" field="VCM2" width="40px"><b>GEAR BOX PREASURE</b></th>
+                <th class="thTable1" rowspan="3" field="CSTTMP1" width="40px"><b>TURBIN OIL PREASURE</b></th>
+                <th class="thTable1" rowspan="3" field="CSTTMP2" width="40px"><b>TEMP STEAM</b></th>
+                <th class="thTable1" rowspan="3" field="CSTTMP3" width="40px"><b>TEMP OIL</b></th>
+                <th class="thTable1" colspan="4"><b>BEARING OIL TEMP (<span>&#176;</span>C)</b></th>
+                <th class="thTable1" rowspan="3" field="CSTTMP4" width="40px"><b>GOVERNOR LOAD LIMIT</b></th>
+                <th class="thTable1" rowspan="3" field="CSTTMP5" width="40px"><b>RPM</b></th>
+                <th class="thTable1" rowspan="3" field="CSTTMP6" width="40px"><b>HZ</b></th>
+                <th class="thTable1" rowspan="3" field="CSTOLY1" width="40px"><b>VOLT</b></th>
+                <th class="thTable1" rowspan="3" field="CSTOLY2" width="40px"><b>COST</b></th>
                 <th class="thTable1" colspan="3"><b>AMPERE</b></th>
-                <th class="thTable1" rowspan="3" field="CSTOLY3" width="60px"><b>KW</b></th>
-                <th class="thTable1" rowspan="3" field="CSTOLY4" width="60px"><b>HM</b></th>
-                <th class="thTable1" rowspan="3" field="CSTOLY5" width="60px"><b>KWH</b></th>
-                <!-- <th class="thTable1" rowspan="3" field="TMP1" width="60px",align:'center' " ><b>PARAF MANDOR</b></th> -->
+                <th class="thTable1" rowspan="3" field="CSTOLY3" width="40px"><b>KW</b></th>
+                <th class="thTable1" rowspan="3" field="CSTOLY4" width="40px"><b>HM</b></th>
+                <th class="thTable1" rowspan="3" field="CSTOLY5" width="40px"><b>KWH</b></th>
+                <!-- <th class="thTable1" rowspan="3" field="TMP1" width="40px",align:'center' " ><b>PARAF MANDOR</b></th> -->
                 <!-- <th class="thTable1" rowspan="3" field="TMP1" width="16px"0,align:'center' " ><b>KETERANGAN</b></th> -->
             </tr>
             <tr class="trHeadTable1">
                 <th class="thTable1" colspan="2"><b>PINION</b></th>
                 <th class="thTable1" colspan="2"><b>BULLGEAR</b></th>
-                <th class="thTable1" rowspan="2" field="CSTOLY6" width="60px"><b>R</b></th>
-                <th class="thTable1" rowspan="2" field="SDTTMP1" width="60px"><b>S</b></th>
-                <th class="thTable1" rowspan="2" field="SDTTMP2" width="60px"><b>T</b></th>
+                <th class="thTable1" rowspan="2" field="CSTOLY6" width="40px"><b>R</b></th>
+                <th class="thTable1" rowspan="2" field="SDTTMP1" width="40px"><b>S</b></th>
+                <th class="thTable1" rowspan="2" field="SDTTMP2" width="40px"><b>T</b></th>
             </tr>
             <tr class="trHeadTable1">
-                <th class="thTable1" field="SDTTMP3" width="60px"><b>1</b></th>
-                <th class="thTable1" field="SDTTMP4" width="60px"><b>2</b></th>
-                <th class="thTable1" field="SDTTMP5" width="60px"><b>3</b></th>
-                <th class="thTable1" field="SDTTMP6" width="60px"><b>4</b></th>
+                <th class="thTable1" field="SDTTMP3" width="40px"><b>1</b></th>
+                <th class="thTable1" field="SDTTMP4" width="40px"><b>2</b></th>
+                <th class="thTable1" field="SDTTMP5" width="40px"><b>3</b></th>
+                <th class="thTable1" field="SDTTMP6" width="40px"><b>4</b></th>
             </tr>
 
         </thead>

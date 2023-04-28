@@ -27,7 +27,7 @@
                     ">
         <thead>
             <tr>
-                <th colspan="2" rowspan="2"><b>TEMP ( c )</b></th>
+                <th colspan="2" rowspan="2"><b>TEMP ( <span>&#176;</span>C )</b></th>
                 <th rowspan="2"><b>VACUUM 1</b></th>
                 <th rowspan="2"><b>VACUUM 2</b></th>
                 <th colspan="6"><b>CONTINOUS SETTING TANK</b></th>
@@ -41,9 +41,9 @@
                 <!-- <th rowspan="3" field="TMP1" halign="center" data-options="sortable:false,width:160,align:'center' " ><b>KETERANGAN</b></th> -->
             </tr>
             <tr>
-                <th colspan="3" ><b>TEMP ( c )</b></th>
-                <th colspan="3" ><b>OIL LAYER (cm)</b></th>
-                <th colspan="2" ><b>TEMP ( c )</b></th>
+                <th colspan="3" ><b>TEMP ( <span>&#176;</span>C )</b></th>
+                <th colspan="3" ><b>OIL LAYER (CM)</b></th>
+                <th colspan="2" ><b>TEMP ( <span>&#176;</span>C )</b></th>
                 <th colspan="2" ><b>RECLAIM OIL TANK</b></th>
                 <th colspan="2" ><b>RUNNING HOURS</b></th>
                 <th colspan="2" ><b>DECANTER NO 1</b></th>
@@ -66,7 +66,7 @@
                 <th field="CSTOLY3" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NO.1</b></th>
                 <th field="CSTOLY4" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NO.2</b></th>
                 <th field="CSTOLY5" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NO.3</b></th>
-                <th field="CSTOLY6" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>TEMP (c)</b></th>
+                <th field="CSTOLY6" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>TEMP (<span>&#176;</span>C)</b></th>
                 <th field="SDTTMP1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>YES</b></th>
                 <th field="SDTTMP2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NO</b></th>
                 <th field="SDTTMP3" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>START</b></th>

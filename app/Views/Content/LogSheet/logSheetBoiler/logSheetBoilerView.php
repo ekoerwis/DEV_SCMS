@@ -33,13 +33,13 @@
                 <th rowspan="2" field="TMP2" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>STEAM FLOW RATE</b></th>
                 <th rowspan="2" field="VCM1" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>MULAI BUKA STEAM KE INST.</b></th>
                 <th colspan="4"><b>BEBAN BLOWER (AMPERE)</b></th>
-                <th rowspan="2" field="VCM2" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>TEMP AIR UMPAN BOILER (C)</b></th>
+                <th rowspan="2" field="VCM2" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>TEMP AIR UMPAN BOILER (<span>&#176;</span>C)</b></th>
                 <th rowspan="2" field="CSTTMP1" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>BLOW DOWN</b></th>
                 <th rowspan="2" field="CSTTMP2" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>SHOOT BLOWING (PER 4 JAM)</b></th>
                 <th rowspan="2" field="CSTTMP3" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>FLOW METER AIR</b></th>
                 <th rowspan="2" field="CSTTMP4" halign="center" data-options="sortable:false,width:70,align:'center' " formatter="formatNumberColumnCostum"><b>INVERTER IDF (%)</b></th>
-                <th rowspan="2" field="CSTTMP5" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>TEMP. AIR DEAERATOR (C)</b></th>
-                <th rowspan="2" field="CSTTMP6" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>TEMP. GAS BUANG (C)</b></th>
+                <th rowspan="2" field="CSTTMP5" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>TEMP. AIR DEAERATOR (<span>&#176;</span>C)</b></th>
+                <th rowspan="2" field="CSTTMP6" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>TEMP. GAS BUANG (<span>&#176;</span>C)</b></th>
                 <th rowspan="2" field="CSTOLY1" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>FURNANCE</b></th>
                 <th rowspan="2" field="CSTOLY2" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>SUPER HEATER</b></th>
                 <!-- <th rowspan="3" field="TMP1" halign="center" data-options="sortable:false,width:60,align:'center' " ><b>PARAF MANDOR</b></th> -->
@@ -49,7 +49,7 @@
                 <th field="CSTOLY3" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>KEADAAN AIR PADA GELAS PENDUGA</b></th>
                 <th field="CSTOLY4" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>MULAI PENGAPIAN (FIRE UP)</b></th>
                 <th field="CSTOLY5" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>MULAI START (JAM)</b></th>
-                <th field="CSTOLY6" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>SEWAKTU BERHENTI (C)</b></th>
+                <th field="CSTOLY6" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>SEWAKTU BERHENTI (<span>&#176;</span>C)</b></th>
                 <th field="SDTTMP1" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>INDUCED DRAFT FAN A</b></th>
                 <th field="SDTTMP2" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>FORCE DRAFT FAN</b></th>
                 <th field="SDTTMP3" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>SECONDARY FAN</b></th>

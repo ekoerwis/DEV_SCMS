@@ -34,7 +34,7 @@
                 <th rowspan="3" field="CSTTMP1" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>TURBIN OIL PREASURE</b></th>
                 <th rowspan="3" field="CSTTMP2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>TEMP STEAM</b></th>
                 <th rowspan="3" field="CSTTMP3" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>TEMP OIL</b></th>
-                <th colspan="4"><b>BEARING OIL TEMP (C)</b></th>
+                <th colspan="4"><b>BEARING OIL TEMP (<span>&#176;</span>C)</b></th>
                 <th rowspan="3" field="CSTTMP4" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>GOVERNOR LOAD LIMIT</b></th>
                 <th rowspan="3" field="CSTTMP5" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>RPM</b></th>
                 <th rowspan="3" field="CSTTMP6" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>HZ</b></th>

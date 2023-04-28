@@ -89,13 +89,13 @@
                 <th class="thTable1" rowspan="2" field="TMP2" width="50px"><b>STEAM FLOW RATE</b></th>
                 <th class="thTable1" rowspan="2" field="VCM1" width="50px"><b>MULAI BUKA STEAM KE INST.</b></th>
                 <th class="thTable1" colspan="4"><b>BEBAN BLOWER (AMPERE)</b></th>
-                <th class="thTable1" rowspan="2" field="VCM2" width="50px"><b>TEMP AIR UMPAN BOILER (C)</b></th>
+                <th class="thTable1" rowspan="2" field="VCM2" width="50px"><b>TEMP AIR UMPAN BOILER (<span>&#176;</span>C)</b></th>
                 <th class="thTable1" rowspan="2" field="CSTTMP1" width="50px"><b>BLOW DOWN</b></th>
                 <th class="thTable1" rowspan="2" field="CSTTMP2" width="50px"><b>SHOOT BLOWING (PER 4 JAM)</b></th>
                 <th class="thTable1" rowspan="2" field="CSTTMP3" width="50px"><b>FLOW METER AIR</b></th>
                 <th class="thTable1" rowspan="2" field="CSTTMP4" width="50px"><b>INVERTER IDF (%)</b></th>
-                <th class="thTable1" rowspan="2" field="CSTTMP5" width="50px"><b>TEMP. AIR DEAERATOR (C)</b></th>
-                <th class="thTable1" rowspan="2" field="CSTTMP6" width="50px"><b>TEMP. GAS BUANG (C)</b></th>
+                <th class="thTable1" rowspan="2" field="CSTTMP5" width="50px"><b>TEMP. AIR DEAERATOR (<span>&#176;</span>C)</b></th>
+                <th class="thTable1" rowspan="2" field="CSTTMP6" width="50px"><b>TEMP. GAS BUANG (<span>&#176;</span>C)</b></th>
                 <th class="thTable1" rowspan="2" field="CSTOLY1" width="50px"><b>FURNANCE</b></th>
                 <th class="thTable1" rowspan="2" field="CSTOLY2" width="50px"><b>SUPER HEATER</b></th>
                 <!-- <th class="thTable1" rowspan="3" field="TMP1" width="60,px"align:'center' " ><b>PARAF MANDOR</b></th> -->
@@ -105,7 +105,7 @@
                 <th class="thTable1" field="CSTOLY3" width="50px"><b>KEADAAN AIR PADA GELAS PENDUGA</b></th>
                 <th class="thTable1" field="CSTOLY4" width="50px"><b>MULAI PENGAPIAN (FIRE UP)</b></th>
                 <th class="thTable1" field="CSTOLY5" width="50px"><b>MULAI START (JAM)</b></th>
-                <th class="thTable1" field="CSTOLY6" width="50px"><b>SEWAKTU BERHENTI (C)</b></th>
+                <th class="thTable1" field="CSTOLY6" width="50px"><b>SEWAKTU BERHENTI (<span>&#176;</span>C)</b></th>
                 <th class="thTable1" field="SDTTMP1" width="50px"><b>INDUCED DRAFT FAN A</b></th>
                 <th class="thTable1" field="SDTTMP2" width="50px"><b>FORCE DRAFT FAN</b></th>
                 <th class="thTable1" field="SDTTMP3" width="50px"><b>SECONDARY FAN</b></th>
