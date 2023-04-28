@@ -27,13 +27,14 @@
 .trHeadTable1 {
     border: 1px solid black;
     border-collapse: collapse;
+    /* font-size: 7pt; */
 }
 
 .thTable1 {
     border: 1px solid black;
     border-collapse: collapse;
     text-align: center;
-    font-size: 7pt;
+    font-size: 6pt;
 }
 
 .tdTable1 {
@@ -44,6 +45,7 @@
     border-left: 1px solid black;
     /* border-bottom: 1px solid black; */
     text-align: center;
+    font-size: 7pt;
     
 }
 
@@ -82,7 +84,7 @@
     <table id="dataTable" class="table1">
         <thead>
             <tr class="trHeadTable1">
-                <th rowspan="2" class="thTable1"  width="50px"><b>JAM</b></th>
+                <th rowspan="2" class="thTable1"  width="30px"><b>JAM</b></th>
                 <th colspan="7" class="thTable1" ><b>DIGESTER MASS TEMP ( OC )</b></th>
                 <th colspan="6" class="thTable1" ><b>DIGESTER LOAD (AMP)</b></th>
                 <th colspan="6" class="thTable1" ><b>PRESS CONE PRESSURE (BAR)</b></th>
@@ -94,37 +96,37 @@
                 <th colspan="2" class="thTable1" ><b>PRESS NO.6</b></th>
             </tr>
             <tr class="trHeadTable1">
-                <th class="thTable1"  width="50px"><b>NO.1</b></th>
-                <th class="thTable1"  width="50px"><b>NO.2</b></th>
-                <th class="thTable1"  width="50px"><b>NO.3</b></th>
-                <th class="thTable1"  width="50px"><b>NO.4</b></th>
-                <th class="thTable1"  width="50px"><b>NO.5</b></th>
-                <th class="thTable1"  width="50px"><b>NO.6</b></th>
-                <th class="thTable1"  width="50px"><b>AVG</b></th>
-                <th class="thTable1"  width="50px"><b>NO.1</b></th>
-                <th class="thTable1"  width="50px"><b>NO.2</b></th>
-                <th class="thTable1"  width="50px"><b>NO.3</b></th>
-                <th class="thTable1"  width="50px"><b>NO.4</b></th>
-                <th class="thTable1"  width="50px"><b>NO.5</b></th>
-                <th class="thTable1"  width="50px"><b>NO.6</b></th>
-                <th class="thTable1"  width="50px"><b>NO.1</b></th>
-                <th class="thTable1"  width="50px"><b>NO.2</b></th>
-                <th class="thTable1"  width="50px"><b>NO.3</b></th>
-                <th class="thTable1"  width="50px"><b>NO.4</b></th>
-                <th class="thTable1"  width="50px"><b>NO.5</b></th>
-                <th class="thTable1"  width="50px"><b>NO.6</b></th>
-                <th class="thTable1"  width="50px"><b>START</b></th>
-                <th class="thTable1"  width="50px"><b>STOP</b></th>
-                <th class="thTable1"  width="50px"><b>START</b></th>
-                <th class="thTable1"  width="50px"><b>STOP</b></th>
-                <th class="thTable1"  width="50px"><b>START</b></th>
-                <th class="thTable1"  width="50px"><b>STOP</b></th>
-                <th class="thTable1"  width="50px"><b>START</b></th>
-                <th class="thTable1"  width="50px"><b>STOP</b></th>
-                <th class="thTable1"  width="50px"><b>START</b></th>
-                <th class="thTable1"  width="50px"><b>STOP</b></th>
-                <th class="thTable1"  width="50px"><b>START</b></th>
-                <th class="thTable1"  width="50px"><b>STOP</b></th>
+                <th class="thTable1"  width="35px"><b>NO.1</b></th>
+                <th class="thTable1"  width="35px"><b>NO.2</b></th>
+                <th class="thTable1"  width="35px"><b>NO.3</b></th>
+                <th class="thTable1"  width="35px"><b>NO.4</b></th>
+                <th class="thTable1"  width="35px"><b>NO.5</b></th>
+                <th class="thTable1"  width="35px"><b>NO.6</b></th>
+                <th class="thTable1"  width="35px"><b>AVG</b></th>
+                <th class="thTable1"  width="35px"><b>NO.1</b></th>
+                <th class="thTable1"  width="35px"><b>NO.2</b></th>
+                <th class="thTable1"  width="35px"><b>NO.3</b></th>
+                <th class="thTable1"  width="35px"><b>NO.4</b></th>
+                <th class="thTable1"  width="35px"><b>NO.5</b></th>
+                <th class="thTable1"  width="35px"><b>NO.6</b></th>
+                <th class="thTable1"  width="35px"><b>NO.1</b></th>
+                <th class="thTable1"  width="35px"><b>NO.2</b></th>
+                <th class="thTable1"  width="35px"><b>NO.3</b></th>
+                <th class="thTable1"  width="35px"><b>NO.4</b></th>
+                <th class="thTable1"  width="35px"><b>NO.5</b></th>
+                <th class="thTable1"  width="35px"><b>NO.6</b></th>
+                <th class="thTable1"  width="35px"><b>START</b></th>
+                <th class="thTable1"  width="35px"><b>STOP</b></th>
+                <th class="thTable1"  width="35px"><b>START</b></th>
+                <th class="thTable1"  width="35px"><b>STOP</b></th>
+                <th class="thTable1"  width="35px"><b>START</b></th>
+                <th class="thTable1"  width="35px"><b>STOP</b></th>
+                <th class="thTable1"  width="35px"><b>START</b></th>
+                <th class="thTable1"  width="35px"><b>STOP</b></th>
+                <th class="thTable1"  width="35px"><b>START</b></th>
+                <th class="thTable1"  width="35px"><b>STOP</b></th>
+                <th class="thTable1"  width="35px"><b>START</b></th>
+                <th class="thTable1"  width="35px"><b>STOP</b></th>
             </tr>
         </thead>
         <tbody>
@@ -158,18 +160,18 @@
                 <td class="tdTable1" ><?= number_format($data_sql[$i]['PRSSP_CNP4'],2,".",",") ?></td>
                 <td class="tdTable1" ><?= number_format($data_sql[$i]['PRSSP_CNP5'],2,".",",") ?></td>
                 <td class="tdTable1" ><?= number_format($data_sql[$i]['PRSSP_CNP6'],2,".",",") ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['PRSSP_SRT1']) > 0) { echo 'V'; } ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['PRSSP_END1']) < 1) { echo 'X'; } ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['PRSSP_SRT2']) > 0) { echo 'V'; } ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['PRSSP_END2']) < 1) { echo 'X'; } ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['PRSSP_SRT3']) > 0) { echo 'V'; } ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['PRSSP_END3']) < 1) { echo 'X'; } ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['PRSSP_SRT4']) > 0) { echo 'V'; } ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['PRSSP_END4']) < 1) { echo 'X'; } ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['PRSSP_SRT5']) > 0) { echo 'V'; } ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['PRSSP_END5']) < 1) { echo 'X'; } ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['PRSSP_SRT6']) > 0) { echo 'V'; } ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['PRSSP_END6']) < 1) { echo 'X'; } ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSSP_SRT1_DISP'] ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSSP_END1_DISP'] ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSSP_SRT2_DISP'] ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSSP_END2_DISP'] ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSSP_SRT3_DISP'] ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSSP_END3_DISP'] ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSSP_SRT4_DISP'] ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSSP_END4_DISP'] ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSSP_SRT5_DISP'] ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSSP_END5_DISP'] ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSSP_SRT6_DISP'] ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSSP_END6_DISP'] ?></td>
             </tr>
 <?php
             
