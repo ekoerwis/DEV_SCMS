@@ -269,8 +269,8 @@
                 exit;   
             } 
 
-             var url = "<?php  echo site_url() . '/../Content/LogSheet/logSheetPowerhouseTurbin/exportPDFFile?TDATE='; ?>"+dateParam+"&PRSID="+idParam;
-            // var url = "<?php // echo site_url() . '/../Content/LogSheet/logSheetPowerhouseTurbin/cekPdfView?TDATE='; ?>"+dateParam+"&PRSID="+idParam;
+             var url = "<?php  echo site_url() . '/../Content/LogSheet/logSheetPowerhouseTurbin/exportPDFFile?TDATE='; ?>"+dateParam+"&STATIONID="+idParam;
+            // var url = "<?php // echo site_url() . '/../Content/LogSheet/logSheetPowerhouseTurbin/cekPdfView?TDATE='; ?>"+dateParam+"&STATIONID="+idParam;
             window.open(url, "_blank");
     }
 

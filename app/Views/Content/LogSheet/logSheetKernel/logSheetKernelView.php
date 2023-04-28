@@ -270,8 +270,8 @@
                 exit;   
             } 
 
-             var url = "<?php  echo site_url() . '/../Content/LogSheet/logSheetKernel/exportPDFFile?TDATE='; ?>"+dateParam+"&PRSID="+idParam;
-            // var url = "<?php // echo site_url() . '/../Content/LogSheet/logSheetKernel/cekPdfView?TDATE='; ?>"+dateParam+"&PRSID="+idParam;
+             var url = "<?php  echo site_url() . '/../Content/LogSheet/logSheetKernel/exportPDFFile?TDATE='; ?>"+dateParam+"&STATIONID="+idParam;
+            // var url = "<?php // echo site_url() . '/../Content/LogSheet/logSheetKernel/cekPdfView?TDATE='; ?>"+dateParam+"&STATIONID="+idParam;
             window.open(url, "_blank");
     }
 
