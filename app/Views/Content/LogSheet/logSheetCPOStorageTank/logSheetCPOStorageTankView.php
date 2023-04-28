@@ -4,6 +4,11 @@
 		/* height:auto; */
 	    white-space: normal;
 	}
+    .datagrid-cell-group{
+		line-height:normal;
+		height:auto;
+	    white-space: normal;
+	}
 </style>
     
     <!--- DATA GRID ------------------------------------------------------------------------->

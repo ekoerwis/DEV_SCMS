@@ -4,6 +4,12 @@
 		/* height:auto; */
 	    white-space: normal;
 	}
+
+    .datagrid-cell-group{
+		line-height:normal;
+		height:auto;
+	    white-space: normal;
+	}
 </style>
     
     <!--- DATA GRID ------------------------------------------------------------------------->
@@ -60,7 +66,7 @@
                 <th field="CSTOLY3" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NO.1</b></th>
                 <th field="CSTOLY4" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NO.2</b></th>
                 <th field="CSTOLY5" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NO.3</b></th>
-                <th field="CSTOLY6" halign="center" data-options="sortable:false,width:170,align:'center' " formatter="formatNumberColumnCostum"><b>TEMP (c)</b></th>
+                <th field="CSTOLY6" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>TEMP (c)</b></th>
                 <th field="SDTTMP1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>YES</b></th>
                 <th field="SDTTMP2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NO</b></th>
                 <th field="SDTTMP3" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>START</b></th>
