@@ -28,7 +28,7 @@
         <thead>
             <tr>
                 <!-- <th rowspan="2" field="TIME_DISP"halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>JAM</b></th> -->
-                <th colspan="7"><b>DIGESTER MASS TEMP ( OC )</b></th>
+                <th colspan="7"><b>DIGESTER MASS TEMP ( <span>&#176;</span>C )</b></th>
                 <th colspan="6"><b>DIGESTER LOAD (AMP)</b></th>
                 <th colspan="6"><b>PRESS CONE PRESSURE (BAR)</b></th>
                 <th colspan="2"><b>PRESS NO.1</b></th>
