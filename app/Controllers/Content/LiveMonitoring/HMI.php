@@ -61,7 +61,8 @@ class HMI extends \App\Controllers\BaseController
 			$data['tinggi_dg']= 'height:'.$tinggiContent.'px';
 		}
 
-        $data['srcView'] = 'https://10.20.38.188:6064/';
+        $data['srcView'] = 'http://10.20.38.188:6065/';
+        // $data['srcView'] = 'https://10.20.38.188:6064/';
 
 		$this->view('Content/LiveMonitoring/HMI/HMIFrameView.php', $data);
 
