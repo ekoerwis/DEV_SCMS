@@ -85,7 +85,7 @@
         <thead>
             <tr class="trHeadTable1">
                 <th rowspan="2" class="thTable1"  width="30px"><b>JAM</b></th>
-                <th colspan="7" class="thTable1" ><b>DIGESTER MASS TEMP ( OC )</b></th>
+                <th colspan="7" class="thTable1" ><b>DIGESTER MASS TEMP ( <span>&#176;</span>C )</b></th>
                 <th colspan="6" class="thTable1" ><b>DIGESTER LOAD (AMP)</b></th>
                 <th colspan="6" class="thTable1" ><b>PRESS CONE PRESSURE (BAR)</b></th>
                 <th colspan="2" class="thTable1" ><b>PRESS NO.1</b></th>
