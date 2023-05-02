@@ -10,4 +10,5 @@
 
 <!-- <script>
     window.open('<?php echo $srcView;?>', '_blank');
+
 </script> -->
