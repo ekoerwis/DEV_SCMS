@@ -27,13 +27,14 @@
 .trHeadTable1 {
     border: 1px solid black;
     border-collapse: collapse;
+    /* font-size: 7pt; */
 }
 
 .thTable1 {
     border: 1px solid black;
     border-collapse: collapse;
     text-align: center;
-    font-size: 7pt;
+    font-size: 6pt;
 }
 
 .tdTable1 {
@@ -44,6 +45,7 @@
     border-left: 1px solid black;
     /* border-bottom: 1px solid black; */
     text-align: center;
+    font-size: 7pt;
     
 }
 
@@ -82,42 +84,39 @@
     <table id="dataTable" class="table1">
         <thead>
             <tr class="trHeadTable1">
-                <th rowspan="3" class="thTable1"  width="50px"><b>JAM</b></th>
-                <th class="thTable1"  colspan="18"><b>RUNNING HOUR</b></th>
-                <!-- <th rowspan="3" field="TMP1" halign="center" data-options="sortable:false,width:60,align:'center' " ><b>PARAF MANDOR</b></th> -->
-                <!-- <th rowspan="3" field="TMP1" halign="center" data-options="sortable:false,width:160,align:'center' " ><b>KETERANGAN</b></th> -->
+                <th rowspan="3" class="thTable1"  width="30px"><b>JAM</b></th>
+                <th colspan="18" class="thTable1" ><b>RUNNING HOUR</b></th>
             </tr>
             <tr class="trHeadTable1">
-                <th class="thTable1" colspan="2" ><b>DIGESTER NO 1</b></th>
-                <th class="thTable1" colspan="2" ><b>DIGESTER NO 2</b></th>
-                <th class="thTable1" colspan="2" ><b>DIGESTER NO 3</b></th>
-                <th class="thTable1" colspan="2" ><b>DIGESTER NO 4</b></th>
-                <th class="thTable1" colspan="2" ><b>DIGESTER NO 5</b></th>
-                <th class="thTable1" colspan="2" ><b>DIGESTER NO 6</b></th>
-                <th class="thTable1" colspan="2" ><b>CBC 1</b></th>
-                <th class="thTable1" colspan="2" ><b>CBC 2</b></th>
-                <th class="thTable1" colspan="2" ><b>CBC 3</b></th>
+                <th colspan="2" class="thTable1" ><b>DIGESTER NO.1</b></th>
+                <th colspan="2" class="thTable1" ><b>DIGESTER NO.2</b></th>
+                <th colspan="2" class="thTable1" ><b>DIGESTER NO.3</b></th>
+                <th colspan="2" class="thTable1" ><b>DIGESTER NO.4</b></th>
+                <th colspan="2" class="thTable1" ><b>DIGESTER NO.5</b></th>
+                <th colspan="2" class="thTable1" ><b>DIGESTER NO.6</b></th>
+                <th colspan="2" class="thTable1" ><b>CBC NO.1</b></th>
+                <th colspan="2" class="thTable1" ><b>CBC NO.2</b></th>
+                <th colspan="2" class="thTable1" ><b>CBC NO.3</b></th>
             </tr>
             <tr class="trHeadTable1">
-                <th class="thTable1"  width="50px "><b>START</b></th>
-                <th class="thTable1"  width="50px "><b>STOP</b></th>
-                <th class="thTable1"  width="50px "><b>START</b></th>
-                <th class="thTable1"  width="50px "><b>STOP</b></th>
-                <th class="thTable1"  width="50px "><b>START</b></th>
-                <th class="thTable1"  width="50px "><b>STOP</b></th>
-                <th class="thTable1"  width="50px "><b>START</b></th>
-                <th class="thTable1"  width="50px "><b>STOP</b></th>
-                <th class="thTable1"  width="50px "><b>START</b></th>
-                <th class="thTable1"  width="50px "><b>STOP</b></th>
-                <th class="thTable1"  width="50px "><b>START</b></th>
-                <th class="thTable1"  width="50px "><b>STOP</b></th>
-                <th class="thTable1"  width="50px "><b>START</b></th>
-                <th class="thTable1"  width="50px "><b>STOP</b></th>
-                <th class="thTable1"  width="50px "><b>START</b></th>
-                <th class="thTable1"  width="50px "><b>STOP</b></th>
-                <th class="thTable1"  width="50px "><b>START</b></th>
-                <th class="thTable1"  width="50px "><b>STOP</b></th>
-            </tr>
+                <th class="thTable1"  width="40px"><b>START</b></th>
+                <th class="thTable1"  width="40px"><b>STOP</b></th>
+                <th class="thTable1"  width="40px"><b>START</b></th>
+                <th class="thTable1"  width="40px"><b>STOP</b></th>
+                <th class="thTable1"  width="40px"><b>START</b></th>
+                <th class="thTable1"  width="40px"><b>STOP</b></th>
+                <th class="thTable1"  width="40px"><b>START</b></th>
+                <th class="thTable1"  width="40px"><b>STOP</b></th>
+                <th class="thTable1"  width="40px"><b>START</b></th>
+                <th class="thTable1"  width="40px"><b>STOP</b></th>
+                <th class="thTable1"  width="40px"><b>START</b></th>
+                <th class="thTable1"  width="40px"><b>STOP</b></th>
+                <th class="thTable1"  width="40px"><b>START</b></th>
+                <th class="thTable1"  width="40px"><b>STOP</b></th>
+                <th class="thTable1"  width="40px"><b>START</b></th>
+                <th class="thTable1"  width="40px"><b>STOP</b></th>
+                <th class="thTable1"  width="40px"><b>START</b></th>
+                <th class="thTable1"  width="40px"><b>STOP</b></th>
             </tr>
         </thead>
         <tbody>
@@ -132,24 +131,24 @@
             ?>
             <tr>
                 <td class="tdTable1" ><?= $data_sql[$i]['TIME_DISP'] ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['TMP1']) > 0) { echo 'V'; } ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['TMP2']) < 1) { echo 'X'; } ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['VCM1']) > 0) { echo 'V'; } ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['VCM2']) < 1) { echo 'X'; } ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['CSTTMP1']) > 0) { echo 'V'; } ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['CSTTMP2']) < 1) { echo 'X'; } ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['CSTTMP3']) > 0) { echo 'V'; } ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['CSTTMP4']) < 1) { echo 'X'; } ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['CSTTMP5']) > 0) { echo 'V'; } ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['CSTTMP6']) < 1) { echo 'X'; } ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['CSTOLY1']) > 0) { echo 'V'; } ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['CSTOLY2']) < 1) { echo 'X'; } ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['CSTOLY3']) > 0) { echo 'V'; } ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['CSTOLY4']) < 1) { echo 'X'; } ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['CSTOLY5']) > 0) { echo 'V'; } ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['CSTOLY6']) < 1) { echo 'X'; } ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['SDTTMP1']) > 0) { echo 'V'; } ?></td>
-                <td class="tdTable1" ><?php if(intval($data_sql[$i]['SDTTMP2']) < 1) { echo 'X'; } ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSDG_SRT1_DISP'] ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSDG_END1_DISP'] ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSDG_SRT2_DISP'] ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSDG_END2_DISP'] ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSDG_SRT3_DISP'] ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSDG_END3_DISP'] ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSDG_SRT4_DISP'] ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSDG_END4_DISP'] ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSDG_SRT5_DISP'] ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSDG_END5_DISP'] ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSDG_SRT6_DISP'] ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSDG_END6_DISP'] ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSCB_SRT1_DISP'] ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSCB_END1_DISP'] ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSCB_SRT2_DISP'] ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSCB_END2_DISP'] ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSCB_SRT3_DISP'] ?></td>
+                <td class="tdTable1" ><?= $data_sql[$i]['PRSCB_END3_DISP'] ?></td>
             </tr>
 <?php
             

@@ -28,39 +28,37 @@
         <thead>
             <tr>
                 <th colspan="18"><b>RUNNING HOUR</b></th>
-                <!-- <th rowspan="3" field="TMP1" halign="center" data-options="sortable:false,width:60,align:'center' " ><b>PARAF MANDOR</b></th> -->
-                <!-- <th rowspan="3" field="TMP1" halign="center" data-options="sortable:false,width:160,align:'center' " ><b>KETERANGAN</b></th> -->
             </tr>
             <tr>
-                <th colspan="2" ><b>DIGESTER NO 1</b></th>
-                <th colspan="2" ><b>DIGESTER NO 2</b></th>
-                <th colspan="2" ><b>DIGESTER NO 3</b></th>
-                <th colspan="2" ><b>DIGESTER NO 4</b></th>
-                <th colspan="2" ><b>DIGESTER NO 5</b></th>
-                <th colspan="2" ><b>DIGESTER NO 6</b></th>
-                <th colspan="2" ><b>CBC 1</b></th>
-                <th colspan="2" ><b>CBC 2</b></th>
-                <th colspan="2" ><b>CBC 3</b></th>
+                <th colspan="2"><b>DIGESTER NO.1</b></th>
+                <th colspan="2"><b>DIGESTER NO.2</b></th>
+                <th colspan="2"><b>DIGESTER NO.3</b></th>
+                <th colspan="2"><b>DIGESTER NO.4</b></th>
+                <th colspan="2"><b>DIGESTER NO.5</b></th>
+                <th colspan="2"><b>DIGESTER NO.6</b></th>
+                <th colspan="2"><b>CBC NO.1</b></th>
+                <th colspan="2"><b>CBC NO.2</b></th>
+                <th colspan="2"><b>CBC NO.3</b></th>
             </tr>
             <tr>
-                <th field="TMP1" halign="center" data-options="sortable:false,width:50,align:'center' " formatter="imageTrue"><b>START</b></th>
-                <th field="TMP2" halign="center" data-options="sortable:false,width:50,align:'center' " formatter="imageFalse"><b>STOP</b></th>
-                <th field="VCM1" halign="center" data-options="sortable:false,width:50,align:'center' " formatter="imageTrue"><b>START</b></th>
-                <th field="VCM2" halign="center" data-options="sortable:false,width:50,align:'center' " formatter="imageFalse"><b>STOP</b></th>
-                <th field="CSTTMP1" halign="center" data-options="sortable:false,width:50,align:'center' " formatter="imageTrue"><b>START</b></th>
-                <th field="CSTTMP2" halign="center" data-options="sortable:false,width:50,align:'center' " formatter="imageFalse"><b>STOP</b></th>
-                <th field="CSTTMP3" halign="center" data-options="sortable:false,width:50,align:'center' " formatter="imageTrue"><b>START</b></th>
-                <th field="CSTTMP4" halign="center" data-options="sortable:false,width:50,align:'center' " formatter="imageFalse"><b>STOP</b></th>
-                <th field="CSTTMP5" halign="center" data-options="sortable:false,width:50,align:'center' " formatter="imageTrue"><b>START</b></th>
-                <th field="CSTTMP6" halign="center" data-options="sortable:false,width:50,align:'center' " formatter="imageFalse"><b>STOP</b></th>
-                <th field="CSTOLY1" halign="center" data-options="sortable:false,width:50,align:'center' " formatter="imageTrue"><b>START</b></th>
-                <th field="CSTOLY2" halign="center" data-options="sortable:false,width:50,align:'center' " formatter="imageFalse"><b>STOP</b></th>
-                <th field="CSTOLY3" halign="center" data-options="sortable:false,width:50,align:'center' " formatter="imageTrue"><b>START</b></th>
-                <th field="CSTOLY4" halign="center" data-options="sortable:false,width:50,align:'center' " formatter="imageFalse"><b>STOP</b></th>
-                <th field="CSTOLY5" halign="center" data-options="sortable:false,width:50,align:'center' " formatter="imageTrue"><b>START</b></th>
-                <th field="CSTOLY6" halign="center" data-options="sortable:false,width:50,align:'center' " formatter="imageFalse"><b>STOP</b></th>
-                <th field="SDTTMP1" halign="center" data-options="sortable:false,width:50,align:'center' " formatter="imageTrue"><b>START</b></th>
-                <th field="SDTTMP2" halign="center" data-options="sortable:false,width:50,align:'center' " formatter="imageFalse"><b>STOP</b></th>
+                <th field="PRSDG_SRT1_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
+                <th field="PRSDG_END1_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
+                <th field="PRSDG_SRT2_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
+                <th field="PRSDG_END2_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
+                <th field="PRSDG_SRT3_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
+                <th field="PRSDG_END3_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
+                <th field="PRSDG_SRT4_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
+                <th field="PRSDG_END4_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
+                <th field="PRSDG_SRT5_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
+                <th field="PRSDG_END5_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
+                <th field="PRSDG_SRT6_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
+                <th field="PRSDG_END6_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
+                <th field="PRSCB_SRT1_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
+                <th field="PRSCB_END1_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
+                <th field="PRSCB_SRT2_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
+                <th field="PRSCB_END2_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
+                <th field="PRSCB_SRT3_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
+                <th field="PRSCB_END3_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
             </tr>
         </thead>
     </table>
@@ -69,7 +67,7 @@
         <div class='col-xl-12 col-lg-12 col-md-12 row'>
             <div class="col row">
                 <input id="dt-tdate" name="TDATE" class="easyui-datebox" style="width: 150px;"  data-options="required:true">
-                <input id="cb-stationid" name="STATIONID" class="" style="width:100px;" >
+                <!-- <input id="cb-prsid" name="PRSID" class="" style="width:100px;" > -->
                 <!-- <div class="col-xl-3 col-lg-3 col-md-3 row"> -->
                     <!-- <input id="tb-Year" name="YEARNUMBER" class="easyui-numberbox " style="width: 100px;"  data-options="required:true" prompt="Year"> -->
                     <!-- <input id="cg-MonthNumber" name="MONTHNUMBER" class="easyui-combogrid" style="width: 200px;"  data-options="required:true" prompt="Month"> -->
@@ -97,14 +95,14 @@
 
             settingCalendarTDATE();            
 
-            $('#cb-stationid').combobox({
-                valueField: 'ID',
-                textField: 'DESCRIPTION',
-                prompt:"Press ID",
-                required:true,
-                value:"1",
-                url: "<?php  echo site_url() . '/../Content/LogSheet/logSheetDigester/getStationID'; ?>",
-            });
+            // $('#cb-prsid').combobox({
+            //     valueField: 'ID',
+            //     textField: 'DESCRIPTION',
+            //     prompt:"Press ID",
+            //     required:true,
+            //     value:"1",
+            //     url: "<?php // echo site_url() . '/../Content/LogSheet/logSheetDigester/getPress'; ?>",
+            // });
 
             doSearch();
 
@@ -150,7 +148,7 @@
         function doSearch() {
 
             var dateParam = $('#dt-tdate').datebox('getValue');
-            var idParam =  $('#cb-stationid').combobox('getValue');
+            // var idParam =  $('#cb-prsid').combobox('getValue');
 
             if( dateParam.trim() == '' || dateParam.trim() == null ){
                 // alert('"Tanggal" Harus Di Isi Dahulu');
@@ -162,25 +160,25 @@
                 exit;   
             } 
 
-            if( idParam.trim() == '' || idParam.trim() == null ){
-                // alert('"Storage" Harus Di Isi Dahulu');
-                $.messager.alert({    
-                    title: 'Info',
-                    msg: 'Pilih Press ID Dahulu ! '
-                });
-                $('#cb-stationid').combobox('textbox').focus();
-                exit;   
-            } 
+            // if( idParam.trim() == '' || idParam.trim() == null ){
+            //     // alert('"Storage" Harus Di Isi Dahulu');
+            //     $.messager.alert({    
+            //         title: 'Info',
+            //         msg: 'Pilih Press ID Dahulu ! '
+            //     });
+            //     $('#cb-prsid').combobox('textbox').focus();
+            //     exit;   
+            // } 
 
             $('#dg').datagrid('load', {
                 TDATE: $('#dt-tdate').datebox('getValue'),
-                STATIONID: $('#cb-stationid').combobox('getValue'),
+                // PRSID: $('#cb-prsid').combobox('getValue'),
             });
         }
 
         function doSearchReset() {
             $('#dt-tdate').datebox('reset');
-            $('#cb-stationid').combobox('reset');
+            // $('#cb-stg_id').combobox('reset');
 
         }
 
@@ -224,7 +222,7 @@
         function exportDataExcel() {
         
             var dateParam = $('#dt-tdate').datebox('getValue');
-            var idParam =  $('#cb-stationid').combobox('getValue');
+            // var idParam =  $('#cb-prsid').combobox('getValue');
 
             if( dateParam.trim() == '' || dateParam.trim() == null ){
                 $.messager.alert({    
@@ -235,23 +233,24 @@
                 exit;   
             } 
 
-            if( idParam.trim() == '' || idParam.trim() == null ){
-                $.messager.alert({    
-                    title: 'Info',
-                    msg: 'Pilih Press ID Dahulu ! '
-                });
-                $('#cb-stationid').combobox('textbox').focus();
-                exit;   
-            } 
+            // if( idParam.trim() == '' || idParam.trim() == null ){
+            //     $.messager.alert({    
+            //         title: 'Info',
+            //         msg: 'Pilih Press ID Dahulu ! '
+            //     });
+            //     $('#cb-prsid').combobox('textbox').focus();
+            //     exit;   
+            // } 
 
-            var url = "<?php  echo site_url() . '/../Content/LogSheet/logSheetDigester/exportExcelFile?TDATE='; ?>"+dateParam+"&STATIONID="+idParam;
+            var url = "<?php  echo site_url() . '/../Content/LogSheet/logSheetDigester/exportExcelFile?TDATE='; ?>"+dateParam;
+            // var url = "<?php  echo site_url() . '/../Content/LogSheet/logSheetDigester/exportExcelFile?TDATE='; ?>"+dateParam+"&PRSID="+idParam;
             window.open(url, "_blank");
         }
 
         function exportDataPDF() {
         
             var dateParam = $('#dt-tdate').datebox('getValue');
-            var idParam =  $('#cb-stationid').combobox('getValue');
+            // var idParam =  $('#cb-prsid').combobox('getValue');
 
             if( dateParam.trim() == '' || dateParam.trim() == null ){
                 $.messager.alert({    
@@ -262,17 +261,17 @@
                 exit;   
             } 
 
-            if( idParam.trim() == '' || idParam.trim() == null ){
-                $.messager.alert({    
-                    title: 'Info',
-                    msg: 'Pilih Press ID Dahulu ! '
-                });
-                $('#cb-stationid').combobox('textbox').focus();
-                exit;   
-            } 
+            // if( idParam.trim() == '' || idParam.trim() == null ){
+            //     $.messager.alert({    
+            //         title: 'Info',
+            //         msg: 'Pilih Press ID Dahulu ! '
+            //     });
+            //     $('#cb-prsid').combobox('textbox').focus();
+            //     exit;   
+            // } 
 
-             var url = "<?php  echo site_url() . '/../Content/LogSheet/logSheetDigester/exportPDFFile?TDATE='; ?>"+dateParam+"&STATIONID="+idParam;
-            // var url = "<?php // echo site_url() . '/../Content/LogSheet/logSheetDigester/cekPdfView?TDATE='; ?>"+dateParam+"&STATIONID="+idParam;
+             var url = "<?php  echo site_url() . '/../Content/LogSheet/logSheetDigester/exportPDFFile?TDATE='; ?>"+dateParam;
+            // var url = "<?php // echo site_url() . '/../Content/LogSheet/logSheetDigester/cekPdfView?TDATE='; ?>"+dateParam+"&PRSID="+idParam;
             window.open(url, "_blank");
     }
 

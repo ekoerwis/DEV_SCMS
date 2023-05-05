@@ -63,9 +63,9 @@ class logSheetDigester extends \App\Controllers\BaseController
 		$this->view('Content/LogSheet/logSheetDigester/logSheetDigesterView.php', $data);
 	}
 
-    public function getStationID(){
+    public function getPress(){
         $this->cekHakAkses('READ_DATA');
-		echo json_encode($this->logSheetDigesterModel->getStationID());     
+		echo json_encode($this->logSheetDigesterModel->getPress());     
     }
 
     public function dataList(){
@@ -118,7 +118,7 @@ class logSheetDigester extends \App\Controllers\BaseController
                 </table>
             </td>
             <td style="width:33.33%; text-align:center;">  
-                DIGESTER STATION
+                DIGESTER
             </td>
             <td style="width:33.33%; text-align:right;">  
                 <table style="float:right;font-size: 8pt;">

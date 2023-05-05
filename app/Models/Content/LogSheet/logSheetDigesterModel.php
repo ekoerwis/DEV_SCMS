@@ -11,101 +11,47 @@ class logSheetDigesterModel extends \App\Models\BaseModel
 
     public function reportSqlString($tdate='' ,$id=''){
 
-        // $w_tdate = " ";
-        // $w_dt_div = " ";
-
-        // if($tdate != ""){
-        //     $w_tdate = " AND POSTDT = TO_DATE('$tdate','dd/mon/yyyy') ";
-        // }
-        
-        // if($dt_div != ""){
-        //     $w_dt_div = " AND STGID = '$dt_div' ";
-        // }
-
-        $sql=" SELECT A.TIME_F, A.TIME_DISP, B.LGSID, B.UEP, B.COMP_ID, B.SITE_ID, B.POSTDT, B.CLRID, B.CLRHR, B.CLRDTHR,
-        B.TMP1, B.TMP2, B.TMP3, 
-       B.TMP4, B.TMP5, B.TMP6, B.VCM1, B.VCM2, B.VCM3, B.VCM4, B.CSTTMP1, B.CSTTMP2, B.CSTTMP3, 
-       B.CSTTMP4, B.CSTTMP5, B.CSTTMP6, B.CSTOLY1, B.CSTOLY2, B.CSTOLY3, B.CSTOLY4, B.CSTOLY5, 
-       B.CSTOLY6, B.SDTTMP1, B.SDTTMP2, B.SDTTMP3, B.SDTTMP4, B.SDTTMP5, B.SDTTMP6, B.SSPTMP1, 
-       B.SSPTMP2, B.SSPTMP3, B.SSPTMP4, B.SSPTMP5, B.SSPTMP6, B.DECACT1, B.DECACT2, B.DECACT3, 
-       B.DECTMP1, B.DECTMP2, B.DECTMP3, B.HWTTMP1, B.HWTTMP2, B.HWTTMP3, B.SPHMS1, B.SPHMS2, 
-       B.SPHMS3, B.SPHME1, B.SPHME2, B.SPHME3, B.DCHMS1, B.DCHMS2, B.DCHMS3, B.DCHME1, 
-       B.DCHME2, B.DCHME3, B.VERMD1, B.USRMD1
-                       FROM (
-                       SELECT TO_CHAR(TO_DATE('$tdate','dd/mon/yyyy'),'DDMONYY')||'07' TIME_F,'07' TIME_DISP FROM DUAL
-                       UNION ALL
-                       SELECT TO_CHAR(TO_DATE('$tdate','dd/mon/yyyy'),'DDMONYY')||'08' TIME_F,'08' TIME_DISP FROM DUAL
-                       UNION ALL
-                       SELECT TO_CHAR(TO_DATE('$tdate','dd/mon/yyyy'),'DDMONYY')||'09' TIME_F,'09' TIME_DISP FROM DUAL
-                       UNION ALL
-                       SELECT TO_CHAR(TO_DATE('$tdate','dd/mon/yyyy'),'DDMONYY')||'10' TIME_F,'10' TIME_DISP FROM DUAL
-                       UNION ALL
-                       SELECT TO_CHAR(TO_DATE('$tdate','dd/mon/yyyy'),'DDMONYY')||'11' TIME_F,'11' TIME_DISP FROM DUAL
-                       UNION ALL
-                       SELECT TO_CHAR(TO_DATE('$tdate','dd/mon/yyyy'),'DDMONYY')||'12' TIME_F,'12' TIME_DISP FROM DUAL
-                       UNION ALL
-                       SELECT TO_CHAR(TO_DATE('$tdate','dd/mon/yyyy'),'DDMONYY')||'13' TIME_F,'13' TIME_DISP FROM DUAL
-                       UNION ALL
-                       SELECT TO_CHAR(TO_DATE('$tdate','dd/mon/yyyy'),'DDMONYY')||'14' TIME_F,'14' TIME_DISP FROM DUAL
-                       UNION ALL
-                       SELECT TO_CHAR(TO_DATE('$tdate','dd/mon/yyyy'),'DDMONYY')||'15' TIME_F,'15' TIME_DISP FROM DUAL
-                       UNION ALL
-                       SELECT TO_CHAR(TO_DATE('$tdate','dd/mon/yyyy'),'DDMONYY')||'16' TIME_F,'16' TIME_DISP FROM DUAL
-                       UNION ALL
-                       SELECT TO_CHAR(TO_DATE('$tdate','dd/mon/yyyy'),'DDMONYY')||'17' TIME_F,'17' TIME_DISP FROM DUAL
-                       UNION ALL
-                       SELECT TO_CHAR(TO_DATE('$tdate','dd/mon/yyyy'),'DDMONYY')||'18' TIME_F,'18' TIME_DISP FROM DUAL
-                       UNION ALL
-                       SELECT TO_CHAR(TO_DATE('$tdate','dd/mon/yyyy'),'DDMONYY')||'19' TIME_F,'19' TIME_DISP FROM DUAL
-                       UNION ALL
-                       SELECT TO_CHAR(TO_DATE('$tdate','dd/mon/yyyy'),'DDMONYY')||'20' TIME_F,'20' TIME_DISP FROM DUAL
-                       UNION ALL
-                       SELECT TO_CHAR(TO_DATE('$tdate','dd/mon/yyyy'),'DDMONYY')||'21' TIME_F,'21' TIME_DISP FROM DUAL
-                       UNION ALL
-                       SELECT TO_CHAR(TO_DATE('$tdate','dd/mon/yyyy'),'DDMONYY')||'22' TIME_F,'22' TIME_DISP FROM DUAL
-                       UNION ALL
-                       SELECT TO_CHAR(TO_DATE('$tdate','dd/mon/yyyy'),'DDMONYY')||'23' TIME_F,'23' TIME_DISP FROM DUAL
-                       UNION ALL
-                       SELECT TO_CHAR(TO_DATE('$tdate','dd/mon/yyyy') + INTERVAL '1' DAY,'DDMONYY')||'00' TIME_F,'00' TIME_DISP FROM DUAL
-                       UNION ALL
-                       SELECT TO_CHAR(TO_DATE('$tdate','dd/mon/yyyy') + INTERVAL '1' DAY,'DDMONYY')||'01' TIME_F,'01' TIME_DISP FROM DUAL
-                       UNION ALL
-                       SELECT TO_CHAR(TO_DATE('$tdate','dd/mon/yyyy') + INTERVAL '1' DAY,'DDMONYY')||'02' TIME_F,'02' TIME_DISP FROM DUAL
-                       UNION ALL
-                       SELECT TO_CHAR(TO_DATE('$tdate','dd/mon/yyyy') + INTERVAL '1' DAY,'DDMONYY')||'03' TIME_F,'03' TIME_DISP FROM DUAL
-                       UNION ALL
-                       SELECT TO_CHAR(TO_DATE('$tdate','dd/mon/yyyy') + INTERVAL '1' DAY,'DDMONYY')||'04' TIME_F,'04' TIME_DISP FROM DUAL
-                       UNION ALL
-                       SELECT TO_CHAR(TO_DATE('$tdate','dd/mon/yyyy') + INTERVAL '1' DAY,'DDMONYY')||'05' TIME_F,'05' TIME_DISP FROM DUAL
-                       UNION ALL
-                       SELECT TO_CHAR(TO_DATE('$tdate','dd/mon/yyyy') + INTERVAL '1' DAY,'DDMONYY')||'06' TIME_F,'06' TIME_DISP FROM DUAL
-                       ) A LEFT JOIN (
-                       SELECT LGSID, UEP, COMP_ID, SITE_ID, POSTDT, CLRID, CLRHR, TO_CHAR(POSTDT,'DDMONYY')||LPAD(CLRHR,2,'0') CLRDTHR,
-                       TMP1, TMP2, TMP3, 
-       TMP4, TMP5, TMP6, VCM1, VCM2, VCM3, VCM4, CSTTMP1, CSTTMP2, CSTTMP3, 
-       CSTTMP4, CSTTMP5, CSTTMP6, CSTOLY1, CSTOLY2, CSTOLY3, CSTOLY4, CSTOLY5, 
-       CSTOLY6, SDTTMP1, SDTTMP2, SDTTMP3, SDTTMP4, SDTTMP5, SDTTMP6, SSPTMP1, 
-       SSPTMP2, SSPTMP3, SSPTMP4, SSPTMP5, SSPTMP6, DECACT1, DECACT2, DECACT3, 
-       DECTMP1, DECTMP2, DECTMP3, HWTTMP1, HWTTMP2, HWTTMP3, SPHMS1, SPHMS2, 
-       SPHMS3, SPHME1, SPHME2, SPHME3, DCHMS1, DCHMS2, DCHMS3, DCHME1, 
-       DCHME2, DCHME3, VERMD1, USRMD1 FROM POM_LGS_CLR B WHERE CLRID = '$id'
-       AND POSTDT BETWEEN TO_DATE('$tdate','dd/mon/yyyy') AND TO_DATE('$tdate','dd/mon/yyyy')+ 1
-                       ) B
-                       ON A.TIME_F = B.CLRDTHR
-                       ORDER BY A.TIME_F
-        ";
+        $sql="SELECT LPAD(PRSHR,2,'0') TIME_DISP , LGSID, SEQ, UEP, COMP_ID, SITE_ID, POSTDT, PRSID, PRSHR, TO_CHAR(POSTDT,'DDMONYY')||LPAD(PRSHR,2,'0') PRSDTHR,
+        PRSDG_TMP1, PRSDG_TMP2, PRSDG_TMP3, PRSDG_TMP4, PRSDG_TMP5, PRSDG_TMP6, 
+        CASE WHEN (PRSDG_TMP1+PRSDG_TMP2+PRSDG_TMP3+PRSDG_TMP4+PRSDG_TMP5+PRSDG_TMP6) > 0 THEN 
+        (PRSDG_TMP1+PRSDG_TMP2+PRSDG_TMP3+PRSDG_TMP4+PRSDG_TMP5+PRSDG_TMP6)/
+        (CASE WHEN PRSDG_TMP1 > 0 THEN 1 ELSE 0 END +
+        CASE WHEN PRSDG_TMP2 > 0 THEN 1 ELSE 0 END +
+        CASE WHEN PRSDG_TMP3 > 0 THEN 1 ELSE 0 END +
+        CASE WHEN PRSDG_TMP4 > 0 THEN 1 ELSE 0 END +
+        CASE WHEN PRSDG_TMP5 > 0 THEN 1 ELSE 0 END +
+        CASE WHEN PRSDG_TMP6 > 0 THEN 1 ELSE 0 END )
+        ELSE 0 END PRSDG_TMP_AVG ,
+        PRSDG_AMP1, PRSDG_AMP2, PRSDG_AMP3, PRSDG_AMP4, PRSDG_AMP5, PRSDG_AMP6, 
+        PRSDG_SRT1, PRSDG_SRT2, PRSDG_SRT3, PRSDG_SRT4, PRSDG_SRT5, PRSDG_SRT6, 
+        PRSDG_END1, PRSDG_END2, PRSDG_END3, PRSDG_END4, PRSDG_END5, PRSDG_END6, 
+        TO_CHAR(PRSDG_SRT1,'HH24:MI') PRSDG_SRT1_DISP, TO_CHAR(PRSDG_SRT2,'HH24:MI') PRSDG_SRT2_DISP, TO_CHAR(PRSDG_SRT3,'HH24:MI') PRSDG_SRT3_DISP, TO_CHAR(PRSDG_SRT4,'HH24:MI') PRSDG_SRT4_DISP, TO_CHAR(PRSDG_SRT5,'HH24:MI') PRSDG_SRT5_DISP, TO_CHAR(PRSDG_SRT6,'HH24:MI') PRSDG_SRT6_DISP, 
+        TO_CHAR(PRSDG_END1,'HH24:MI') PRSDG_END1_DISP, TO_CHAR(PRSDG_END2,'HH24:MI') PRSDG_END2_DISP, TO_CHAR(PRSDG_END3,'HH24:MI') PRSDG_END3_DISP, TO_CHAR(PRSDG_END4,'HH24:MI') PRSDG_END4_DISP, TO_CHAR(PRSDG_END5,'HH24:MI') PRSDG_END5_DISP, TO_CHAR(PRSDG_END6,'HH24:MI') PRSDG_END6_DISP,
+        PRSSP_CNP1, PRSSP_CNP2, PRSSP_CNP3, PRSSP_CNP4, PRSSP_CNP5, PRSSP_CNP6, 
+        PRSSP_SRT1, PRSSP_SRT2, PRSSP_SRT3, PRSSP_SRT4, PRSSP_SRT5, PRSSP_SRT6, 
+        PRSSP_END1, PRSSP_END2, PRSSP_END3, PRSSP_END4, PRSSP_END5, PRSSP_END6,
+        TO_CHAR(PRSSP_SRT1,'HH24:MI') PRSSP_SRT1_DISP, TO_CHAR(PRSSP_SRT2,'HH24:MI') PRSSP_SRT2_DISP, TO_CHAR(PRSSP_SRT3,'HH24:MI') PRSSP_SRT3_DISP, TO_CHAR(PRSSP_SRT4,'HH24:MI') PRSSP_SRT4_DISP, TO_CHAR(PRSSP_SRT5,'HH24:MI') PRSSP_SRT5_DISP, TO_CHAR(PRSSP_SRT6,'HH24:MI') PRSSP_SRT6_DISP, 
+        TO_CHAR(PRSSP_END1,'HH24:MI') PRSSP_END1_DISP, TO_CHAR(PRSSP_END2,'HH24:MI') PRSSP_END2_DISP, TO_CHAR(PRSSP_END3,'HH24:MI') PRSSP_END3_DISP, TO_CHAR(PRSSP_END4,'HH24:MI') PRSSP_END4_DISP, TO_CHAR(PRSSP_END5,'HH24:MI') PRSSP_END5_DISP, TO_CHAR(PRSSP_END6,'HH24:MI') PRSSP_END6_DISP,
+        PRSDG_HMS1, PRSDG_HMS2, PRSDG_HMS3, PRSDG_HMS4, PRSDG_HMS5, PRSDG_HMS6, 
+        PRSDG_HMP1, PRSDG_HMP2, PRSDG_HMP3, PRSDG_HMP4, PRSDG_HMP5, PRSDG_HMP6, 
+        PRSCB_HMS1, PRSCB_HMS2, PRSCB_HMS3, PRSCB_HMP1, PRSCB_HMP2, PRSCB_HMP3 ,
+        PRSCB_SRT1, PRSCB_SRT2, PRSCB_SRT3, 
+        PRSCB_END1, PRSCB_END2, PRSCB_END3,
+        TO_CHAR(PRSCB_SRT1, 'HH24:MI') PRSCB_SRT1_DISP, TO_CHAR(PRSCB_SRT2, 'HH24:MI') PRSCB_SRT2_DISP, TO_CHAR(PRSCB_SRT3, 'HH24:MI') PRSCB_SRT3_DISP, 
+        TO_CHAR(PRSCB_END1, 'HH24:MI') PRSCB_END1_DISP, TO_CHAR(PRSCB_END2, 'HH24:MI') PRSCB_END2_DISP, TO_CHAR(PRSCB_END3, 'HH24:MI') PRSCB_END3_DISP
+         FROM POM_LGS_PRS WHERE POSTDT = TO_DATE('$tdate','dd/mon/yyyy') ORDER BY SEQ";
 
         return $sql;
     }
 
-    public function getStationID()
+    public function getPress()
     {
         
         $userOrganisasi=$this->session->get('userOrganisasi');
         $sess_comp=$userOrganisasi['COMPANYID'];
         $sess_site= $userOrganisasi['COMPANYSITEID'];        
 
-        $sql = " SELECT DISTINCT TRIM(CLRID) ID, TRIM(CLRID) DESCRIPTION FROM POM_LGS_CLR ORDER BY 1";
+        $sql = " SELECT DISTINCT TRIM(PRSID) ID, TRIM(PRSID) DESCRIPTION FROM POM_LGS_PRS ORDER BY 1";
         
         $sql = $this->db->query($sql)->getResultArray();
 
@@ -118,7 +64,7 @@ class logSheetDigesterModel extends \App\Models\BaseModel
     {
         $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
         $rows = isset($_POST['rows']) ? intval($_POST['rows']) : 50;
-        $sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'TIME_F';
+        $sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'SEQ';
         $order = isset($_POST['order']) ? strval($_POST['order']) : 'ASC';
         
         $userOrganisasi=$this->session->get('userOrganisasi');
@@ -133,9 +79,9 @@ class logSheetDigesterModel extends \App\Models\BaseModel
 			$TDATE  =  date("d/M/Y", strtotime($_POST['TDATE']));
 		}
 
-        $id = isset($_POST['STATIONID']) ? strval($_POST['STATIONID']) : '';
+        // $id = isset($_POST['PRSID']) ? strval($_POST['PRSID']) : '';
 
-        $sqlReport = $this->reportSqlString($TDATE, $id );
+        $sqlReport = $this->reportSqlString($TDATE );
 
         $mainSql="SELECT * FROM ($sqlReport) WHERE ROWNUM > 0";
 
@@ -151,15 +97,25 @@ class logSheetDigesterModel extends \App\Models\BaseModel
         $result["total"] = $sql['JUMLAH'];
         
 
-        $sql = "SELECT * FROM (SELECT TIME_F, TIME_DISP, LGSID, UEP, COMP_ID, SITE_ID, POSTDT, CLRID, CLRHR, CLRDTHR,
-        TMP1, TMP2, TMP3, 
-       TMP4, TMP5, TMP6, VCM1, VCM2, VCM3, VCM4, CSTTMP1, CSTTMP2, CSTTMP3, 
-       CSTTMP4, CSTTMP5, CSTTMP6, CSTOLY1, CSTOLY2, CSTOLY3, CSTOLY4, CSTOLY5, 
-       CSTOLY6, SDTTMP1, SDTTMP2, SDTTMP3, SDTTMP4, SDTTMP5, SDTTMP6, SSPTMP1, 
-       SSPTMP2, SSPTMP3, SSPTMP4, SSPTMP5, SSPTMP6, DECACT1, DECACT2, DECACT3, 
-       DECTMP1, DECTMP2, DECTMP3, HWTTMP1, HWTTMP2, HWTTMP3, SPHMS1, SPHMS2, 
-       SPHMS3, SPHME1, SPHME2, SPHME3, DCHMS1, DCHMS2, DCHMS3, DCHME1, 
-       DCHME2, DCHME3, VERMD1, USRMD1,
+        $sql = "SELECT * FROM (SELECT TIME_DISP , LGSID, SEQ, UEP, COMP_ID, SITE_ID, POSTDT, PRSID, PRSHR, PRSDTHR,
+        PRSDG_TMP1, PRSDG_TMP2, PRSDG_TMP3, PRSDG_TMP4, PRSDG_TMP5, PRSDG_TMP6, PRSDG_TMP_AVG,
+        PRSDG_AMP1, PRSDG_AMP2, PRSDG_AMP3, PRSDG_AMP4, PRSDG_AMP5, PRSDG_AMP6, 
+        PRSDG_SRT1, PRSDG_SRT2, PRSDG_SRT3, PRSDG_SRT4, PRSDG_SRT5, PRSDG_SRT6, 
+        PRSDG_END1, PRSDG_END2, PRSDG_END3, PRSDG_END4, PRSDG_END5, PRSDG_END6, 
+        PRSDG_SRT1_DISP, PRSDG_SRT2_DISP, PRSDG_SRT3_DISP, PRSDG_SRT4_DISP, PRSDG_SRT5_DISP, PRSDG_SRT6_DISP, 
+        PRSDG_END1_DISP, PRSDG_END2_DISP, PRSDG_END3_DISP, PRSDG_END4_DISP, PRSDG_END5_DISP, PRSDG_END6_DISP, 
+        PRSSP_CNP1, PRSSP_CNP2, PRSSP_CNP3, PRSSP_CNP4, PRSSP_CNP5, PRSSP_CNP6, 
+        PRSSP_SRT1, PRSSP_SRT2, PRSSP_SRT3, PRSSP_SRT4, PRSSP_SRT5, PRSSP_SRT6, 
+        PRSSP_END1, PRSSP_END2, PRSSP_END3, PRSSP_END4, PRSSP_END5, PRSSP_END6,
+        PRSSP_SRT1_DISP, PRSSP_SRT2_DISP, PRSSP_SRT3_DISP, PRSSP_SRT4_DISP, PRSSP_SRT5_DISP, PRSSP_SRT6_DISP, 
+        PRSSP_END1_DISP, PRSSP_END2_DISP, PRSSP_END3_DISP, PRSSP_END4_DISP, PRSSP_END5_DISP, PRSSP_END6_DISP,
+         PRSDG_HMS1, PRSDG_HMS2, PRSDG_HMS3, PRSDG_HMS4, PRSDG_HMS5, PRSDG_HMS6, 
+         PRSDG_HMP1, PRSDG_HMP2, PRSDG_HMP3, PRSDG_HMP4, PRSDG_HMP5, PRSDG_HMP6, 
+         PRSCB_HMS1, PRSCB_HMS2, PRSCB_HMS3, PRSCB_HMP1, PRSCB_HMP2, PRSCB_HMP3,
+        PRSCB_SRT1, PRSCB_SRT2, PRSCB_SRT3, 
+        PRSCB_END1, PRSCB_END2, PRSCB_END3,
+        PRSCB_SRT1_DISP, PRSCB_SRT2_DISP, PRSCB_SRT3_DISP, 
+        PRSCB_END1_DISP, PRSCB_END2_DISP, PRSCB_END3_DISP,
         ROWNUM AS RNUM FROM ( $mainSql ORDER BY $sort $order) WHERE ROWNUM <= $limit) WHERE RNUM > $offset";
         
         $sql = $this->db->query($sql)->getResultArray();
@@ -172,7 +128,7 @@ class logSheetDigesterModel extends \App\Models\BaseModel
 
     public function dataListExcel()
     {   
-        $sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'TIME_F';
+        $sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'SEQ';
         $order = isset($_POST['order']) ? strval($_POST['order']) : 'ASC';
         
 
@@ -182,11 +138,11 @@ class logSheetDigesterModel extends \App\Models\BaseModel
 			$TDATE  =  date("d/M/Y", strtotime($_GET['TDATE']));
 		}
 
-        $STATIONID = isset($_GET['STATIONID']) ? strval($_GET['STATIONID']) : '1';
+        $STG_ID = isset($_GET['STG_ID']) ? strval($_GET['STG_ID']) : '1';
 
         $result = array();
 
-        $sqlReport = $this->reportSqlString($TDATE, $STATIONID);
+        $sqlReport = $this->reportSqlString($TDATE, $STG_ID);
         $sql = "SELECT * FROM ( $sqlReport ) WHERE ROWNUM > 0
         ORDER BY $sort $order ";
         
