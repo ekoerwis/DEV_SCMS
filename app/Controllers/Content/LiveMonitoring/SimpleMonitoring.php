@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controllers\Content\LiveMonitoring;
-// use App\Models\Content\LiveMonitoring\SimpleMonitoringModel;
+use App\Models\Content\LiveMonitoring\SimpleMonitoringModel;
 use \Config\App;
 
 use CodeIgniter\HTTP\RequestInterface;
@@ -14,10 +14,13 @@ use PhpOffice\PhpSpreadsheet\Style\Border;
 
 class SimpleMonitoring extends \App\Controllers\BaseController
 {
+	public $SimpleMonitoringModel;
 
 	public function __construct() {
 
 		parent::__construct();
+
+		$this->SimpleMonitoringModel = new SimpleMonitoringModel;
 
 		$this->data['site_title'] = 'Simple Monitoring ';
 
@@ -61,21 +64,11 @@ class SimpleMonitoring extends \App\Controllers\BaseController
 			$data['tinggi_dg']= 'height:'.$tinggiContent.'px';
 		}
 
-        $data['srcView'] = 'http://10.20.38.95:1880/ui/';
-        // $data['srcView'] = 'http://10.20.38.19:1880/ui/';
+		$data['srcView'] = $this->SimpleMonitoringModel->getURLIFrame();
+
+        // $data['srcView'] = 'http://10.20.38.95:1880/ui/';
 
 		$this->view('Content/LiveMonitoring/SimpleMonitoring/SimpleMonitoringFrameView.php', $data);
-
-
-        // echo "
-        // <script>
-        // window.open('https://google.com/?', '_blank');
-        // </script>
-        // ";
-        
-        // if ($agent->isReferral()) {
-        //     echo $agent->referrer();
-        // }
 	}
 
 

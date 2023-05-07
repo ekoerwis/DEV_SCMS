@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controllers\Content\LiveMonitoring;
-// use App\Models\Content\LiveMonitoring\HMIModel;
+use App\Models\Content\LiveMonitoring\HMIModel;
 use \Config\App;
 
 use CodeIgniter\HTTP\RequestInterface;
@@ -14,10 +14,13 @@ use PhpOffice\PhpSpreadsheet\Style\Border;
 
 class HMI extends \App\Controllers\BaseController
 {
+	public $HMIModel;
 
 	public function __construct() {
 
 		parent::__construct();
+
+		$this->HMIModel = new HMIModel;
 
 		$this->data['site_title'] = 'HMI';
 
@@ -61,21 +64,13 @@ class HMI extends \App\Controllers\BaseController
 			$data['tinggi_dg']= 'height:'.$tinggiContent.'px';
 		}
 
-        $data['srcView'] = 'http://10.20.38.188:6065/';
-        // $data['srcView'] = 'https://10.20.38.188:6064/';
+		$data['srcView'] = $this->HMIModel->getURLIFrame();
+
+        // $data['srcView'] = 'http://10.20.38.188:6065/';
 
 		$this->view('Content/LiveMonitoring/HMI/HMIFrameView.php', $data);
 
 
-        // echo "
-        // <script>
-        // window.open('https://google.com/?', '_blank');
-        // </script>
-        // ";
-        
-        // if ($agent->isReferral()) {
-        //     echo $agent->referrer();
-        // }
 	}
 
 
