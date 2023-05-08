@@ -18,6 +18,8 @@
                     ">
         <thead>
             <tr>
+                <th field="MONTHNUMBER" halign="center" data-options="sortable:false,width:120,align:'center' " formatter=""><b>MONTHNUMBER</b></th>
+                <th field="YEARNUMBER" halign="center" data-options="sortable:false,width:120,align:'center' " formatter=""><b>YEARNUMBER</b></th>
                 <th field="ID" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>ID</b></th>
                 <th field="IDHEADER" halign="center" data-options="sortable:false,width:100,align:'center' " formatter=""><b>IDHEADER</b></th>
                 <th field="LVL" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>LVL</b></th>
@@ -30,10 +32,10 @@
                 <th field="NAMA_MODULE" halign="center" data-options="sortable:false,width:150,align:'' " formatter=""><b>NAMA_MODULE</b></th>
                 <th field="JUDUL_MODULE" halign="center" data-options="sortable:false,width:150,align:'' " formatter=""><b>JUDUL_MODULE</b></th>
                 <th field="DESKRIPSI" halign="center" data-options="sortable:false,width:150,align:'' " formatter=""><b>DESKRIPSI</b></th>
-                <th field="TOTALLSMONTH" halign="center" data-options="sortable:false,width:150,align:'' " formatter=""><b>TOTALLSMONTH</b></th>
-                <th field="COUNTFINISHLS" halign="center" data-options="sortable:false,width:150,align:'' " formatter=""><b>COUNTFINISHLS</b></th>
-                <th field="UNFINISHLS" halign="center" data-options="sortable:false,width:150,align:'' " formatter=""><b>UNFINISHLS</b></th>
-                <th field="COUNTNEEDACTION" halign="center" data-options="sortable:false,width:150,align:'' " formatter=""><b>COUNTNEEDACTION</b></th>
+                <th field="TOTALLSMONTH" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="goToLogsheetPage"><b>Total</b></th>
+                <th field="COUNTFINISHLS" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="goToFinishLSPage"><b>Finish</b></th>
+                <th field="UNFINISHLS" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="goToUnfinishLSPage"><b>On Progress</b></th>
+                <th field="COUNTNEEDACTION" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="goToNeedActionPage"><b>Need Action</b></th>
             </tr>
         </thead>
     </table>
@@ -76,8 +78,9 @@
                 data : optionMonth
             });
             
-            settingCalendarTDATE();            
-            // doSearch();
+            settingCalendarTDATE();
+
+            doSearch();
 
         });
 
@@ -202,6 +205,26 @@
                 returnVal = parseFloat(val).format(2, 3, ',', '.');
             } 
             return  returnVal;
+        }
+
+        function goToLogsheetPage(value,row){
+            var href = 'get_details.php?MONRHNM='+row.id;
+            return '<a target="_blank" href="' + href + '"> <button type="button" class="btn btn-primary"> '+value+'</button></a>';
+        }
+
+        function goToFinishLSPage(value,row){
+            var href = 'get_details.php?userid='+row.id;
+            return '<a target="_blank" href="' + href + '"> <button type="button" class="btn btn-success"> '+value+'</button></a>';
+        }
+
+        function goToUnfinishLSPage(value,row){
+            var href = 'get_details.php?userid='+row.id;
+            return '<a target="_blank" href="' + href + '"> <button type="button" class="btn btn-info"> '+value+'</button></a>';
+        }
+
+        function goToNeedActionPage(value,row){
+            var href = '../Approval/ApprovalListLogsheet/goToNeedActionPage?MONTHNUMBER='+row.MONTHNUMBER+'&YEARNUMBER='+row.YEARNUMBER+'&IDMODULE='+row.IDMODULE;
+            return '<a target="_blank" href="' + href + '"> <button type="button" class="btn btn-warning"> '+value+'</button></a>';
         }
 
 
