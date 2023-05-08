@@ -104,7 +104,13 @@
                 ]
             });
 
-            doSearch();
+           
+            var paramDate = "<?php if(isset($_GET['POSTDT'])) { echo $_GET['POSTDT'];}  ?>";
+
+            if(paramDate != ''){    
+                doSearch();
+                console.log('POSTDATE not null');
+            } 
 
         });
 
@@ -123,7 +129,7 @@
 
             var paramDate = "<?php if(isset($_GET['POSTDT'])) { echo $_GET['POSTDT'];}  ?>";
 
-            console.log(paramDate);
+            // console.log(paramDate);
 
             if(paramDate != ''){    
                 var newD = new Date(paramDate);
@@ -133,7 +139,7 @@
                 var newD = new Date(enddate);
             }
 
-            var newD = new Date(enddate);
+            // var newD = new Date(enddate);
             // alert(newD.getDate());
 
 

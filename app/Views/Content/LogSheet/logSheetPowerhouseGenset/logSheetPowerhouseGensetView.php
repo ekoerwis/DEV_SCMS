@@ -109,7 +109,20 @@
             var d = new Date();
             var enddate = d.setDate(d.getDate() - 1);
 
-            var newD = new Date(enddate);
+            var paramDate = "<?php if(isset($_GET['POSTDT'])) { echo $_GET['POSTDT'];}  ?>";
+
+            console.log(paramDate);
+
+            if(paramDate != ''){    
+                var newD = new Date(paramDate);
+                enddate = newD;
+                
+            } else {
+                var newD = new Date(enddate);
+            }
+            
+            
+            // var newD = new Date(enddate);
             // alert(newD.getDate());
 
 
