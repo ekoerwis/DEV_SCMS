@@ -35,7 +35,7 @@ class ApprovalListLogsheet extends \App\Controllers\BaseController
 
 		$this->addJs ( $this->config->baseURL . 'public/vendors/jquery-easyui-1.9.12/extension-datagridview-1.0.1/datagrid-detailview.js');
 		$this->addJs ( $this->config->baseURL . 'public/vendors/jquery-easyui-1.9.12/extension-datagridview-1.0.1/datagrid-groupview.js');
-        $this->addJs ( $this->config->baseURL . 'public/vendors/jquery-easyui-1.9.12/datagrid-export-1.0.3/datagrid-export.js');
+        // $this->addJs ( $this->config->baseURL . 'public/vendors/jquery-easyui-1.9.12/datagrid-export-1.0.3/datagrid-export.js');
 
 		$this->addJs ( $this->config->baseURL . 'public/themes/modern/js/easyui-custom.js');
 		// tambahan untuk client paging
@@ -66,6 +66,8 @@ class ApprovalListLogsheet extends \App\Controllers\BaseController
 
         // $data['srcView'] = 'https://10.20.38.95:6063/';
 
+		// echo "<script>console.log('".json_encode($this->user)."')</script>";
+
 		$this->view('Content/Approval/ApprovalListLogsheet/ApprovalListLogsheetView.php', $data);
 
 
@@ -83,6 +85,9 @@ class ApprovalListLogsheet extends \App\Controllers\BaseController
     
     public function dataList(){
         $this->cekHakAkses('READ_DATA');
+
+		
+
 		echo json_encode($this->ApprovalListLogsheetModel->dataList($this->user));        
 	}
 

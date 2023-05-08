@@ -21,7 +21,7 @@
                 <th field="ID" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>ID</b></th>
                 <th field="IDHEADER" halign="center" data-options="sortable:false,width:100,align:'center' " formatter=""><b>IDHEADER</b></th>
                 <th field="LVL" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>LVL</b></th>
-                <th field="IDUSER" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>IDUSER</b></th>
+                <th field="IDROLE" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>IDROLE</b></th>
                 <th field="IDCONTENT" halign="center" data-options="sortable:false,width:80,align:'center' " formatter=""><b>IDCONTENT</b></th>
                 <th field="REMARKS" halign="center" data-options="sortable:false,width:80,align:'' " formatter=""><b>REMARKS</b></th>
                 <th field="MAXLEVEL" halign="center" data-options="sortable:false,width:80,align:'' " formatter=""><b>MAXLEVEL</b></th>

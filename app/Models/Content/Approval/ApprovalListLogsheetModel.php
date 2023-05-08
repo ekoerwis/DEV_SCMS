@@ -22,16 +22,16 @@ class ApprovalListLogsheetModel extends \App\Models\BaseModel
         $sess_comp=$userOrganisasi['COMPANYID'];
         $sess_site= $userOrganisasi['COMPANYSITEID'];
 
-        $sess_iduser = $user_data['ID_USER'];
+        $sess_iduser = $user_data['ID_ROLE'];
 
         $MONTHNUMBER = isset($_POST['MONTHNUMBER']) ? intval($_POST['MONTHNUMBER']) : 0;
         $YEARNUMBER = isset($_POST['YEARNUMBER']) ? intval($_POST['YEARNUMBER']) : 0;
 
         $mainSql="SELECT * FROM (
-            SELECT A.ID, A.IDHEADER, A.LVL, A.IDUSER, B.IDCONTENT, B.REMARKS, B.MAXLEVEL,
+            SELECT A.ID, A.IDHEADER, A.LVL, A.IDROLE, B.IDCONTENT, B.REMARKS, B.MAXLEVEL,
             C.IDMODULE, C.TABLECONTENT, D.NAMA_MODULE, D.JUDUL_MODULE, D.DESKRIPSI
             FROM MS_APPROVAL_LS_DETAIL A, MS_APPROVAL_LS_HEADER B, MS_CONTENT_TABLE C, MODULE D
-            WHERE A.IDUSER = $sess_iduser 
+            WHERE A.IDROLE = $sess_iduser 
             AND A.IDHEADER=B.ID
             AND B.IDCONTENT=C.ID
             AND C.IDMODULE = D.ID_MODULE
@@ -51,7 +51,7 @@ class ApprovalListLogsheetModel extends \App\Models\BaseModel
         $result["total"] = $sql['JUMLAH'];
         
 
-        $sql = "SELECT * FROM (SELECT ID, IDHEADER, LVL, IDUSER, IDCONTENT, REMARKS, MAXLEVEL,
+        $sql = "SELECT * FROM (SELECT ID, IDHEADER, LVL, IDROLE, IDCONTENT, REMARKS, MAXLEVEL,
         IDMODULE, TABLECONTENT, NAMA_MODULE, JUDUL_MODULE, DESKRIPSI, ROWNUM AS RNUM FROM ( $mainSql ORDER BY $sort $order) WHERE ROWNUM <= $limit) WHERE RNUM > $offset";
         
         $dataRow = $this->db->query($sql)->getResultArray();
@@ -87,11 +87,11 @@ class ApprovalListLogsheetModel extends \App\Models\BaseModel
     public function getCountFinishLS($monthnumber,$yearnumber,  $tablename)
     {   
         $sql = "SELECT COUNT(*) COUNTFINISHLS FROM (
-            SELECT X.ID, X.ID_APPROAL_DETAIL, X.LS_POSTDT, X.STATUS, X.REMARKS , A.IDHEADER, A.LVL, A.IDUSER, B.IDCONTENT, B.REMARKS REMARKS_HEADER, B.MAXLEVEL,
+            SELECT X.ID, X.ID_APPROAL_DETAIL, X.LS_POSTDT, X.STATUS, X.REMARKS , A.IDHEADER, A.LVL, A.IDROLE, B.IDCONTENT, B.REMARKS REMARKS_HEADER, B.MAXLEVEL,
             C.IDMODULE, C.TABLECONTENT, D.NAMA_MODULE, D.JUDUL_MODULE, D.DESKRIPSI
             FROM LIST_LS_STATUS_APPROVAL X , MS_APPROVAL_LS_DETAIL A, MS_APPROVAL_LS_HEADER B, MS_CONTENT_TABLE C, MODULE D
             WHERE X.ID_APPROAL_DETAIL = A.ID
-            --AND A.LVL >= :P_LVL_USER
+            --AND A.LVL >= :P_LVL_ROLE
             AND A.IDHEADER=B.ID
             AND B.IDCONTENT=C.ID
             AND C.IDMODULE = D.ID_MODULE
@@ -101,11 +101,11 @@ class ApprovalListLogsheetModel extends \App\Models\BaseModel
             ) A ,
             (SELECT MAX(LVL) MAXLVL
             FROM (
-            SELECT A.ID, A.IDHEADER, A.LVL, A.IDUSER, B.IDCONTENT, B.REMARKS, B.MAXLEVEL,
+            SELECT A.ID, A.IDHEADER, A.LVL, A.IDROLE, B.IDCONTENT, B.REMARKS, B.MAXLEVEL,
             C.IDMODULE, C.TABLECONTENT, D.NAMA_MODULE, D.JUDUL_MODULE, D.DESKRIPSI
             FROM MS_APPROVAL_LS_DETAIL A, MS_APPROVAL_LS_HEADER B, MS_CONTENT_TABLE C, MODULE D
             WHERE 
-            --A.IDUSER = :P_ID_USER AND 
+            --A.IDROLE = :P_ID_ROLE AND 
             A.IDHEADER=B.ID
             AND B.IDCONTENT=C.ID
             AND C.IDMODULE = D.ID_MODULE
@@ -128,7 +128,7 @@ class ApprovalListLogsheetModel extends \App\Models\BaseModel
         WHERE EXTRACT (MONTH FROM A.POSTDT) = $monthnumber 
         AND EXTRACT (YEAR FROM A.POSTDT) = $yearnumber 
         AND A.POSTDT NOT IN  ( SELECT DISTINCT LS_POSTDT FROM (
-       SELECT X.ID, X.ID_APPROAL_DETAIL, X.LS_POSTDT, X.STATUS, X.REMARKS , A.IDHEADER, A.LVL, A.IDUSER, B.IDCONTENT, B.REMARKS REMARKS_HEADER, B.MAXLEVEL,
+       SELECT X.ID, X.ID_APPROAL_DETAIL, X.LS_POSTDT, X.STATUS, X.REMARKS , A.IDHEADER, A.LVL, A.IDROLE, B.IDCONTENT, B.REMARKS REMARKS_HEADER, B.MAXLEVEL,
                    C.IDMODULE, C.TABLECONTENT, D.NAMA_MODULE, D.JUDUL_MODULE, D.DESKRIPSI
                    FROM LIST_LS_STATUS_APPROVAL X , MS_APPROVAL_LS_DETAIL A, MS_APPROVAL_LS_HEADER B, MS_CONTENT_TABLE C, MODULE D
                    WHERE X.ID_APPROAL_DETAIL = A.ID
