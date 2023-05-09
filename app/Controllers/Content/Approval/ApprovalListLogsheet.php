@@ -128,6 +128,37 @@ class ApprovalListLogsheet extends \App\Controllers\BaseController
 		echo json_encode($this->ApprovalListLogsheetModel->actionApprove($this->user));
 	}
 
+	public function goToStatusPage(){
+		$this->cekHakAkses('READ_DATA');
+		$data = $this->data;
+
+		// berfungsi untuk nilai otorisasi berdasarkan role
+		$data['auth_tambah']=$this->actionUser['CREATE_DATA'];
+		$data['auth_ubah']=$this->actionUser['UPDATE_DATA'];
+		$data['auth_hapus']=$this->actionUser['DELETE_DATA'];
+
+		$tinggiContent = 0;
+		$data['tinggi_dg']='';
+		$tinggiContent = $this->session->get('dg_height');
+		
+		if(intval($tinggiContent) > 0) {
+			$data['tinggi_dg']= 'height:'.$tinggiContent.'px';
+		}
+
+		$data['MONTHNUMBER']=isset($_GET['MONTHNUMBER']) ? intval($_GET['MONTHNUMBER']) : 0;
+		$data['YEARNUMBER']=isset($_GET['YEARNUMBER']) ? intval($_GET['YEARNUMBER']) : 0;
+		$data['IDMODULE']=isset($_GET['IDMODULE']) ? intval($_GET['IDMODULE']) : 0;
+
+		$this->view('Content/Approval/ApprovalListLogsheet/StatusPageView.php', $data);
+
+	}
+
+	public function dataListStatus(){
+        $this->cekHakAkses('READ_DATA');
+
+		echo json_encode($this->ApprovalListLogsheetModel->dataListStatus($this->user));        
+	}
+
 
 	// batas pakai
 	
