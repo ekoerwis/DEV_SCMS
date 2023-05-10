@@ -1,5 +1,53 @@
 <style>
+    .divbottom {
+        margin-bottom: -8px;
+    }
 
+    .titleForm {
+        color: white;
+        font-weight: bold;
+        display: inline-block;
+        line-height: 30px;
+    }
+
+    .cekmerah {
+        border: red;
+        border-style: solid;
+        border-width: 1px;
+    }
+
+    .table td {
+        padding: 2px;
+        vertical-align: middle;
+    }
+
+    .table th {
+        padding: 5px;
+        vertical-align: middle;
+    }
+
+    thead th {
+        border: 1px solid white;
+        background-color: #36A5B2;
+        color: white;
+        text-align: center;
+        /* vertical-align: middle; */
+    }
+
+    .table thead th {
+        vertical-align: middle;
+    }
+
+    .table tbody td {
+        border-top: 0px;
+        border-left: 0px;
+        border-right: 0px;
+        border-bottom: 1px solid lightgray;
+    }
+
+    .table tfoot th {
+        border-width: 0px;
+    }
 </style>
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
@@ -55,6 +103,26 @@
 
         </div>
 
+        <div class="col row headcls pt-2 titleDetail">
+            <div class="col  panel-title" >
+                Master Approval List Details
+            </div>
+        </div>
+
+        <div id="containerDetailForm" class=" col-md-12 pt-3 pl-0 ">
+            <table style="margin-top:5px;" class="col-md-12 table table-sm table-responsive tableScroll">
+                <thead>
+                    <tr>
+                        <th rowspan=2 class="headadd" style="width:32px;height:35px;">add</th>
+                        <th style="width:100px">Level</th>
+                        <th style="width:250px">Role</th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyDetails">
+
+                </tbody>
+            </table>
+        </div>
        
 
         <!-- </div> -->
@@ -83,11 +151,81 @@
 
             }
         });
+
+        addRowDetails(0, 0, 0);
        
 
     });
 
     
+    var room = 1;
+
+    function addRowDetails(length_data, key, val) {
+
+        room++;
+        var objTo = document.getElementById('tbodyDetails')
+        var trAddDetails = document.createElement("tr");
+        trAddDetails.setAttribute("class", "trDetails removeclass" + room);
+
+        var HTMLDetails = '';
+
+        if (length_data == 0 || key == 0) {
+            HTMLDetails += '<td class="headadd-body" style="text-align: center;"> <div class="input-group-addon">  <a href="javascript:void(0)" class="btn btn-success addEMP" onclick="addRowDetails();"><i class="fas fa-plus"></i></a> </div> </td>';
+        } else {
+            HTMLDetails += '<td class="headadd-body" style="text-align: center;"> <div class="input-group-addon">  <a href="javascript:void(0)" class="btn btn-danger remove" onclick="remove_more(' + room + ');"><i class="fas fa-trash"></i></a> </div> </td>';
+        }
+
+        HTMLDetails += '<td><input style="width:100px" class="nb-level_details nb-level_details' + room + '" name="LEVEL_DETAILS[]" data-options="required:true,readonly:true"';
+        HTMLDetails += '></td>';
+        HTMLDetails += '<td><input style="width:250px" class="cb-role_details' + room + '" name="ROLE_DETAILS[]" data-options="required:true,readonly:false"';
+        HTMLDetails += '></td>';
+        trAddDetails.innerHTML = HTMLDetails;
+
+        objTo.appendChild(trAddDetails);
+
+        visualDetails(room);
+    }
+
+
+    function visualDetails(room = '') {
+
+        $('.nb-level_details'+room).numberbox();
+
+        $('.cb-role_details'+room).combobox({
+            url: "<?php echo site_url() . '/../Content/Approval/MasterApprovalLS/getCbRole'; ?>",
+            required:true,
+            loadMsg: 'Loading',
+            panelHeight:'auto',
+            valueField:'ID_ROLE',
+            textField:'JUDUL_ROLE',
+            value:'',
+            onSelect: function(record){
+                
+
+            }
+        });
+
+        generateLevel();
+    }
+
+
+    function remove_more(rid) {
+
+        $('.removeclass' + rid).remove();
+        generateLevel();
+
+    }
+
+    function generateLevel(){
+        var fieldLevel = document.getElementsByClassName("nb-level_details");
+        
+        for (var i = 0; i < fieldLevel.length; i++) {
+            $(fieldLevel[i]).numberbox('setValue', i+1);
+
+        }
+
+    }
+
 
 </script>
 

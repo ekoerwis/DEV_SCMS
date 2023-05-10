@@ -99,43 +99,134 @@ class MasterApprovalLSModel extends \App\Models\BaseModel
 	
 	}
 
+    public function getCbRole()
+	{
+		
+		$sql = "SELECT ID_ROLE, NAMA_ROLE, JUDUL_ROLE, KETERANGAN FROM ROLE ORDER BY ID_ROLE";
+
+		$result = $this->db->query($sql)->getResultArray();
+
+		return $result;
+	
+	}
+
     
     // batas pakai
 
     // Fungsi Save  -------------------------------------------------------------
 	public function saveData($user_data)
 	{
-		$ID_MODULE = isset($_POST['ID_MODULE']) ? strval($_POST['ID_MODULE']) : '';
-		$TABLECONTENT = isset($_POST['TABLECONTENT']) ? strval($_POST['TABLECONTENT']) : '';
+		$IDCONTENT = isset($_POST['IDCONTENT']) ? strval($_POST['IDCONTENT']) : '';
+		$REMARKS = isset($_POST['REMARKS']) ? strval($_POST['REMARKS']) : '';
 		// $DATECREATED = '';
 		// if(!empty($_POST['DATECREATED'])){
 		// 	$DATECREATED = date("d/M/Y", strtotime($_POST['DATECREATED']));
 		// }
 
+        if (isset($_POST['ROLE_DETAILS'])) {
+			$jumDataDetail = count($_POST['ROLE_DETAILS']);
+			if ($jumDataDetail < 1) {
+				$result['msg']['status'] = 'error';
+				$result['msg']['content'] = 'Data Gagal Disimpan, Detail Tidak Terbaca';
+				return $result;
+			}
+		}
 
-		try {
+        $cekpk = $this->cekPKApprovalLSHeader($IDCONTENT);
 
-            $sqlNo = "SELECT MAX(ID)+1 IDNO FROM MS_CONTENT_TABLE";
-            $dataIDNO = $this->db->query($sqlNo)->getRowArray()['IDNO'];
+        $statHeaderMasuk = 0;
 
-            $sess_iduser = $user_data['ID_USER'];
+        if (isset($cekpk)) {
+			$result['msg']['status'] = 'error';
+			$result['msg']['content'] = 'Data Gagal Disimpan, Data Tidak Unik.';
+		} else {
+            try {
 
-            $sqlInput = "INSERT INTO MS_CONTENT_TABLE (ID, IDMODULE, TABLECONTENT, INPUTBY) VALUES 
-            ($dataIDNO, $ID_MODULE ,  '$TABLECONTENT', $sess_iduser)";
-            $input = $this->db->query($sqlInput);
+                $sqlNo = "SELECT MAX(ID)+1 IDNO FROM MS_APPROVAL_LS_HEADER";
+                $dataIDNO = $this->db->query($sqlNo)->getRowArray()['IDNO'];
+    
+                $sess_iduser = $user_data['ID_USER'];
+    
+                $sqlInput = "INSERT INTO MS_APPROVAL_LS_HEADER (ID, IDCONTENT, REMARKS, MAXLEVEL, INPUTBY) VALUES 
+                ($dataIDNO, $IDCONTENT ,  '$REMARKS', $jumDataDetail, $sess_iduser)";
+                $input = $this->db->query($sqlInput);
+    
+                if ($input) {
+                    $this->db->query('COMMIT');
+                    $result['msg']['status'] = 'ok';
+                    $result['msg']['content'] = 'Data Berhasil Disimpan';
+                    $result['msg']['UNIQUEID'] = $dataIDNO .' - ' .$IDCONTENT;
+                    $statHeaderMasuk++;
+                }
+            } catch (\Exception $e) {
+                $result['msg']['status'] = 'error';
+                $result['msg']['content'] = 'Data Gagal Disimpan : '.$sqlInput;
+                return $result;
 
-            if ($input) {
-                $this->db->query('COMMIT');
-                $result['msg']['status'] = 'ok';
-                $result['msg']['content'] = 'Data Berhasil Disimpan';
-                $result['msg']['UNIQUEID'] = $ID_MODULE .' - ' .$TABLECONTENT;
-                // $statHeaderMasuk++;
             }
-        } catch (\Exception $e) {
-            $result['msg']['status'] = 'error';
-            $result['msg']['content'] = 'Data Gagal Disimpan : '.$sqlInput;
         }
-        
+
+        $statDetailGagalMasuk=0;
+        $statDetailMasuk=0;
+
+        if($statHeaderMasuk == 1){
+            for ($i = 0; $i < $jumDataDetail; $i++) {
+				$LEVEL_DETAILS = isset($_POST['LEVEL_DETAILS'][$i]) ? intval($_POST['LEVEL_DETAILS'][$i]) : 0;
+				$ROLE_DETAILS = isset($_POST['ROLE_DETAILS'][$i]) ? intval($_POST['ROLE_DETAILS'][$i]) : 0;
+
+                $sess_iduser = $user_data['ID_USER'];
+
+				$cekpkDetail = $this->cekPKApprovalLSDetail($dataIDNO, $LEVEL_DETAILS, $ROLE_DETAILS);
+
+
+				if(!isset($cekpkDetail)){
+					try {
+                        $sqlNoDetail = "SELECT MAX(ID)+1 IDNO FROM MS_APPROVAL_LS_DETAIL";
+                        $dataIDNODetail = $this->db->query($sqlNoDetail)->getRowArray()['IDNO'];
+
+						$sqlInput = "INSERT INTO MS_APPROVAL_LS_DETAIL (ID, IDHEADER, LVL, IDROLE, INPUTBY) VALUES 
+						($dataIDNODetail, $dataIDNO, $LEVEL_DETAILS, $ROLE_DETAILS, '$sess_iduser')";
+						$input = $this->db->query($sqlInput);
+	
+						if ($input) {
+							$this->db->query('COMMIT');
+							$statDetailMasuk++;
+						}
+					} catch (\Exception $e) {
+
+						$statDetailGagalMasuk++;
+					}
+				}
+			}
+        }
+
+        if($statHeaderMasuk == 1 AND $statDetailMasuk == $jumDataDetail){
+            $result['msg']['status'] = 'ok';
+            $result['msg']['content'] = 'Data Berhasil Disimpan';
+            $result['msg']['UNIQUEID'] = $dataIDNO .' - ' .$IDCONTENT;
+        } else {
+            $result['msg']['status'] = 'error';
+            $result['msg']['content'] = 'Data Sebagian Gagal Disimpan, Detail Gagal : '.$statDetailGagalMasuk;
+            $result['msg']['UNIQUEID'] = $dataIDNO .' - ' .$IDCONTENT;
+        }    
+
+		return $result;
+	}
+
+    public function cekPKApprovalLSHeader($IDCONTENT='')
+	{
+		$sql = "SELECT * FROM MS_APPROVAL_LS_HEADER WHERE IDCONTENT='$IDCONTENT'";
+
+		$result = $this->db->query($sql)->getRowArray();
+
+		return $result;
+	}
+
+    public function cekPKApprovalLSDetail($dataIDNO=0, $LEVEL_DETAILS=0, $ROLE_DETAILS=0)
+	{
+		$sql = "SELECT * FROM MS_APPROVAL_LS_DETAIL WHERE IDHEADER = $dataIDNO AND (LVL = $LEVEL_DETAILS OR IDROLE = $ROLE_DETAILS)";
+
+		$result = $this->db->query($sql)->getRowArray();
 
 		return $result;
 	}

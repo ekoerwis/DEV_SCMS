@@ -100,6 +100,12 @@ class MasterApprovalLS extends \App\Controllers\BaseController
 		echo json_encode($this->MasterApprovalLSModel->getCbContent());        
 	}
 
+	public function getCbRole(){
+        $this->cekHakAkses('READ_DATA');
+		
+		echo json_encode($this->MasterApprovalLSModel->getCbRole());        
+	}
+
 	public function saveData()
 	{
 		$this->cekHakAkses('CREATE_DATA');
