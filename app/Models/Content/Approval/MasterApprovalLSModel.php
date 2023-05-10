@@ -236,26 +236,59 @@ class MasterApprovalLSModel extends \App\Models\BaseModel
 		{
 	
 			$id = isset($_POST['id']) ? strval($_POST['id']) : '';
-			
-            try {    
-                $sqlDelete = "DELETE FROM MS_CONTENT_TABLE WHERE  ID = $id ";
-                $delete = $this->db->query($sqlDelete);
-    
-                if ($delete) {
-                    $this->db->query('COMMIT');
 
-                    $this->db->query('COMMIT');
-                    $result['msg']['status'] = 'ok';
-                    $result['msg']['content'] = 'Proses Delete Berhasil';
-                }
-            } catch (\Exception $e) {
+            $cekUse = $this->cekUseHeaderOnList($id);
+
+            if(!isset($cekUse)){
+                try {    
+                    $sqlDelete = "DELETE FROM MS_APPROVAL_LS_DETAIL WHERE IDHEADER = $id ";
+                    $delete = $this->db->query($sqlDelete);
+                            
+                    if ($delete) {
+                        $this->db->query('COMMIT');
+
+                        try {    
+                            $sqlDelete = "DELETE FROM MS_APPROVAL_LS_HEADER WHERE ID = $id ";
+                            $delete = $this->db->query($sqlDelete);
+                
+                            if ($delete) {
+                                $this->db->query('COMMIT');
+        
+                                
+                                $result['msg']['status'] = 'ok';
+                                $result['msg']['content'] = 'Proses Delete Berhasil';
+                            }
+                        } catch (\Exception $e) {
+                            $result['msg']['status'] = 'error';
+                            $result['msg']['content'] = 'Proses Delete Header Gagal';
+                            // die($e->getMessage());
+                        } 
+                    }
+                } catch (\Exception $e) {
+                    $result['msg']['status'] = 'error';
+                    $result['msg']['content'] = 'Proses Delete Detail Gagal';
+                    // die($e->getMessage());
+                } 
+            } else {
                 $result['msg']['status'] = 'error';
-                $result['msg']['content'] = 'Proses Delete Detail Gagal';
-                // die($e->getMessage());
-            } 
+                $result['msg']['content'] = 'Gagal Dihapus Karena Approval Sudah Digunakan';
+            }
 			
 			return $result;
 		}
+
+        public function cekUseHeaderOnList($id=0)
+        {
+            $sql = "SELECT A.ID, A.ID_APPROVAL_DETAIL, A.LS_POSTDT, A.STATUS, A.REMARKS,
+            B.IDHEADER, B.LVL, B.IDROLE
+            FROM LIST_LS_STATUS_APPROVAL A , MS_APPROVAL_LS_DETAIL B
+            WHERE A.ID_APPROVAL_DETAIL = B.ID
+            AND IDHEADER =$id";
+
+            $result = $this->db->query($sql)->getRowArray();
+
+            return $result;
+        }
 
     
 
