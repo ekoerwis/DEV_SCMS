@@ -82,7 +82,7 @@ class MasterContentTableModel extends \App\Models\BaseModel
 
 		try {
 
-            $sqlNo = "SELECT MAX(ID)+1 IDNO FROM MS_CONTENT_TABLE";
+            $sqlNo = "SELECT NVL(MAX(ID),0)+1 IDNO FROM MS_CONTENT_TABLE";
             $dataIDNO = $this->db->query($sqlNo)->getRowArray()['IDNO'];
 
             $sess_iduser = $user_data['ID_USER'];

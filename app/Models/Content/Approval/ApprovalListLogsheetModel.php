@@ -338,7 +338,7 @@ class ApprovalListLogsheetModel extends \App\Models\BaseModel
         } else {
             try {    
 
-                $sqlNo = "SELECT MAX(ID)+1 IDNO FROM LIST_LS_STATUS_APPROVAL";
+                $sqlNo = "SELECT NVL(MAX(ID),0)+1 IDNO FROM LIST_LS_STATUS_APPROVAL";
                 $dataIDNO = $this->db->query($sqlNo)->getRowArray()['IDNO'];
                 // $LS_POSTDT = date("d/M/Y");
                 $STATUS = 1;

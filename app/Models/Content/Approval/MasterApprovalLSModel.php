@@ -142,7 +142,7 @@ class MasterApprovalLSModel extends \App\Models\BaseModel
 		} else {
             try {
 
-                $sqlNo = "SELECT MAX(ID)+1 IDNO FROM MS_APPROVAL_LS_HEADER";
+                $sqlNo = "SELECT NVL(MAX(ID),0)+1 IDNO FROM MS_APPROVAL_LS_HEADER";
                 $dataIDNO = $this->db->query($sqlNo)->getRowArray()['IDNO'];
     
                 $sess_iduser = $user_data['ID_USER'];
@@ -181,7 +181,7 @@ class MasterApprovalLSModel extends \App\Models\BaseModel
 
 				if(!isset($cekpkDetail)){
 					try {
-                        $sqlNoDetail = "SELECT MAX(ID)+1 IDNO FROM MS_APPROVAL_LS_DETAIL";
+                        $sqlNoDetail = "SELECT NVL(MAX(ID),0)+1 IDNO FROM MS_APPROVAL_LS_DETAIL";
                         $dataIDNODetail = $this->db->query($sqlNoDetail)->getRowArray()['IDNO'];
 
 						$sqlInput = "INSERT INTO MS_APPROVAL_LS_DETAIL (ID, IDHEADER, LVL, IDROLE, INPUTBY) VALUES 
@@ -243,7 +243,7 @@ class MasterApprovalLSModel extends \App\Models\BaseModel
                 try {    
                     $sqlDelete = "DELETE FROM MS_APPROVAL_LS_DETAIL WHERE IDHEADER = $id ";
                     $delete = $this->db->query($sqlDelete);
-                            
+
                     if ($delete) {
                         $this->db->query('COMMIT');
 
