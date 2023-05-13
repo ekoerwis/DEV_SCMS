@@ -18,6 +18,9 @@
                     rownumbers: true,
                     ">
         <thead>
+             <tr>
+                <th colspan="3"><b><?php echo $JUDULMODULELS; ?></b></th>                
+            </tr>
             <tr>
                 <!-- <th field="POSTDT" halign="center" data-options="sortable:false,width:120,align:'center' " formatter=""><b>POSTDT</b></th> -->
                 <th field="POSTDT2" halign="center" data-options="sortable:false,width:120,align:'center' " formatter=""><b>Tanggal</b></th>
