@@ -19,9 +19,14 @@
                     ">
         <thead>
             <tr>
+                <th colspan="3"><b><?php echo $JUDULMODULELS; ?></b></th>                
+            </tr>
+            <tr>
                 <!-- <th field="POSTDT" halign="center" data-options="sortable:false,width:120,align:'center' " formatter=""><b>POSTDT</b></th> -->
                 <th field="POSTDT2" halign="center" data-options="sortable:false,width:120,align:'center' " formatter=""><b>Tanggal</b></th>
                 <th field="STATUS_FINISH" halign="center" data-options="sortable:false,width:120,align:'center' " formatter="statusButton"><b>Status</b></th>
+                <!-- <th field="JUDUL_MODULE" halign="center" data-options="sortable:false,width:120,align:'center' " formatter=""><b>JUDUL_MODULE</b></th> -->
+                <!-- <th field="DESKRIPSI" halign="center" data-options="sortable:false,width:120,align:'center' " formatter=""><b>DESKRIPSI</b></th> -->
                 <th field="NAMA_MODULE" halign="center" data-options="sortable:false,width:120,align:'center' " formatter="goToLS"><b>Go To</b></th>
                 <!-- <th field="ID_MS_APPROVAL_DETAIL" halign="center" data-options="sortable:false,width:120,align:'center' " formatter=""><b>ID_MS_APPROVAL_DETAIL</b></th> -->
                 

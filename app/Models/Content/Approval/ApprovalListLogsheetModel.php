@@ -149,6 +149,9 @@ class ApprovalListLogsheetModel extends \App\Models\BaseModel
 		$YEARNUMBER=isset($_GET['YEARNUMBER']) ? intval($_GET['YEARNUMBER']) : 0;
 		$IDMODULE=isset($_GET['IDMODULE']) ? intval($_GET['IDMODULE']) : 0;
 
+        // $sqlModule = "SELECT ID_MODULE, NAMA_MODULE, JUDUL_MODULE, DESKRIPSI FROM MODULE WHERE ID_MODULE = $IDMODULE";
+        // $dataModule = $this->db->query($sqlModule)->getRowArray();
+
         $mainSqlSatu="SELECT * FROM (
             SELECT $MONTHNUMBER MONTHNUMBER, $YEARNUMBER YEARNUMBER, A.ID, A.IDHEADER, A.LVL, A.IDROLE, B.IDCONTENT, B.REMARKS, B.MAXLEVEL, 
             C.IDMODULE, C.TABLECONTENT, D.NAMA_MODULE, D.JUDUL_MODULE, D.DESKRIPSI
@@ -164,12 +167,14 @@ class ApprovalListLogsheetModel extends \App\Models\BaseModel
         $dataSatu = $this->db->query($mainSqlSatu)->getRowArray();
 
         $nama_module = $dataSatu['NAMA_MODULE'];
+        $judul_module = $dataSatu['JUDUL_MODULE'];
+        $deskripsi_module = $dataSatu['DESKRIPSI'];
 
         // $sqlData = $this->needActionLSSqlString( $MONTHNUMBER,$YEARNUMBER,  $dataSatu['TABLECONTENT'], $dataSatu['LVL']  );
 
         // $mainSql = "SELECT DISTINCT POSTDT, TO_CHAR(POSTDT,'FXFMDD-Mon-YYYY') POSTDT2, ". $dataSatu['ID']." ID_MS_APPROVAL_DETAIL , '".$nama_module."' NAMA_MODULE   FROM ( $sqlData )";
 
-        $mainSql ="SELECT DISTINCT POSTDT , TO_CHAR(POSTDT,'FXFMDD-Mon-YYYY') POSTDT2, '".$nama_module."' NAMA_MODULE  ,
+        $mainSql ="SELECT DISTINCT POSTDT , TO_CHAR(POSTDT,'FXFMDD-Mon-YYYY') POSTDT2, '".$nama_module."' NAMA_MODULE  ,'".$judul_module."' JUDUL_MODULE, '".$deskripsi_module."' DESKRIPSI,
         CASE WHEN POSTDT IN (SELECT DISTINCT LS_POSTDT FROM (
                     SELECT X.ID, X.ID_APPROVAL_DETAIL , X.LS_POSTDT, X.STATUS, X.REMARKS , A.IDHEADER, A.LVL, A.IDROLE, B.IDCONTENT, B.REMARKS REMARKS_HEADER, B.MAXLEVEL,
                     C.IDMODULE, C.TABLECONTENT, D.NAMA_MODULE, D.JUDUL_MODULE, D.DESKRIPSI
@@ -197,7 +202,7 @@ class ApprovalListLogsheetModel extends \App\Models\BaseModel
                      WHERE A.TABLECONTENT = '".$dataSatu['TABLECONTENT']."'
                      AND A.LVL = B.MAXLVL)
                      THEN 1 ELSE 0 END STATUS_FINISH
-        FROM POM_LGS_STZ 
+        FROM ".$dataSatu['TABLECONTENT']." 
         WHERE  EXTRACT (MONTH FROM POSTDT) = $MONTHNUMBER AND EXTRACT (YEAR FROM POSTDT) = $YEARNUMBER";
 
         $limit = $page*$rows;
@@ -212,13 +217,23 @@ class ApprovalListLogsheetModel extends \App\Models\BaseModel
         $result["total"] = $sql['JUMLAH'];
         
 
-        $sql = "SELECT * FROM (SELECT POSTDT, POSTDT2, NAMA_MODULE, STATUS_FINISH, ROWNUM AS RNUM FROM ( $mainSql ORDER BY $sort $order) WHERE ROWNUM <= $limit) WHERE RNUM > $offset";
+        $sql = "SELECT * FROM (SELECT POSTDT, POSTDT2, NAMA_MODULE, JUDUL_MODULE, DESKRIPSI, STATUS_FINISH, ROWNUM AS RNUM FROM ( $mainSql ORDER BY $sort $order) WHERE ROWNUM <= $limit) WHERE RNUM > $offset";
         
         $dataRow = $this->db->query($sql)->getResultArray();
 
         $result['rows'] = $dataRow;
     
         return $result;
+    }
+
+    public function getModuleLS($id=0)
+    {   
+        $sqlModule = "SELECT ID_MODULE, NAMA_MODULE, JUDUL_MODULE, DESKRIPSI FROM MODULE WHERE ID_MODULE = $id";
+
+        $dataModule = $this->db->query($sqlModule)->getRowArray();
+
+    
+        return $dataModule;
     }
 
 

@@ -149,6 +149,8 @@ class ApprovalListLogsheet extends \App\Controllers\BaseController
 		$data['YEARNUMBER']=isset($_GET['YEARNUMBER']) ? intval($_GET['YEARNUMBER']) : 0;
 		$data['IDMODULE']=isset($_GET['IDMODULE']) ? intval($_GET['IDMODULE']) : 0;
 
+		$data['JUDULMODULELS']=$this->ApprovalListLogsheetModel->getModuleLS($data['IDMODULE'])['JUDUL_MODULE'];
+
 		$this->view('Content/Approval/ApprovalListLogsheet/StatusPageView.php', $data);
 
 	}
