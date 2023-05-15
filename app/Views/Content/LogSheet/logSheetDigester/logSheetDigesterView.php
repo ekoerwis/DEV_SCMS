@@ -42,23 +42,23 @@
             </tr>
             <tr>
                 <th field="PRSDG_SRT1_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
-                <th field="PRSDG_END1_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
+                <th field="PRSDG_END1_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="basedOnStart_DG1END"><b>STOP</b></th>
                 <th field="PRSDG_SRT2_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
-                <th field="PRSDG_END2_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
+                <th field="PRSDG_END2_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="basedOnStart_DG2END"><b>STOP</b></th>
                 <th field="PRSDG_SRT3_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
-                <th field="PRSDG_END3_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
+                <th field="PRSDG_END3_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="basedOnStart_DG3END"><b>STOP</b></th>
                 <th field="PRSDG_SRT4_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
-                <th field="PRSDG_END4_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
+                <th field="PRSDG_END4_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="basedOnStart_DG4END"><b>STOP</b></th>
                 <th field="PRSDG_SRT5_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
-                <th field="PRSDG_END5_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
+                <th field="PRSDG_END5_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="basedOnStart_DG5END"><b>STOP</b></th>
                 <th field="PRSDG_SRT6_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
-                <th field="PRSDG_END6_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
+                <th field="PRSDG_END6_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="basedOnStart_DG6END"><b>STOP</b></th>
                 <th field="PRSCB_SRT1_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
-                <th field="PRSCB_END1_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
+                <th field="PRSCB_END1_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="basedOnStart_CB1END"><b>STOP</b></th>
                 <th field="PRSCB_SRT2_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
-                <th field="PRSCB_END2_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
+                <th field="PRSCB_END2_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="basedOnStart_CB2END"><b>STOP</b></th>
                 <th field="PRSCB_SRT3_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
-                <th field="PRSCB_END3_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
+                <th field="PRSCB_END3_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="basedOnStart_CB3END"><b>STOP</b></th>
             </tr>
         </thead>
     </table>
@@ -160,7 +160,6 @@
         function doSearch() {
 
             var dateParam = $('#dt-tdate').datebox('getValue');
-            // var idParam =  $('#cb-prsid').combobox('getValue');
 
             if( dateParam.trim() == '' || dateParam.trim() == null ){
                 // alert('"Tanggal" Harus Di Isi Dahulu');
@@ -172,45 +171,16 @@
                 exit;   
             } 
 
-            // if( idParam.trim() == '' || idParam.trim() == null ){
-            //     // alert('"Storage" Harus Di Isi Dahulu');
-            //     $.messager.alert({    
-            //         title: 'Info',
-            //         msg: 'Pilih Press ID Dahulu ! '
-            //     });
-            //     $('#cb-prsid').combobox('textbox').focus();
-            //     exit;   
-            // } 
-
             $('#dg').datagrid('load', {
                 TDATE: $('#dt-tdate').datebox('getValue'),
-                // PRSID: $('#cb-prsid').combobox('getValue'),
             });
         }
 
         function doSearchReset() {
             $('#dt-tdate').datebox('reset');
-            // $('#cb-stg_id').combobox('reset');
 
         }
 
-        function formatNumberColumnCostum(val,row){
-            // return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            var returnVal ='';
-            if(val != null){
-                returnVal = parseFloat(val).format(2, 3, ',', '.');
-            } 
-            return  returnVal;
-        }
-
-        function formatNumberColumnCostumBilanganBulat(val,row){
-            // return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            var returnVal ='';
-            if(val != null){
-                returnVal = parseFloat(val).format(0, 3, ',', '.');
-            } 
-            return  returnVal;
-        }
 
         function imageTrue(val,row){
 
@@ -228,6 +198,120 @@
                 returnVal = '<i class="fas fa-times"></i>';
             } 
             return  returnVal;
+        }
+
+        function basedOnStart_DG1END(val,row,lol){
+
+            var startTime = row.PRSDG_SRT1_DISP;
+            if( startTime != null){
+                var result = '';
+            } else {
+                var result = val;
+            }
+            return  result;
+        }
+
+        function basedOnStart_DG2END(val,row,lol){
+
+            var startTime = row.PRSDG_SRT2_DISP;
+            if( startTime != null){
+                var result = '';
+            } else {
+                var result = val;
+            }
+            return  result;
+        }
+
+        function basedOnStart_DG3END(val,row,lol){
+
+            var startTime = row.PRSDG_SRT3_DISP;
+            if( startTime != null){
+                var result = '';
+            } else {
+                var result = val;
+            }
+            return  result;
+        }
+
+        function basedOnStart_DG4END(val,row,lol){
+
+            var startTime = row.PRSDG_SRT4_DISP;
+            if( startTime != null){
+                var result = '';
+            } else {
+                var result = val;
+            }
+            return  result;
+        }
+
+        function basedOnStart_DG5END(val,row,lol){
+
+            var startTime = row.PRSDG_SRT5_DISP;
+            if( startTime != null){
+                var result = '';
+            } else {
+                var result = val;
+            }
+            return  result;
+        }
+
+        function basedOnStart_DG6END(val,row,lol){
+
+            var startTime = row.PRSDG_SRT6_DISP;
+            if( startTime != null){
+                var result = '';
+            } else {
+                var result = val;
+            }
+            return  result;
+        }
+
+        function basedOnStart_CB1END(val,row,lol){
+
+            var startTime = row.PRSCB_SRT1_DISP;
+            if( startTime != null){
+                var result = '';
+            } else {
+                var result = val;
+            }
+            return  result;
+        }
+
+        function basedOnStart_CB2END(val,row,lol){
+
+            var startTime = row.PRSCB_SRT2_DISP;
+            if( startTime != null){
+                var result = '';
+            } else {
+                var result = val;
+            }
+            return  result;
+        }
+
+        function basedOnStart_CB3END(val,row,lol){
+
+            var startTime = row.PRSCB_SRT3_DISP;
+            if( startTime != null){
+                var result = '';
+            } else {
+                var result = val;
+            }
+            return  result;
+        }
+
+        function basedOnPrevRow_DG1ST(val,row,lol){
+
+            var startTime = row.PRSDG_SRT1_DISP;
+            var stopTime = row.PRSDG_END1_DISP;
+
+            if( startTime != null && stopTime !=null ){
+
+                var rowPrev = $('#dg').datagrid('getRows')[lol-1];
+                var result = rowPrev.PRSDG_END1_DISP;
+            } else {
+                var result = val;
+            }
+            return  result;
         }
 
 

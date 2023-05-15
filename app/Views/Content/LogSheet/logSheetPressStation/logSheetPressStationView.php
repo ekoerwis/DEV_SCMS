@@ -59,17 +59,17 @@
                 <th field="PRSSP_CNP5" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NO.5</b></th>
                 <th field="PRSSP_CNP6" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NO.6</b></th>
                 <th field="PRSSP_SRT1_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
-                <th field="PRSSP_END1_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
+                <th field="PRSSP_END1_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="basedOnStart_SP1END"><b>STOP</b></th>
                 <th field="PRSSP_SRT2_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
-                <th field="PRSSP_END2_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
+                <th field="PRSSP_END2_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="basedOnStart_SP2END"><b>STOP</b></th>
                 <th field="PRSSP_SRT3_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
-                <th field="PRSSP_END3_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
+                <th field="PRSSP_END3_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="basedOnStart_SP3END"><b>STOP</b></th>
                 <th field="PRSSP_SRT4_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
-                <th field="PRSSP_END4_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
+                <th field="PRSSP_END4_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="basedOnStart_SP4END"><b>STOP</b></th>
                 <th field="PRSSP_SRT5_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
-                <th field="PRSSP_END5_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
+                <th field="PRSSP_END5_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="basedOnStart_SP5END"><b>STOP</b></th>
                 <th field="PRSSP_SRT6_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
-                <th field="PRSSP_END6_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>STOP</b></th>
+                <th field="PRSSP_END6_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="basedOnStart_SP6END"><b>STOP</b></th>
             </tr>
         </thead>
     </table>
@@ -203,6 +203,72 @@
             $('#dt-tdate').datebox('reset');
             // $('#cb-stg_id').combobox('reset');
 
+        }
+
+        function basedOnStart_SP1END(val,row,lol){
+
+            var startTime = row.PRSSP_SRT1_DISP;
+            if( startTime != null){
+                var result = '';
+            } else {
+                var result = val;
+            }
+            return  result;
+        }
+
+        function basedOnStart_SP2END(val,row,lol){
+
+            var startTime = row.PRSSP_SRT2_DISP;
+            if( startTime != null){
+                var result = '';
+            } else {
+                var result = val;
+            }
+            return  result;
+        }
+
+        function basedOnStart_SP3END(val,row,lol){
+
+            var startTime = row.PRSSP_SRT3_DISP;
+            if( startTime != null){
+                var result = '';
+            } else {
+                var result = val;
+            }
+            return  result;
+        }
+
+        function basedOnStart_SP4END(val,row,lol){
+
+            var startTime = row.PRSSP_SRT4_DISP;
+            if( startTime != null){
+                var result = '';
+            } else {
+                var result = val;
+            }
+            return  result;
+        }
+
+        function basedOnStart_SP5END(val,row,lol){
+
+            var startTime = row.PRSSP_SRT5_DISP;
+            if( startTime != null){
+                var result = '';
+            } else {
+                var result = val;
+            }
+            return  result;
+        }
+
+        function basedOnStart_SP6END(val,row,lol){
+
+            var startTime = row.PRSSP_SRT6_DISP;
+            if( startTime != null){
+                var result = '';
+            } else {
+                var result = val;
+            }
+            return  result;
         }
 
         function formatNumberColumnCostum(val,row){

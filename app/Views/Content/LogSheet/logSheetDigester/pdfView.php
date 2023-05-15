@@ -132,23 +132,23 @@
             <tr>
                 <td class="tdTable1" ><?= $data_sql[$i]['TIME_DISP'] ?></td>
                 <td class="tdTable1" ><?= $data_sql[$i]['PRSDG_SRT1_DISP'] ?></td>
-                <td class="tdTable1" ><?= $data_sql[$i]['PRSDG_END1_DISP'] ?></td>
+                <td class="tdTable1" ><?php if($data_sql[$i]['PRSDG_SRT1_DISP'] == null){ echo $data_sql[$i]['PRSDG_END1_DISP']; }  ?></td>
                 <td class="tdTable1" ><?= $data_sql[$i]['PRSDG_SRT2_DISP'] ?></td>
-                <td class="tdTable1" ><?= $data_sql[$i]['PRSDG_END2_DISP'] ?></td>
+                <td class="tdTable1" ><?php if($data_sql[$i]['PRSDG_SRT2_DISP'] == null){ echo $data_sql[$i]['PRSDG_END2_DISP']; }  ?></td>
                 <td class="tdTable1" ><?= $data_sql[$i]['PRSDG_SRT3_DISP'] ?></td>
-                <td class="tdTable1" ><?= $data_sql[$i]['PRSDG_END3_DISP'] ?></td>
+                <td class="tdTable1" ><?php if($data_sql[$i]['PRSDG_SRT3_DISP'] == null){ echo $data_sql[$i]['PRSDG_END3_DISP']; }  ?></td>
                 <td class="tdTable1" ><?= $data_sql[$i]['PRSDG_SRT4_DISP'] ?></td>
-                <td class="tdTable1" ><?= $data_sql[$i]['PRSDG_END4_DISP'] ?></td>
+                <td class="tdTable1" ><?php if($data_sql[$i]['PRSDG_SRT4_DISP'] == null){ echo $data_sql[$i]['PRSDG_END4_DISP']; }  ?></td>
                 <td class="tdTable1" ><?= $data_sql[$i]['PRSDG_SRT5_DISP'] ?></td>
-                <td class="tdTable1" ><?= $data_sql[$i]['PRSDG_END5_DISP'] ?></td>
+                <td class="tdTable1" ><?php if($data_sql[$i]['PRSDG_SRT5_DISP'] == null){ echo $data_sql[$i]['PRSDG_END5_DISP']; }  ?></td>
                 <td class="tdTable1" ><?= $data_sql[$i]['PRSDG_SRT6_DISP'] ?></td>
-                <td class="tdTable1" ><?= $data_sql[$i]['PRSDG_END6_DISP'] ?></td>
+                <td class="tdTable1" ><?php if($data_sql[$i]['PRSDG_SRT6_DISP'] == null){ echo $data_sql[$i]['PRSDG_END6_DISP']; }  ?></td>
                 <td class="tdTable1" ><?= $data_sql[$i]['PRSCB_SRT1_DISP'] ?></td>
-                <td class="tdTable1" ><?= $data_sql[$i]['PRSCB_END1_DISP'] ?></td>
+                <td class="tdTable1" ><?php if($data_sql[$i]['PRSCB_SRT1_DISP'] == null){ echo $data_sql[$i]['PRSCB_END1_DISP']; }  ?></td>
                 <td class="tdTable1" ><?= $data_sql[$i]['PRSCB_SRT2_DISP'] ?></td>
-                <td class="tdTable1" ><?= $data_sql[$i]['PRSCB_END2_DISP'] ?></td>
+                <td class="tdTable1" ><?php if($data_sql[$i]['PRSCB_SRT2_DISP'] == null){ echo $data_sql[$i]['PRSCB_END2_DISP']; }  ?></td>
                 <td class="tdTable1" ><?= $data_sql[$i]['PRSCB_SRT3_DISP'] ?></td>
-                <td class="tdTable1" ><?= $data_sql[$i]['PRSCB_END3_DISP'] ?></td>
+                <td class="tdTable1" ><?php if($data_sql[$i]['PRSCB_SRT3_DISP'] == null){ echo $data_sql[$i]['PRSCB_END3_DISP']; }  ?></td>
             </tr>
 <?php
             

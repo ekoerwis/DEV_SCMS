@@ -161,17 +161,17 @@
                 <td class="tdTable1" ><?= number_format($data_sql[$i]['PRSSP_CNP5'],2,".",",") ?></td>
                 <td class="tdTable1" ><?= number_format($data_sql[$i]['PRSSP_CNP6'],2,".",",") ?></td>
                 <td class="tdTable1" ><?= $data_sql[$i]['PRSSP_SRT1_DISP'] ?></td>
-                <td class="tdTable1" ><?= $data_sql[$i]['PRSSP_END1_DISP'] ?></td>
+                <td class="tdTable1" ><?php if($data_sql[$i]['PRSSP_SRT1_DISP'] == null){ echo $data_sql[$i]['PRSSP_END1_DISP']; }  ?></td>
                 <td class="tdTable1" ><?= $data_sql[$i]['PRSSP_SRT2_DISP'] ?></td>
-                <td class="tdTable1" ><?= $data_sql[$i]['PRSSP_END2_DISP'] ?></td>
+                <td class="tdTable1" ><?php if($data_sql[$i]['PRSSP_SRT2_DISP'] == null){ echo $data_sql[$i]['PRSSP_END2_DISP']; }  ?></td>
                 <td class="tdTable1" ><?= $data_sql[$i]['PRSSP_SRT3_DISP'] ?></td>
-                <td class="tdTable1" ><?= $data_sql[$i]['PRSSP_END3_DISP'] ?></td>
+                <td class="tdTable1" ><?php if($data_sql[$i]['PRSSP_SRT3_DISP'] == null){ echo $data_sql[$i]['PRSSP_END3_DISP']; }  ?></td>
                 <td class="tdTable1" ><?= $data_sql[$i]['PRSSP_SRT4_DISP'] ?></td>
-                <td class="tdTable1" ><?= $data_sql[$i]['PRSSP_END4_DISP'] ?></td>
+                <td class="tdTable1" ><?php if($data_sql[$i]['PRSSP_SRT4_DISP'] == null){ echo $data_sql[$i]['PRSSP_END4_DISP']; }  ?></td>
                 <td class="tdTable1" ><?= $data_sql[$i]['PRSSP_SRT5_DISP'] ?></td>
-                <td class="tdTable1" ><?= $data_sql[$i]['PRSSP_END5_DISP'] ?></td>
+                <td class="tdTable1" ><?php if($data_sql[$i]['PRSSP_SRT5_DISP'] == null){ echo $data_sql[$i]['PRSSP_END5_DISP']; }  ?></td>
                 <td class="tdTable1" ><?= $data_sql[$i]['PRSSP_SRT6_DISP'] ?></td>
-                <td class="tdTable1" ><?= $data_sql[$i]['PRSSP_END6_DISP'] ?></td>
+                <td class="tdTable1" ><?php if($data_sql[$i]['PRSSP_SRT6_DISP'] == null){ echo $data_sql[$i]['PRSSP_END6_DISP']; }  ?></td>
             </tr>
 <?php
             
