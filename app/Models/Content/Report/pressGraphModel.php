@@ -148,4 +148,30 @@ SELECT LGSID, UEP,
         return $result;
     }
 
+    public function dataGraph1()
+    {   
+        // $sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'UEP';
+        // $order = isset($_POST['order']) ? strval($_POST['order']) : 'ASC';
+        
+
+        // if (empty($_GET['TDATE'])) {
+		// 	$TDATE  = '';
+		// } else {
+		// 	$TDATE  =  date("d/M/Y", strtotime($_GET['TDATE']));
+		// }
+
+        // $DT_DIV = isset($_GET['DT_DIV']) ? strval($_GET['DT_DIV']) : '';
+
+        // $result = array();
+
+        // $sqlReport = $this->reportSqlString($TDATE, $DT_DIV);
+        $sql = "SELECT * FROM POM_LGS_PRS WHERE POSTDT = '6/MAY/2023' ORDER BY SEQ";
+        
+        $sql = $this->db->query($sql)->getResultArray();
+
+        $result = $sql;
+    
+        return $result;
+    }
+
 }

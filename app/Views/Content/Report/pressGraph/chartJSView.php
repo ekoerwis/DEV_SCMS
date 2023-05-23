@@ -7,9 +7,11 @@
     <div class='col-xl-12 col-lg-12 col-md-12 row'>
         
         <div class="col row">
-            <button id="btn-searchReset" class="btn btn-warning" style="width: 100px;"  onclick="chartJSView()"><i class="fas fa-print"></i> Print</button>
+            <button id="btn-searchReset" class="btn btn-warning" style="width: 100px;"  onclick="exportDataPDF()"><i class="fas fa-print"></i> Print</button>
+            &nbsp;
+            <button id="btn-searchReset" class="btn btn-warning" style="width: 100px;"  onclick="test()"><i class="fas fa-print"></i> Test</button>
         </div>
-
+        
         <div class=" col-md-auto  text-right">
             <button id="btn-search" class="btn btn-primary" style="width: 100px;"  onclick="koolreportView()"><i class="fas fa-chart-line"></i> koolreport</button>
             &nbsp;
@@ -45,85 +47,100 @@ function chartJSView(){
         <p class="lead">Temperatur Digester</p>
     </div>
 
-    <?php
-    // BarChart::create(array(
-    //     "dataStore"=>$dataGraph1,
-    //     "width"=>"100%",
-    //     "height"=>"500px",
-    //     "columns"=>array(
-    //         "PRSHR"=>array(
-    //             "label"=>"Jam"
-    //         ),
-    //         "PRSDG_TMP1"=>array(
-    //             "type"=>"number",
-    //             "label"=>"TEMP 1",
-    //             // "prefix"=>"$",
-    //             "emphasis"=>true
-    //         )
-    //     ),
-    //     "options"=>array(
-    //         "title"=>"Sales By Customer",
-    //     )
-    // ));
-    // ?>
+    <div class="col-xl-12 col-lg-12 col-md-12 border-right-blue-grey border-right-lighten-5">
+        <div class="my-1 text-center">
+          <div class="card-content">
+            <!-- <h5 class="" style="color: #FF6384;">Temperature</h5> -->
+            <canvas id="myChart2" style="width:100%; height:300px;"></canvas>
 
-<?php
-    LineChart::create(array(
-        "dataStore"=>$dataGraph1,
-        "width"=>"100%",
-        "height"=>"500px",
-        "columns"=>array(
-            "PRSHR"=>array(
-                "label"=>"Jam"
-            ),
-            "PRSDG_TMP1"=>array(
-                "type"=>"number",
-                "decimals"=>2,
-                "label"=>"TEMP 1",
-                // "prefix"=>"$",
-                "emphasis"=>true
-            ),
-            "PRSDG_TMP2"=>array(
-                "type"=>"number",
-                "decimals"=>2,
-                "label"=>"TEMP 2",
-                // "prefix"=>"$",
-                "emphasis"=>true
-            ),
-            "PRSDG_TMP3"=>array(
-                "type"=>"number",
-                "decimals"=>2,
-                "label"=>"TEMP 3",
-                // "prefix"=>"$",
-                "emphasis"=>true
-            ),
-            "PRSDG_TMP4"=>array(
-                "type"=>"number",
-                "decimals"=>2,
-                "label"=>"TEMP 4",
-                // "prefix"=>"$",
-                "emphasis"=>true
-            ),
-            "PRSDG_TMP5"=>array(
-                "type"=>"number",
-                "decimals"=>2,
-                "label"=>"TEMP 5",
-                // "prefix"=>"$",
-                "emphasis"=>true
-            ),
-            "PRSDG_TMP6"=>array(
-                "type"=>"number",
-                "decimals"=>2,
-                "label"=>"TEMP 6",
-                // "prefix"=>"$",
-                "emphasis"=>true
-            )
-        ),
-        "options"=>array(
-            "title"=>"Digester Per Jam",
-        )
-    ));
-    ?>
+          </div>
+        </div>
+      </div>
+
+
+<script>
+
+  $(document).ready(function() {
+    fetchData();
+  });
+
+function fetchData() {
+    $.ajax({
+      url:"<?php echo site_url().'/../Content/Report/pressGraph/getData'; ?>",
+      type: 'post',
+      success: function(response) {
+        // Perform operation on the return value
+        //    alert(response);
+        // alert(response.length)
+        if (response.length < 1) {
+          alert("Data Kosong Hubungi Administrator");
+        } else {
+          // var result = response.substring(response.lastIndexOf("{"), response.lastIndexOf("}") + 1);
+          objHistory = JSON.parse(response);
+          // objHistory2 = JSON.parse(response);
+          // $("#datahistory").html(objHistory[1].FTU_VAL + " - " + objHistory[1].SVRTM + " - " + objHistory.length);
+          // $("#datahistory").html(response);
+          // $("#datahistory").html(result);
+          var xValues = [];
+          var yValues = [];
+
+          for (var i = 0; i < objHistory.length; i++) {
+            xValues.push(objHistory[i].PRSHR );
+            yValues.push(objHistory[i].PRSDG_TMP1);
+          }
+          // $("#datahistory").html(objHistory.length);
+
+          generateChart(xValues, yValues);
+        }
+      }
+    });
+  }
+
+  
+  function generateChart(xValues, yValues) {
+    var canvar_bar = document.getElementById("myChart2");
+    new Chart(canvar_bar, {
+      type: "line",
+      data: {
+        labels: xValues,
+        datasets: [{
+          fill: false,
+          backgroundColor: "#FF6384",
+          borderColor: "#FF6384",
+          data: yValues
+        }]
+      },
+      options: {
+        legend: {
+          display: false
+        },
+        elements: {
+                    point:{
+                        radius: 0
+                    }
+                },
+        scales: {
+        //   yAxes: [{ticks: {min: 6, max:16}}],
+        // xAxes: [{ticks: {display: false}}],
+        },
+        animation: false,
+      }
+    });
+
+  }
+
+  function exportDataPDF() {
+        
+        var url = "<?php  echo site_url() . '/../Content/Report/pressGraph/exportPDFFile'; ?>";
+        window.open(url, "_blank");
+    }
+
+    function test() {
+        
+        var url = "<?php  echo site_url() . '/../Content/Report/pressGraph/pdfView_test'; ?>";
+        window.open(url, "_blank");
+    }
+</script>
    
     <?php
     Table::create(array(

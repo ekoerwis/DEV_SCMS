@@ -1,4 +1,13 @@
-<div class="report-content">
+<html>
+    <head>
+    <!-- <script type="text/javascript" src="https://sites.local/dev_SCMS//public/vendors/jquery/jquery-3.4.1.js?r=1684484292"></script>
+    <script type="text/javascript" src="https://sites.local/dev_SCMS/public/vendors/chartJs/2.9.4/Chart.js?r=1684484292"></script> -->
+    <script type="text/javascript" src="<?= site_url().'/../public/vendors/jquery/jquery-3.4.1.js' ?>" ></script>
+    <script type="text/javascript" src="<?= site_url().'/../public/vendors/chartJs/2.9.4/Chart.js' ?>"></script>
+    <script type="text/javascript" src="<?= site_url().'/../public/vendors/html2canvas/html2canvas.min.js' ?>"></script>
+    </head>
+    <body>
+    <div class="report-content">
     <div class="text-center">
         <h1>Press Station</h1>
         <p class="lead">Temperatur Digester</p>
@@ -10,6 +19,9 @@
             <!-- <h5 class="" style="color: #FF6384;">Temperature</h5> -->
             <canvas id="myChart2" style="width:100%; height:300px;"></canvas>
 
+            <button onclick="screenshoot()">Take Screenshoot</button>
+            <button id="download" onclick="download()">Download Pdf</button>
+
           </div>
         </div>
       </div>
@@ -18,8 +30,20 @@
 <script>
 
   $(document).ready(function() {
-    fetchData();
+    fetchData()
   });
+
+  function download(){
+    html2canvas(document.querySelector("#myChart2")).then(canvas => {
+      document.body.appendChild(canvas)
+    });
+  }
+
+  function screenshoot(){
+    html2canvas(document.querySelector("#myChart2")).then(canvas => {
+      document.body.appendChild(canvas)
+    });
+  }
 
 function fetchData() {
     $.ajax({
@@ -39,6 +63,8 @@ function fetchData() {
           }
 
           generateChart(xValues, yValues);
+          
+          // screenshoot();
         }
       }
     });
@@ -82,4 +108,5 @@ function fetchData() {
   }
 
 </script>
-   
+    </body>
+</html>
