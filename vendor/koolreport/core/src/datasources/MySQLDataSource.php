@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains class for MySQLDataSource
  * 
@@ -22,6 +23,7 @@
  */
 
 namespace koolreport\datasources;
+
 use \koolreport\core\DataSource;
 use \koolreport\core\Utility as Util;
 
@@ -50,7 +52,7 @@ class MySQLDataSource extends DataSource
      * @var $connection Current data connection
      */
     protected $connection;
-    
+
     /**
      * The SQL query
      * 
@@ -81,6 +83,8 @@ class MySQLDataSource extends DataSource
 
     protected $queryParams = [];
 
+    public $originalQuery;
+
     /**
      * Init MySQLdataSource
      * 
@@ -93,8 +97,8 @@ class MySQLDataSource extends DataSource
         $password = Util::get($this->params, "password", "");
         $dbname = Util::get($this->params, "dbname", "");
         $charset = Util::get($this->params, "charset", null);
-        
-        $key = md5($host.$username.$password.$dbname);
+
+        $key = md5($host . $username . $password . $dbname);
         if (isset(MySQLDataSource::$connections[$key])) {
             $this->connection = MySQLDataSource::$connections[$key];
         } else {
@@ -103,23 +107,23 @@ class MySQLDataSource extends DataSource
             if ($this->connection->connect_errno) {
                 throw new \Exception(
                     "Failed to connect to MySQL: ("
-                    .$this->connection->connect_errno
-                    .") "
-                    .$this->connection->connect_error
+                        . $this->connection->connect_errno
+                        . ") "
+                        . $this->connection->connect_error
                 );
             }
-            MySQLDataSource::$connections[$key] = $this->connection;    
+            MySQLDataSource::$connections[$key] = $this->connection;
         }
 
         /* change character set */
-        if (isset($charset) && ! $this->connection->set_charset($charset)) {
+        if (isset($charset) && !$this->connection->set_charset($charset)) {
             throw new \Exception(
                 "Error loading character set $charset: "
-                .$this->connection->error
+                    . $this->connection->error
             );
         }
     }
-    
+
     /**
      * Set the query and parameters
      * 
@@ -128,7 +132,7 @@ class MySQLDataSource extends DataSource
      * 
      * @return MySQLDataSource Return itself for cascade
      */
-    public function query($query, $sqlParams=null)
+    public function query($query, $sqlParams = null)
     {
         $this->originalQuery = $this->query = (string)$query;
         if ($sqlParams != null) {
@@ -149,11 +153,11 @@ class MySQLDataSource extends DataSource
     {
         $search = Util::get($queryParams, 'search', '');
 
-        $searchSql = ! empty($search) ? "WHERE $search" : "";
+        $searchSql = !empty($search) ? "WHERE $search" : "";
 
         $order = Util::get($queryParams, 'order', '');
-        $orderSql = ! empty($order) ? "ORDER BY $order" : "";
-            
+        $orderSql = !empty($order) ? "ORDER BY $order" : "";
+
         $start = (int) Util::get($queryParams, 'start', 0);
         $length = (int) Util::get($queryParams, 'length', 1);
         $limit =  $length > -1 ? "LIMIT $start, $length" : "";
@@ -161,9 +165,23 @@ class MySQLDataSource extends DataSource
         $filterQuery = "SELECT count(*) FROM ($query) tmp $searchSql";
         $totalQuery = "SELECT count(*) FROM ($query) tmp";
         $processedQuery = "select * from ($query) tmp $searchSql $orderSql $limit";
-        // echo "processedQuery=" . $processedQuery . '<br>';
 
-        return [$processedQuery, $totalQuery, $filterQuery];
+        $thisAggregates = [];
+        if (!empty($queryParams["aggregates"])) {
+            $aggregates = $queryParams["aggregates"];
+            foreach ($aggregates as $operator => $fields) {
+                foreach ($fields as $field) {
+                    $aggQuery = "SELECT $operator($field) FROM ($query) tmp $searchSql";
+                    $thisAggregates[] = [
+                        "operator" => $operator,
+                        "field" => $field,
+                        "aggQuery" => $aggQuery
+                    ];
+                }
+            }
+        }
+
+        return [$processedQuery, $totalQuery, $filterQuery, $thisAggregates];
     }
 
     /**
@@ -173,11 +191,10 @@ class MySQLDataSource extends DataSource
      * 
      * @return MySQLDataSource Return itself for cascade
      */
-    public function queryProcessing($queryParams) 
+    public function queryProcessing($queryParams)
     {
         $this->queryParams = $queryParams;
-        // echo "queryProcessing queryParams="; print_r($queryParams); echo "<br>";
-        list($this->query, $this->totalQuery, $this->filterQuery)
+        list($this->query, $this->totalQuery, $this->filterQuery, $this->aggregates)
             = self::processQuery($this->originalQuery, $queryParams);
 
         $this->countTotal = Util::get($queryParams, 'countTotal', false);
@@ -185,7 +202,7 @@ class MySQLDataSource extends DataSource
 
         return $this;
     }
-    
+
     /**
      * Insert params for query
      * 
@@ -198,7 +215,7 @@ class MySQLDataSource extends DataSource
         $this->sqlParams = $sqlParams;
         return $this;
     }
-  
+
     /**
      * Perform data binding
      * 
@@ -213,13 +230,13 @@ class MySQLDataSource extends DataSource
             $sqlParams = [];
         }
         uksort(
-            $sqlParams, 
+            $sqlParams,
             function ($k1, $k2) {
                 return strlen($k1) - strlen($k2);
             }
         );
-        foreach ($sqlParams as $key=>$value) {
-            if (gettype($value)==="array") {
+        foreach ($sqlParams as $key => $value) {
+            if (gettype($value) === "array") {
                 $value = array_map(
                     function ($v) {
                         return $this->escape($v);
@@ -229,12 +246,12 @@ class MySQLDataSource extends DataSource
                 $value = implode(",", $value);
                 $query = str_replace($key, $value, $query);
             } else {
-                $query = str_replace($key, $this->escape($value), $query);
+                $query = str_replace($key, (string)$this->escape($value), $query);
             }
         }
         return $query;
     }
-    
+
     /**
      * Escape value for SQL safe
      * 
@@ -245,7 +262,7 @@ class MySQLDataSource extends DataSource
     public function escape($str)
     {
         if (is_string($str) || (is_object($str) && method_exists($str, '__toString'))) {
-            return "'".$this->escapeStr($str)."'";
+            return "'" . $this->escapeStr($str) . "'";
         } elseif (is_bool($str)) {
             return ($str === false) ? 0 : 1;
         } elseif ($str === null) {
@@ -266,7 +283,7 @@ class MySQLDataSource extends DataSource
     {
         return $this->connection->real_escape_string($str);
     }
-    
+
     /**
      * Map field type to bind type
      * 
@@ -277,79 +294,159 @@ class MySQLDataSource extends DataSource
     function mapFieldTypeToBindType($field_type)
     {
         switch ($field_type) {
-        case MYSQLI_TYPE_DECIMAL:
-        case MYSQLI_TYPE_NEWDECIMAL:
-        case MYSQLI_TYPE_FLOAT:
-        case MYSQLI_TYPE_DOUBLE:
-        case MYSQLI_TYPE_BIT:
-        case MYSQLI_TYPE_TINY:
-        case MYSQLI_TYPE_SHORT:
-        case MYSQLI_TYPE_LONG:
-        case MYSQLI_TYPE_LONGLONG:
-        case MYSQLI_TYPE_INT24:
-        case MYSQLI_TYPE_YEAR:
-        case MYSQLI_TYPE_ENUM:
-            return 'number';
+            case MYSQLI_TYPE_DECIMAL:
+            case MYSQLI_TYPE_NEWDECIMAL:
+            case MYSQLI_TYPE_FLOAT:
+            case MYSQLI_TYPE_DOUBLE:
+            case MYSQLI_TYPE_BIT:
+            case MYSQLI_TYPE_TINY:
+            case MYSQLI_TYPE_SHORT:
+            case MYSQLI_TYPE_LONG:
+            case MYSQLI_TYPE_LONGLONG:
+            case MYSQLI_TYPE_INT24:
+            case MYSQLI_TYPE_YEAR:
+            case MYSQLI_TYPE_ENUM:
+                return 'number';
 
-        case MYSQLI_TYPE_DATE:
-            return 'date';
+            case MYSQLI_TYPE_DATE:
+                return 'date';
 
-        case MYSQLI_TYPE_TIME:
-            return 'time';
-        case MYSQLI_TYPE_TIMESTAMP:
-        case MYSQLI_TYPE_DATETIME:
-        case MYSQLI_TYPE_NEWDATE:
-            return 'datetime';
-        
-        case MYSQLI_TYPE_VAR_STRING:
-        case MYSQLI_TYPE_STRING:
-        case MYSQLI_TYPE_CHAR:
-        case MYSQLI_TYPE_GEOMETRY:
-        case MYSQLI_TYPE_TINY_BLOB:
-        case MYSQLI_TYPE_MEDIUM_BLOB:
-        case MYSQLI_TYPE_LONG_BLOB:
-        case MYSQLI_TYPE_BLOB:
-            return 'string';
+            case MYSQLI_TYPE_TIME:
+                return 'time';
+            case MYSQLI_TYPE_TIMESTAMP:
+            case MYSQLI_TYPE_DATETIME:
+            case MYSQLI_TYPE_NEWDATE:
+                return 'datetime';
 
-        default:
-            return 'unknown';
+            case MYSQLI_TYPE_VAR_STRING:
+            case MYSQLI_TYPE_STRING:
+            case MYSQLI_TYPE_CHAR:
+            case MYSQLI_TYPE_GEOMETRY:
+            case MYSQLI_TYPE_TINY_BLOB:
+            case MYSQLI_TYPE_MEDIUM_BLOB:
+            case MYSQLI_TYPE_LONG_BLOB:
+            case MYSQLI_TYPE_BLOB:
+                return 'string';
+
+            default:
+                return 'unknown';
         }
     }
 
     protected function prepareAndBind($query, $params = [])
     {
-        $paramNames = array_keys($params);
-        uksort(
-            $paramNames,
+        $sortedLenPaNames = array_keys($params);
+        // Sort param names, longest name first,
+        // so that longer ones are replaced before shorter ones in query
+        // to avoid case when a shorter name is a substring of a longer name
+        usort(
+            $sortedLenPaNames,
             function ($k1, $k2) {
-                return strlen($k1) - strlen($k2);
+                return strlen($k2) - strlen($k1);
             }
         );
-        foreach ($paramNames as $k) {
-            $query = str_replace($k, "?", $query);
+
+        // Spread array parameters
+        foreach ($sortedLenPaNames as $paName) {
+            $paValue = $params[$paName];
+            if (gettype($paValue) === "array") {
+                $numValues = strlen((string)count($paValue));
+                $paramList = [];
+                foreach ($paValue as $i => $value) {
+                    $order = $i + 1;
+                    // Pad order to keep all array param name length equal
+                    $order = str_pad($order, $numValues, "0", STR_PAD_LEFT);
+                    $paArrElName = $paName . "_arr_$order";
+                    $paramList[] = $paArrElName;
+                    $params[$paArrElName] = $value;
+                }
+                $query = str_replace($paName, implode(",", $paramList), $query);
+            }
         }
+        
+        $sortedLenPaNames = array_keys($params);
+        usort(
+            $sortedLenPaNames,
+            function ($k1, $k2) {
+                return strlen($k2) - strlen($k1);
+            }
+        );
+        $newParams = [];
+        $positions = [];
+        $originalQuery = $query;
+        foreach ($sortedLenPaNames as $paName) {
+            $count = 1;
+            $pos = -1;
+            while (true) {
+                $pos = strpos($query, $paName, $pos + 1);
+                if ($pos === false) {
+                    break;
+                } else {
+                    $newPaName = $count > 1 ? $paName . "_" . $count : $paName;
+                    $newParams[$newPaName] = $params[$paName];
+                    $positions[$newPaName] = $pos;
+                    $query = substr_replace($query, str_repeat("?", strlen($paName)), $pos, strlen($paName));
+                }
+                $count++;
+            }
+        }
+        $sortedLenPaNames = array_keys($newParams);
+        usort(
+            $sortedLenPaNames,
+            function ($k1, $k2) {
+                return strlen($k2) - strlen($k1);
+            }
+        );
+        $query = $originalQuery;
+        foreach ($sortedLenPaNames as $paName) {
+            $query = str_replace($paName, "?", $query);
+        }
+
+        // Sort new params by their positions, leftist one first
+        $sortedPosNewParams = $newParams;
+        uksort(
+            $sortedPosNewParams,
+            function ($k1, $k2) use ($positions) {
+                return $positions[$k1] - $positions[$k2];
+            }
+        );
+
         $stmt = $this->connection->prepare($query);
-        $typeStr = "";
-        foreach ($params as $v) {
-            $typeStr .= is_double($v) ? "d" : 
-                (is_int($v) ? "i" : "s");
+        if ($stmt === false) {
+            throw new \Exception(
+                "Mysql error: " . $this->connection->error . " || Sql query = $query"
+            );
         }
-        if (! empty($typeStr)) {
+
+        $typeStr = "";
+        foreach ($sortedPosNewParams as $v) {
+            $typeStr .= is_double($v) ? "d" : (is_int($v) ? "i" : "s");
+        }
+        if (!empty($typeStr)) {
             // echo "typeStr=$typeStr<br>"; 
             // echo "[typeStr] + params="; print_r([$typeStr] + $params); echo "<br>";
             // echo "...array_values(params) = "; print_r(...array_values($params)); echo "<br>";
-            $arr = [$typeStr] + $params;
+            $arr = [$typeStr] + $newParams;
             $refArr = [];
-            foreach($arr as $k => $v){$refArr[] = &$arr[$k];}
-            call_user_func_array(array($stmt, 'bind_param'), $refArr);
+            foreach ($arr as $k => $v) {
+                $refArr[] = &$arr[$k];
+            }
+            $bindParamResult = call_user_func_array(array($stmt, 'bind_param'), $refArr);
             // call_user_func_array(array($stmt, 'bind_param'), array_merge([$typeStr], $params));
             // call_user_func_array(array($stmt, 'bind_param'), array_merge([$typeStr], array_values($params)));
             // $stmt->bind_param($typeStr, ...array_values($params)); //spread operator ... only available since PHP 5.6
             // $stmt->bind_param($typeStr, ...$params); //spread operator ... only available since PHP 5.6
+            if ($bindParamResult === false) {
+                throw new \Exception(
+                    'bind_param() failed: ' . htmlspecialchars($stmt->error)
+                        . " || Sql query = $query"
+                        . " || Params = $refArr"
+                );
+            }
         }
         return $stmt;
     }
-    
+
     /**
      * Start piping data
      * 
@@ -357,15 +454,20 @@ class MySQLDataSource extends DataSource
      */
     public function start()
     {
-        $metaData = array("columns"=>array());
+        $metaData = array("columns" => array());
 
         $searchParams = Util::get($this->queryParams, 'searchParams', []);
 
+        if (empty($this->sqlParams)) $this->sqlParams = [];
+        if (empty($searchParams)) $searchParams = [];
+
         if ($this->countTotal) {
-            $totalQuery = $this->bindParams($this->totalQuery, $this->sqlParams);
-            $totalResult = $this->connection->query($totalQuery);
-            if ($totalResult===false) {
-                throw new \Exception("Error on query >>> ".$this->connection->error);
+            // $totalQuery = $this->bindParams($this->totalQuery, $this->sqlParams);
+            $stmt = $this->prepareAndBind($this->totalQuery, $this->sqlParams);
+            $stmt->execute();
+            $totalResult = $stmt->get_result();
+            if ($totalResult === false) {
+                throw new \Exception("Error on query >>> " . $this->connection->error);
             }
             $row = $totalResult->fetch_array();
             $result = $row[0];
@@ -373,58 +475,72 @@ class MySQLDataSource extends DataSource
         }
 
         if ($this->countFilter) {
-            $filterQuery = $this->bindParams($this->filterQuery, $this->sqlParams);
-            $stmt = $this->prepareAndBind($filterQuery, $searchParams);
+            // $filterQuery = $this->bindParams($this->filterQuery, $this->sqlParams);
+            $stmt = $this->prepareAndBind($this->filterQuery, array_merge($this->sqlParams, $searchParams));
             $stmt->execute();
             $filterResult = $stmt->get_result();
-            // $filterResult = $this->connection->query($filterQuery);
-            if ($filterResult===false) {
-                throw new \Exception("Error on query >>> ".$this->connection->error);
+            if ($filterResult === false) {
+                throw new \Exception("Error on query >>> " . $this->connection->error);
             }
             $row = $filterResult->fetch_array();
             $result = $row[0];
             $metaData['filterRecords'] = $result;
         }
 
-        $query = $this->bindParams($this->query, $this->sqlParams);
+        if (!empty($this->aggregates)) {
+            foreach ($this->aggregates as $aggregate) {
+                $operator = $aggregate["operator"];
+                $field = $aggregate["field"];
+                $aggQuery = $aggregate["aggQuery"];
+                // $aggQuery = $this->bindParams($aggQuery, $this->sqlParams);
+                $stmt = $this->prepareAndBind($aggQuery, array_merge($this->sqlParams, $searchParams));
+                $stmt->execute();
+                $aggResult = $stmt->get_result();
+                if ($aggResult === false) {
+                    throw new \Exception("Error on query >>> " . $this->connection->error);
+                }
+                Util::set($metaData, ['aggregates', $operator, $field], $result);
+            }
+        }
+
+        // $query = $this->bindParams($this->query, $this->sqlParams);
         // echo "query=$query<br>";
         // echo "this->sqlParams="; print_r($this->sqlParams); echo "<br>";
         // $result = $this->connection->query($query);
-        $stmt = $this->prepareAndBind($query, $searchParams);
+        $stmt = $this->prepareAndBind($this->query, array_merge($this->sqlParams, $searchParams));
         $stmt->execute();
         $result = $stmt->get_result();
-        
-        if ($result===false) {
-            throw new \Exception("Error on query >>> ".$this->connection->error);
+
+        if ($result === false) {
+            throw new \Exception("Error on query >>> " . $this->connection->error);
         }
 
         $finfo = $result->fetch_fields();
 
-        
+
         $numcols = count($finfo);
-        for ($i=0; $i<$numcols; $i++) {
+        for ($i = 0; $i < $numcols; $i++) {
             $type = $this->mapFieldTypeToBindType($finfo[$i]->type);
-                $metaData["columns"][$finfo[$i]->name] = array(
-                        "type"=>$type,
-                    );
-            switch($type)
-            {
-            case "datetime":
-                $metaData["columns"][$finfo[$i]->name]["format"] = "Y-m-d H:i:s";
-                break;
-            case "date":
-                $metaData["columns"][$finfo[$i]->name]["format"] = "Y-m-d";
-                break;
-            case "time":
-                $metaData["columns"][$finfo[$i]->name]["format"] = "H:i:s";
-                break;          
+            $metaData["columns"][$finfo[$i]->name] = array(
+                "type" => $type,
+            );
+            switch ($type) {
+                case "datetime":
+                    $metaData["columns"][$finfo[$i]->name]["format"] = "Y-m-d H:i:s";
+                    break;
+                case "date":
+                    $metaData["columns"][$finfo[$i]->name]["format"] = "Y-m-d";
+                    break;
+                case "time":
+                    $metaData["columns"][$finfo[$i]->name]["format"] = "H:i:s";
+                    break;
             }
         }
 
         $this->sendMeta($metaData, $this);
-    
+
         $this->startInput(null);
-        
+
         while ($row = $result->fetch_assoc()) {
             $this->next($row, $this);
         }
@@ -438,27 +554,26 @@ class MySQLDataSource extends DataSource
         $stmt = $this->prepareAndBind($query, []);
         $stmt->execute();
         $result = $stmt->get_result();
-        if ($result===false) {
-            throw new \Exception("Error on query >>> ".$this->connection->error);
+        if ($result === false) {
+            throw new \Exception("Error on query >>> " . $this->connection->error);
         }
         $finfo = $result->fetch_fields();
         $numcols = count($finfo);
-        for ($i=0; $i<$numcols; $i++) {
+        for ($i = 0; $i < $numcols; $i++) {
             $type = $this->mapFieldTypeToBindType($finfo[$i]->type);
-                $columns[$finfo[$i]->name] = array(
-                        "type"=>$type,
-                    );
-            switch($type)
-            {
-            case "datetime":
-                $columns[$finfo[$i]->name]["format"] = "Y-m-d H:i:s";
-                break;
-            case "date":
-                $columns[$finfo[$i]->name]["format"] = "Y-m-d";
-                break;
-            case "time":
-                $columns[$finfo[$i]->name]["format"] = "H:i:s";
-                break;          
+            $columns[$finfo[$i]->name] = array(
+                "type" => $type,
+            );
+            switch ($type) {
+                case "datetime":
+                    $columns[$finfo[$i]->name]["format"] = "Y-m-d H:i:s";
+                    break;
+                case "date":
+                    $columns[$finfo[$i]->name]["format"] = "Y-m-d";
+                    break;
+                case "time":
+                    $columns[$finfo[$i]->name]["format"] = "H:i:s";
+                    break;
             }
         }
         return $columns;
@@ -466,11 +581,13 @@ class MySQLDataSource extends DataSource
 
     public function fetchData($query, $queryParams = null)
     {
-        if (isset($queryParams) && 
-            (isset($queryParams['countTotal']) || isset($queryParams['countFilter']))) {
+        if (
+            isset($queryParams) &&
+            (isset($queryParams['countTotal']) || isset($queryParams['countFilter']))
+        ) {
             list($query, $totalQuery, $filterQuery)
                 = self::processQuery($query, $queryParams);
-            
+
             $queries = [
                 'data' => $query,
                 'total' => $totalQuery,
@@ -481,24 +598,24 @@ class MySQLDataSource extends DataSource
                 'data' => $query
             ];
         }
-        $result = [];
+        $data = [];
         foreach ($queries as $key => $query) {
-            $query = $this->bindParams($query, $this->sqlParams);
+            // $query = $this->bindParams($query, $this->sqlParams);
             // print_r($this->sqlParams); echo "<br>";
             // echo "query=$query<br>";
-            $stmt = $this->prepareAndBind($query, []);
+            $stmt = $this->prepareAndBind($query, $this->sqlParams);
             $stmt->execute();
             $queryResult = $stmt->get_result();
-            if ($result===false) {
-                throw new \Exception("Error on query >>> ".$this->connection->error);
+            if ($queryResult === false) {
+                throw new \Exception("Error on query >>> " . $this->connection->error);
             }
             $rows = [];
             while ($row = $queryResult->fetch_assoc()) {
                 // print_r($row); echo "<br>";
                 $rows[] = $row;
             }
-            $result[$key] = $rows;
+            $data[$key] = $rows;
         }
-        return $result;
+        return $data;
     }
 }

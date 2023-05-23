@@ -89,6 +89,8 @@ class SQLSRVDataSource extends DataSource
      */    
     protected $countFilter = false;
 
+    public $originalQuery;
+
     /**
      * Datasource initiation
      * 
@@ -168,8 +170,23 @@ class SQLSRVDataSource extends DataSource
         $filterQuery = "SELECT count(*) FROM ($query) tmp $searchSql";
         $totalQuery = "SELECT count(*) FROM ($query) tmp";
         $processedQuery = "select * from ($query) tmp $searchSql $orderSql $limit";
-        // echo "query=" . $processedQuery . '<br>';
-        return [$processedQuery, $totalQuery, $filterQuery];
+
+        $thisAggregates = [];
+        if (!empty($queryParams["aggregates"])) {
+            $aggregates = $queryParams["aggregates"];
+            foreach ($aggregates as $operator => $fields) {
+                foreach ($fields as $field) {
+                    $aggQuery = "SELECT $operator($field) FROM ($query) tmp $searchSql";
+                    $thisAggregates[] = [
+                        "operator" => $operator,
+                        "field" => $field,
+                        "aggQuery" => $aggQuery
+                    ];
+                }
+            }
+        }
+
+        return [$processedQuery, $totalQuery, $filterQuery, $thisAggregates];
     }
 
     /**
@@ -182,7 +199,7 @@ class SQLSRVDataSource extends DataSource
     public function queryProcessing($queryParams) 
     {
         $this->queryParams = $queryParams;
-        list($this->query, $this->totalQuery, $this->filterQuery)
+        list($this->query, $this->totalQuery, $this->filterQuery, $this->aggregates)
             = self::processQuery($this->originalQuery, $queryParams);
 
         $this->countTotal = Util::get($queryParams, 'countTotal', false);
@@ -235,7 +252,7 @@ class SQLSRVDataSource extends DataSource
                 $value = implode(",", $value);
                 $query = str_replace($key, $value, $query);
             } else {
-                $query = str_replace($key, $this->escape($value), $query);
+                $query = str_replace($key, (string)$this->escape($value), $query);
             }
         }
         return $query;
@@ -312,19 +329,102 @@ class SQLSRVDataSource extends DataSource
         }
     }
 
-    protected function prepareAndBind($query, $params)
+    protected function prepareAndBind($query, $params = [])
     {
-        $paramNames = array_keys($params);
-        uksort(
-            $paramNames,
+        $paNames = array_keys($params);
+        // Sort param names, longest name first,
+        // so that longer ones are replaced before shorter ones in query
+        // to avoid case when a shorter name is a substring of a longer name
+        usort(
+            $paNames,
             function ($k1, $k2) {
-                return strlen($k1) - strlen($k2);
+                return strlen($k2) - strlen($k1);
             }
         );
-        foreach ($paramNames as $k) {
-            $query = str_replace($k, "?", $query);
+        // echo "paNames = "; print_r($paNames); echo "<br>";
+
+        // Spreadh array parameters
+        foreach ($paNames as $paName) {
+            $paValue = $params[$paName];
+            if (gettype($paValue)==="array") {
+                $numValues = strlen((string)count($paValue));
+                $paramList = [];
+                foreach ($paValue as $i=>$value) {
+                    $order = $i + 1;
+                    // Pad order to keep all array param name length equal
+                    $order = str_pad($order, $numValues, "0", STR_PAD_LEFT);
+                    $paArrElName = $paName . "_arr_$order";
+                    $paramList[] = $paArrElName;
+                    $params[$paArrElName] = $value;
+                }
+                $query = str_replace($paName, implode(",", $paramList), $query);
+            } 
         }
-        $stmt = sqlsrv_query($this->connection, $query, array_values($params));
+
+        $paNames = array_keys($params);
+        usort(
+            $paNames,
+            function ($k1, $k2) {
+                return strlen($k2) - strlen($k1);
+            }
+        );
+        // echo "paNames = "; print_r($paNames); echo "<br><br>";
+        // echo "query = $query<br><br>";
+
+        $newParams = [];
+        $positions = [];
+        $originalQuery = $query;
+        foreach ($paNames as $paName) {
+            $count = 1;
+            $pos = -1;
+            while (true) {
+                $pos = strpos($query, $paName, $pos + 1);
+                if ($pos === false) {
+                    break;
+                } else {
+                    $newPaName = $count > 1 ? $paName . "_" . $count : $paName;
+                    $newParams[$newPaName] = $params[$paName];
+                    $positions[$newPaName] = $pos;
+                    // $query = substr_replace($query, "?", $pos, strlen($paName));
+                    $query = substr_replace($query, str_repeat("?", strlen($paName)), $pos, strlen($paName));
+                }
+                $count++;
+            }
+        }
+        $sortedLenPaNames = array_keys($newParams);
+        usort(
+            $sortedLenPaNames,
+            function ($k1, $k2) {
+                return strlen($k2) - strlen($k1);
+            }
+        );
+        // echo "positions = " . print_r($positions, true) . "<br><br>";
+        // echo "sortedLenPaNames = " . print_r($sortedLenPaNames, true) . "<br><br>";
+        // echo "query = $query<br><br>";
+        $query = $originalQuery;
+        foreach ($sortedLenPaNames as $paName) {
+            $query = str_replace($paName, "?", $query);
+        }
+        // echo "query = $query<br><br>";
+
+        // Sort new params by their positions, smallest one first
+        $sortedPosParams = $newParams;
+        uksort(
+            $sortedPosParams,
+            function ($k1, $k2) use ($positions) {
+                return $positions[$k1] - $positions[$k2];
+            }
+        );
+        // echo "sortedPosParams = " . print_r($sortedPosParams, true) . "<br><br>";
+
+        $stmt = sqlsrv_query($this->connection, $query, array_values($sortedPosParams));
+        if( $stmt === false ) {
+            throw new \Exception(
+                "Sqlsrv error: " . json_encode(sqlsrv_errors()) 
+                . " || Sql query = $query"
+                . " || params = " . json_encode($params)
+            );
+        }
         return $stmt;
     }
     
@@ -339,35 +439,36 @@ class SQLSRVDataSource extends DataSource
 
         $searchParams = Util::get($this->queryParams, 'searchParams', []);
 
+        if (empty($this->sqlParams)) $this->sqlParams = [];
+        if (empty($searchParams)) $searchParams = [];
+
         if ($this->countTotal) {
-            $query = $this->bindParams($this->totalQuery, $this->sqlParams);
-            $stmt = sqlsrv_query($this->connection, $query);
-            if ($stmt === false) {
-                die(print_r(sqlsrv_errors(), true));
-            } 
+            $stmt = $this->prepareAndBind($this->totalQuery, $this->sqlParams);
             $row = sqlsrv_fetch_array($stmt);
             $total = $row[0];
             $metaData['totalRecords'] = $total;
         }
 
         if ($this->countFilter) {
-            $query = $this->bindParams($this->filterQuery, $this->sqlParams);
-            // $stmt = sqlsrv_query($this->connection, $query);
-            $stmt = $this->prepareAndBind($query, $searchParams);
-            if ($stmt === false) {
-                die(print_r(sqlsrv_errors(), true));
-            } 
+            $stmt = $this->prepareAndBind($this->filterQuery, array_merge($this->sqlParams, $searchParams));
             $row = sqlsrv_fetch_array($stmt);
             $total = $row[0];
             $metaData['filterRecords'] = $total;
         }
 
-        $query = $this->bindParams($this->query, $this->sqlParams);
-        // $stmt = sqlsrv_query($this->connection, $query);
-        $stmt = $this->prepareAndBind($query, $searchParams);
-        if ($stmt === false) {
-            die(print_r(sqlsrv_errors(), true));
-        } 
+        if (!empty($this->aggregates)) {
+            foreach ($this->aggregates as $aggregate) {
+                $operator = $aggregate["operator"];
+                $field = $aggregate["field"];
+                $aggQuery = $aggregate["aggQuery"];
+                $stmt = $this->prepareAndBind($aggQuery, array_merge($this->sqlParams, $searchParams));
+                $row = sqlsrv_fetch_array($stmt);
+                $result = $row[0];
+                Util::set($metaData, ['aggregates', $operator, $field], $result);
+            }
+        }
+
+        $stmt = $this->prepareAndBind($this->query, array_merge($this->sqlParams, $searchParams));
 
         $finfo = sqlsrv_field_metadata($stmt);
         
@@ -416,23 +517,16 @@ class SQLSRVDataSource extends DataSource
                 'data' => $query
             ];
         }
-        $result = [];
+        $data = [];
         foreach ($queries as $key => $query) {
-            $query = $this->bindParams($this->query, $this->sqlParams);
-            $stmt = $this->prepareAndBind($query, []);
-            if ($stmt === false) {
-                die(print_r(sqlsrv_errors(), true));
-            } 
-            if ($result===false) {
-                throw new \Exception("Error on query >>> ".$this->connection->error);
-            }
+            $stmt = $this->prepareAndBind($this->query, $this->sqlParams);
             $rows = [];
             while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
                 // print_r($row); echo "<br>";
                 $rows[] = $row;
             }
-            $result[$key] = $rows;
+            $data[$key] = $rows;
         }
-        return $result;
+        return $data;
     }
 }

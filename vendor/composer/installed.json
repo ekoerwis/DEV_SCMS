@@ -203,23 +203,23 @@
         },
         {
             "name": "koolreport/core",
-            "version": "5.5.0",
-            "version_normalized": "5.5.0.0",
+            "version": "6.1.0",
+            "version_normalized": "6.1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/koolreport/core.git",
-                "reference": "40f68b47e98aa48adcc800e029d56c2c99ef01ca"
+                "reference": "d2cb3e64a1eafcda65a4cdfdf664b97648334ba4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koolreport/core/zipball/40f68b47e98aa48adcc800e029d56c2c99ef01ca",
-                "reference": "40f68b47e98aa48adcc800e029d56c2c99ef01ca",
+                "url": "https://api.github.com/repos/koolreport/core/zipball/d2cb3e64a1eafcda65a4cdfdf664b97648334ba4",
+                "reference": "d2cb3e64a1eafcda65a4cdfdf664b97648334ba4",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4"
             },
-            "time": "2021-11-15T08:01:16+00:00",
+            "time": "2023-03-31T07:44:22+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -248,7 +248,7 @@
             ],
             "support": {
                 "issues": "https://github.com/koolreport/core/issues",
-                "source": "https://github.com/koolreport/core/tree/v5.5.0"
+                "source": "https://github.com/koolreport/core/tree/v6.1.0"
             },
             "install-path": "../koolreport/core"
         },

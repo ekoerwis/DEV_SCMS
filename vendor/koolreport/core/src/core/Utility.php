@@ -145,7 +145,7 @@ class Utility
             $prefix = Utility::get($format, "prefix", "");
             $suffix = Utility::get($format, "suffix", "");
             return $prefix
-                .number_format($value, $decimals, $dec_point, $thousand_sep)
+                .number_format((float)$value, $decimals, $dec_point, $thousand_sep)
                 .$suffix;
             break;
         case "string":
@@ -243,7 +243,7 @@ class Utility
         $marks = Utility::markJsFunction($object);
         $text = json_encode($object, $option);
         foreach ($marks as $i=>$js) {
-            $text = str_replace("\"--js($i)\"", $js, $text);
+            $text = str_replace("\"--js($i)\"", (string)$js, (string)$text);
         }
         return $text;
     }
@@ -282,17 +282,18 @@ class Utility
      */
     public static function get($arr, $keys, $default=null)
     {
-        if (! is_array($arr)) {
-            return $default;
+        // if (! is_array($arr)) {
+        //     return $default;
+        // }
+        // return isset($arr[$keys]) ? $arr[$keys] : $default;
+        if (is_string($keys) || is_int($keys)) {
+            return isset($arr[$keys]) ? $arr[$keys] : $default;
         }
         if (is_array($keys) and count($keys) > 0) {
             foreach ($keys as $key) {
                 $arr = self::get($arr, $key, $default);
             }
             return $arr;
-        }
-        if (is_string($keys) || is_int($keys)) {
-            return isset($arr[$keys]) ? $arr[$keys] : $default;
         }
         return $default;
     }
@@ -423,7 +424,7 @@ class Utility
     public static function strReplace($str, $params)
     {
         foreach ($params as $k=>$v) {
-            $str = str_replace($k, $v, $str);
+            $str = str_replace($k, $v, (string)$str);
         }
         return $str;
     }
@@ -476,13 +477,19 @@ class Utility
      * @return string the document root path
      */
     public static function getDocumentRoot()
-        {
+    {
         //The old method is to use the document_root from $_SERVER
         //Howerver in some hosting the document root is not the same
         //with the root folder of the website, so we add backup with
         //second way  to calculate the document root with script_name
         //and script_filename
+        
+        // if (isset($_SERVER["DOCUMENT_ROOT"])) return $_SERVER["DOCUMENT_ROOT"];
 
+        //In case of using virtual host, method of using difference between script_name and script_filename
+        //might not work
+        // if (isset($_SERVER["DOCUMENT_ROOT"])) return $_SERVER["DOCUMENT_ROOT"];
+        
         $script_filename = str_replace(
             "\\",
             "/",

@@ -131,6 +131,7 @@ KoolReport.google.chart.prototype = {
             this.addPointerCss();
         }
         this.draw();
+        this.fireEvent("init");
     },
     addPointerCss:function()
     {
@@ -143,11 +144,28 @@ KoolReport.google.chart.prototype = {
     },
     draw:function(data)
     {
+        this.fireEvent("drawing");
         if(data)
         {
             this.data = data;
         }
         this.dataTable = new google.visualization.arrayToDataTable(this.data);
+        
+        /* var view = new google.visualization.DataView(this.dataTable);
+        view.setColumns([
+            // first column is calculated
+            {
+              calc: function (dt, row) {
+                // convert string to date
+                return new Date(dt.getValue(row, 0));
+              },
+              label: this.dataTable.getColumnLabel(0),
+              type: 'datetime'
+            },
+            // just use index # for second column
+            1
+        ]); */
+        
         if (this.options.showColumns) {
             var view = new google.visualization.DataView(this.dataTable);
             view.setColumns([0].concat(this.options.showColumns));
@@ -157,6 +175,7 @@ KoolReport.google.chart.prototype = {
         {
             this.chart.draw(this.dataTable,this.options);
         }
+        this.fireEvent("drawed");
     },
     redraw:function()
     {

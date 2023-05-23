@@ -36,6 +36,10 @@ class KoolReport
     protected $templateEngine;
     protected $events;
     protected $reportSettings;
+    public $generatorUsed = false;
+    public $dataStoresGenerator;
+    public $viewDir;
+    public $renderingVariables;
 
     /**
      * Get the version of KoolReport
@@ -44,7 +48,7 @@ class KoolReport
      */
     public function version()
     {
-        return "5.1.0";
+        return "6.1.0";
     }
 
     /**
@@ -278,6 +282,7 @@ class KoolReport
         if (gettype($name) == "string") {
             if (!isset($this->dataStores[$name])) {
                 $this->dataStores[$name] = new DataStore;
+                $this->dataStores[$name]->name = $name;
             }
             return $this->dataStores[$name];
         } else {
@@ -285,6 +290,70 @@ class KoolReport
             //return everything for further process
             return $name;
         }
+    }
+
+    public function buildDataGenerator($genName)
+    {
+        // echo "KoolReport -> buildDataGenerator() genName = $genName <br>";
+        $dataGens = [];
+        foreach ($this->dataSources as $src) {
+            // echo "src->startGenerator<br>";
+            $dataGen = $src->startGenerator($genName);
+            $dataGens[] = $dataGen;
+        }
+        $combinedGen = $this->combineGeneratorsSequentially($dataGens);
+        return $combinedGen;
+    }
+
+    /**
+        * Yield all values from $generator1, then all values from $generator2
+        * Keys are preserved
+        */
+    protected function combineGeneratorsSequentially($generators)
+    {
+        foreach ($generators as $generator) {
+            yield from $generator;
+        }
+    }
+
+    /**
+     * Yield a value from $generator1, then a value from $generator2, and so on
+     * Keys are preserved
+     */
+    protected function combine_alternatively($generator1, $generator2)
+    {
+        while ($generator1->valid() || $generator2->valid()) {
+            if ($generator1->valid()) {
+                yield $generator1->key() => $generator1->current();
+                $generator1->next();
+            }
+            if ($generator2->valid()) {
+                yield $generator2->key() => $generator2->current();
+                $generator2->next();
+            }
+        }
+    }
+
+    public function runGenerator($genName = null)
+    {
+        // echo "KoolReport -> runGenerator() <br>";
+        foreach ($this->dataSources as $src) {
+            $src->startMetaOnly();
+        }
+        if (!isset($genName)) {
+            foreach ($this->dataStores as $genName => $v) {
+                // echo "genName = $genName<br>";
+                $this->dataStores[$genName]->rowGenerator = $this->buildDataGenerator($genName);
+            }
+        } else {
+            $this->dataStores[$genName]->rowGenerator = $this->buildDataGenerator($genName);
+        }
+    }
+
+    public function useGenerator($generatorUsed)
+    {
+        $this->generatorUsed = $generatorUsed;
+        return $this;
     }
 
     /**
@@ -310,9 +379,13 @@ class KoolReport
     {
         if ($this->fireEvent("OnBeforeRun")) {
             if ($this->dataSources != null) {
-                foreach ($this->dataSources as $dataSource) {
-                    if (!$dataSource->isEnded()) {
-                        $dataSource->start();
+                if ($this->generatorUsed) {
+                    $this->runGenerator();
+                } else {
+                    foreach ($this->dataSources as $dataSource) {
+                        if (!$dataSource->isEnded()) {
+                            $dataSource->start();
+                        }
                     }
                 }
             }
@@ -449,7 +522,7 @@ class KoolReport
     public function render($view = null, $return = false)
     {
 
-        $currentDir = dirname(Utility::getClassPath($this));
+        $currentDir = is_string($this->viewDir) ? $this->viewDir : dirname(Utility::getClassPath($this));
         if (!$this->templateEngine) {
             if ($view === null) {
                 $view = Utility::getClassName($this);
@@ -468,6 +541,9 @@ class KoolReport
 
         $content = "";
         if ($this->fireEvent("OnBeforeRender")) {
+
+            $renderingVariables = $this->renderingVariables;
+            if (!is_array($renderingVariables)) $renderingVariables = [];
             
             if (!isset($_POST["@subReport"])) {
                 //If this is subreport request, we dont want to render 
@@ -492,13 +568,19 @@ class KoolReport
             if ($this->templateEngine) {
                 $content = $this->templateEngine->render(
                     $view,
-                    array(
-                        "report"=>$this
+                    array_merge(
+                        array(
+                            "report"=>$this
+                        ), 
+                        $renderingVariables  
                     )
                 );
             } else {
                 ob_start();
                 $report = $this;
+                foreach ($renderingVariables as $varName => $varValue) {
+                    $$varName = $varValue;
+                }
                 include $currentDir . "/" . $view . ".view.php";
                 $content = ob_get_clean();    
             }
@@ -523,5 +605,10 @@ class KoolReport
                 echo $content;
             }
         }
+    }
+
+    public function getParams()
+    {
+        return $this->params;
     }
 }

@@ -1,5 +1,41 @@
 # Change Log
 
+## Version 6.1.0
+1. Fix dynamic properties in PHP 8.2.
+2. Fix mull meta column key in core/Table widget.
+3. Add event "init", "drawing" and "drawed" to google chart
+4. Add public `viewDir` property for KoolReport class to find view files from that directory.
+5. Add public `renderingVariables` property for KoolReport class to use in view files.
+
+## Version 6.0.1
+1. Fix forced string cast of report's "assets" setting.
+
+## Version 6.0.0
+
+1. Improve Table's client function handleRemoveDuplicate for much faster rendering.
+2. Add closeCursor to statement in PdoDataSource.
+3. Fix the string function with null parameter in PHP8.1
+4. Upgrade jquery to 3.5.0
+5. Add `Shuffle` process to randomize data order.
+
+## Version 5.6.2
+
+1. Fix: MySQL, PostgreSQL, SQLServer data sources when binding array with more than 10 values.
+2. Fix: bug with DataStore's offsetGet method.
+
+## Version 5.6.1
+
+1. Fix DataStore's generator method.
+2. Fix DataStore's deprecated methods in PHP 8.1.
+
+## Version 5.6.0
+
+1. Added: `AssetManager` ability to load resources with absolute paths.
+2. Improved: `PDODataSource`, `MySQLDataSource`, `PostgreSQLDataSource`, `SQLSRVDataSource`, `OracleDataSource` to be able to bind params with any orders, duplicated names, array params for WHERE IN (only `PDODataSource` supports this before).
+3. Added: SQL-like `like` and `not like` operator for `Filter` process.
+4. Add `useGenerator` method for report.
+5. Add `charset` and `session_mode` properties for OracleDataSource.
+
 ## Version 5.5.0
 
 1. Added: PDODataSource is able to execute other statement like update, delete with `execute()` method

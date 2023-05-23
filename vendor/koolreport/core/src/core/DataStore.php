@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file contains foundation class for datastore
  *
@@ -11,6 +12,7 @@
  */
 
 namespace koolreport\core;
+
 use IteratorAggregate;
 use ArrayIterator;
 use ArrayAccess;
@@ -39,8 +41,12 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      * 
      * @var integer $index Index of current row use by pop() function
      */
-    protected $index=-1;
-    
+    protected $index = -1;
+
+    public $name;
+
+    protected $report;
+
     /**
      * Constructor of DataStore
      * 
@@ -51,20 +57,20 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      * 
      * @return null
      */
-    public function __construct($rows = null,$meta = null)
+    public function __construct($rows = null, $meta = null)
     {
         parent::__construct();
         $this->rows = array();
-        $this->meta(array("columns"=>array()));
-        if ($rows!=null) {
+        $this->meta(array("columns" => array()));
+        if ($rows != null) {
             $this->data($rows);
-            if ($meta!=null) {
+            if ($meta != null) {
                 $this->meta($meta);
-            } else if ($this->count()>0) {
+            } else if ($this->count() > 0) {
                 // Try to guess
-                foreach ($this->first() as $cName=>$cValue) {
+                foreach ($this->first() as $cName => $cValue) {
                     $this->metaData["columns"][$cName] = array(
-                        "type"=>Utility::guessType($cValue)
+                        "type" => Utility::guessType($cValue)
                     );
                 }
             }
@@ -81,8 +87,40 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      */
     protected function onInit()
     {
-        
     }
+
+    public function source($source)
+    {
+        //The one that forward data to.
+        array_push($this->sources, $source);
+        $this->report = $this->getReport();
+    }
+
+    public function getRowGenerator()
+    {
+        // echo "datstore getRowGenerator<br>";
+        if (isset($this->rowGenerator) && $this->rowGenerator->valid()) {
+            return $this->rowGenerator;
+        } else {
+            return $this->getGeneratorFromRows();
+        }
+    }
+
+    public function getGeneratorFromRows()
+    {
+        foreach ($this->rows as $row) yield $row;
+    }
+
+    public function generateRows()
+    {
+        if (isset($this->rowGenerator) && $this->rowGenerator->valid()) {
+            $this->rows = [];
+            foreach ($this->rowGenerator as $row) {
+                $this->rows[] = $row;
+            }
+        }
+    }
+
     /**
      * Be called when row is input
      * 
@@ -95,9 +133,18 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      */
     protected function onInput($row)
     {
-        $this->append($row);
+        $report = $this->report;
+        if (
+            $report && $report->generatorUsed
+            && isset($report->saveDataGenRow)
+            && $report->saveDataGenRow === $this->name
+        ) {
+            $report->dataGenRow[$this->name][] = $row;
+        } else {
+            $this->append($row);
+        }
     }
-    
+
     /**
      * Return the number of rows
      * 
@@ -109,7 +156,7 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
     {
         return count($this->rows);
     }
-    
+
     /**
      * Get or set the meta data of datastore
      * 
@@ -118,11 +165,11 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      * 
      * @param array $metaData Associate array contaning meta data
      * 
-     * @return array Meta data in array form
+     * @return array|DataStore Meta data in array form or the DataStore object itself
      * 
      * @since 1.0.0
      */
-    public function meta($metaData=null)
+    public function meta($metaData = null)
     {
         if ($metaData) {
             $this->metaData = $metaData;
@@ -140,13 +187,13 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      * 
      * @param array $rows Rows of data
      * 
-     * @return array Rows of data
+     * @return array|DataStore Rows of data or the DataStore object itself
      * 
      * @since 1.0.0
      */
-    public function data($rows=null)
+    public function data($rows = null)
     {
-        if ($rows!==null) {
+        if ($rows !== null) {
             $this->rows = $rows;
             return $this;
         } else {
@@ -176,7 +223,7 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
     {
         return $this->index;
     }
-    
+
     /**
      * Return current row of index and increase index
      * 
@@ -187,7 +234,7 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
         $this->index++;
         return Utility::get($this->rows, $this->index);
     }
-    
+
     /**
      * Return a data row at index or single value at column name
      * 
@@ -196,10 +243,10 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      * 
      * @return mixed Could be array of row or single value
      */
-    public function get($index=0,$colName=null)
+    public function get($index = 0, $colName = null)
     {
         if (isset($this->rows[$index])) {
-            if ($colName!==null) {
+            if ($colName !== null) {
                 if (isset($this->rows[$index][$colName])) {
                     return $this->rows[$index][$colName];
                 }
@@ -212,10 +259,10 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
 
     public function getScalar()
     {
-        if($this->count()===0) {
+        if ($this->count() === 0) {
             return null;
         }
-        foreach($this->rows[0] as $v) {
+        foreach ($this->rows[0] as $v) {
             return $v;
         }
         return null;
@@ -229,16 +276,16 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      * 
      * @return null
      */
-    public function breakGroup($key,$func)
+    public function breakGroup($key, $func)
     {
         $data = array();
         $start = 0;
-        foreach ($this->rows as $i=>$row) {
+        foreach ($this->rows as $i => $row) {
             if (!isset($oldValue)) {
                 $oldValue = $row[$key];
             }
 
-            if ($row[$key]==$oldValue) {
+            if ($row[$key] == $oldValue) {
                 $oldValue = $row[$key];
                 array_push($data, $row);
             } else {
@@ -265,7 +312,7 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
     {
         $condition = func_get_args();
         $cName = Utility::get($condition, 0);
-        if (gettype($cName)=="object" && is_callable($cName)) {
+        if (gettype($cName) == "object" && is_callable($cName)) {
             //Able to filter by function
             return $this->filterByFunc($cName);
         }
@@ -273,7 +320,7 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
         $value = Utility::get($condition, 2);
         $optional_value = Utility::get($condition, 3);
 
-        if ($cName===null||$operator===null) {
+        if ($cName === null || $operator === null) {
             throw new \Exception('dataStore->filter() requires condition in array form ($colname,$operator,$value)');
         }
 
@@ -281,139 +328,137 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
         $cType = $this->metaData["columns"][$cName]["type"];
         $dtFormat = null;
         if (in_array($cType, array("datetime", "date", "time"))) {
-            switch ($cType)
-            {
-            case "datetime":
-                $dtFormat = Utility::get($this->metaData["columns"][$cName], "format", "Y-m-d H:i:s");
-                break;
-            case "date":
-                $dtFormat = Utility::get($this->metaData["columns"][$cName], "format", "Y-m-d");
-                break;
-            case "time":
-                $dtFormat = Utility::get($this->metaData["columns"][$cName], "format", "H:i:s");
-                break;
+            switch ($cType) {
+                case "datetime":
+                    $dtFormat = Utility::get($this->metaData["columns"][$cName], "format", "Y-m-d H:i:s");
+                    break;
+                case "date":
+                    $dtFormat = Utility::get($this->metaData["columns"][$cName], "format", "Y-m-d");
+                    break;
+                case "time":
+                    $dtFormat = Utility::get($this->metaData["columns"][$cName], "format", "H:i:s");
+                    break;
             }
             $value =  \DateTime::createFromFormat($dtFormat, $value);
         }
-        
+
         foreach ($this->rows as $row) {
-            $columnValue = $row[$cName]; 
-            if ($dtFormat!==null) {
+            $columnValue = $row[$cName];
+            if ($dtFormat !== null) {
                 $columnValue =  \DateTime::createFromFormat($dtFormat, $columnValue);
             }
-            switch($operator)
-            {
-            case "=":
-            case "==":
-            case "equal":
-                if ($columnValue==$value) {
-                    array_push($result, $row);
-                }
-                break;
-            case "===":
-                if ($columnValue===$value) {
-                    array_push($result, $row);
-                }
-                break;
-            case "!=":
-            case "notEqual":
-                if ($columnValue!=$value) {
-                    array_push($result, $row);
-                }
-                break;
-            case "!==":
-                if ($columnValue!==$value) {
-                    array_push($result, $row);
-                }
-                break;
-            case ">":
-            case "gt":
-                if ($columnValue>$value) {
-                    array_push($result, $row);
-                }
-                break;
-            case ">=":
-                if ($columnValue>=$value) {
-                    array_push($result, $row);
-                }
-                break;
-            case "<":
-            case "lt":
-                if ($columnValue<$value) {
-                    array_push($result, $row);
-                }
-                break;
-            case "<=":
-                if ($columnValue<=$value) {
-                    array_push($result, $row);
-                }
-                break;
-            case "contain":
-            case "contains":
-                if (strpos(strtolower($columnValue), strtolower($value))!==false) {
-                    array_push($result, $row);
-                }
-                break;
-            case "notContain":
-            case "notContains":
-                if (strpos(strtolower($columnValue), strtolower($value))===false) {
-                    array_push($result, $row);
-                }
-                break;
-            case "between":
-                if ($value<$columnValue && $columnValue<$optional_value) {
-                    array_push($result, $row);
-                }
-                break;
-            case "notBetween":
-                if (!($value<$columnValue && $columnValue<$optional_value)) {
-                    array_push($result, $row);
-                }
-                break;
-            case "in":
-                if (!is_array($value)) {
-                    $value = array($value);
-                }
-                if (in_array($columnValue, $value)) {
-                    array_push($result, $row);
-                }
-                break;
-            case "notIn":
-                if (!is_array($value)) {
-                    $value = array($value);
-                }
-                if (!in_array($columnValue, $value)) {
-                    array_push($result, $row);
-                }
-                break;
-            case "startWith":
-            case "startsWith":
-                if (strpos(strtolower($columnValue), strtolower($value)) === 0) {
-                    array_push($result, $row);
-                }
-                break;
-            case "notStartWith":
-            case "notStartsWith":
-                if (strpos(strtolower($columnValue), strtolower($value)) !== 0) {
-                    array_push($result, $row);
-                }
-                break;
-            case "endWith":
-            case "endsWith":
-                if (strpos(strrev(strtolower($columnValue)), strrev(strtolower($value))) === 0) {
-                    array_push($result, $row);
-                }
-                break;
-            case "notEndWith":
-            case "notEndsWith":
-                if (strpos(strrev(strtolower($columnValue)), strrev(strtolower($value))) !== 0) {
-                    array_push($result, $row);
-                }
-                break;
-            default:
-                throw new \Exception("Unknown operator [$operator]");
-                return $this;
-                break;
+            switch ($operator) {
+                case "=":
+                case "==":
+                case "equal":
+                    if ($columnValue == $value) {
+                        array_push($result, $row);
+                    }
+                    break;
+                case "===":
+                    if ($columnValue === $value) {
+                        array_push($result, $row);
+                    }
+                    break;
+                case "!=":
+                case "notEqual":
+                    if ($columnValue != $value) {
+                        array_push($result, $row);
+                    }
+                    break;
+                case "!==":
+                    if ($columnValue !== $value) {
+                        array_push($result, $row);
+                    }
+                    break;
+                case ">":
+                case "gt":
+                    if ($columnValue > $value) {
+                        array_push($result, $row);
+                    }
+                    break;
+                case ">=":
+                    if ($columnValue >= $value) {
+                        array_push($result, $row);
+                    }
+                    break;
+                case "<":
+                case "lt":
+                    if ($columnValue < $value) {
+                        array_push($result, $row);
+                    }
+                    break;
+                case "<=":
+                    if ($columnValue <= $value) {
+                        array_push($result, $row);
+                    }
+                    break;
+                case "contain":
+                case "contains":
+                    if (strpos(strtolower($columnValue), strtolower($value)) !== false) {
+                        array_push($result, $row);
+                    }
+                    break;
+                case "notContain":
+                case "notContains":
+                    if (strpos(strtolower($columnValue), strtolower($value)) === false) {
+                        array_push($result, $row);
+                    }
+                    break;
+                case "between":
+                    if ($value < $columnValue && $columnValue < $optional_value) {
+                        array_push($result, $row);
+                    }
+                    break;
+                case "notBetween":
+                    if (!($value < $columnValue && $columnValue < $optional_value)) {
+                        array_push($result, $row);
+                    }
+                    break;
+                case "in":
+                    if (!is_array($value)) {
+                        $value = array($value);
+                    }
+                    if (in_array($columnValue, $value)) {
+                        array_push($result, $row);
+                    }
+                    break;
+                case "notIn":
+                    if (!is_array($value)) {
+                        $value = array($value);
+                    }
+                    if (!in_array($columnValue, $value)) {
+                        array_push($result, $row);
+                    }
+                    break;
+                case "startWith":
+                case "startsWith":
+                    if (strpos(strtolower($columnValue), strtolower($value)) === 0) {
+                        array_push($result, $row);
+                    }
+                    break;
+                case "notStartWith":
+                case "notStartsWith":
+                    if (strpos(strtolower($columnValue), strtolower($value)) !== 0) {
+                        array_push($result, $row);
+                    }
+                    break;
+                case "endWith":
+                case "endsWith":
+                    if (strpos(strrev(strtolower($columnValue)), strrev(strtolower($value))) === 0) {
+                        array_push($result, $row);
+                    }
+                    break;
+                case "notEndWith":
+                case "notEndsWith":
+                    if (strpos(strrev(strtolower($columnValue)), strrev(strtolower($value))) !== 0) {
+                        array_push($result, $row);
+                    }
+                    break;
+                default:
+                    throw new \Exception("Unknown operator [$operator]");
+                    return $this;
+                    break;
             }
         }
         return new DataStore($result, $this->metaData);
@@ -430,9 +475,9 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      * 
      * @return DataStore The new datastore containing rows
      */
-    public function paging($pageSize,$pageIndex)
+    public function paging($pageSize, $pageIndex)
     {
-        return $this->top($pageSize, $pageIndex*$pageSize);
+        return $this->top($pageSize, $pageIndex * $pageSize);
     }
 
     /**
@@ -446,11 +491,11 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      * 
      * @return DataStore New DataStore containing result
      */
-    public function top($num,$offset=0)
+    public function top($num, $offset = 0)
     {
         $count = $this->countData();
         $result = array();
-        for ($i=$offset;$i<$num+$offset && $i<$count;$i++) {
+        for ($i = $offset; $i < $num + $offset && $i < $count; $i++) {
             array_push($result, $this->rows[$i]);
         }
         return new DataStore($result, $this->metaData);
@@ -466,7 +511,7 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
     public function topByPercent($num)
     {
         $count = $this->countData();
-        return $this->top(round($num*$count/100));
+        return $this->top(round($num * $count / 100));
     }
 
     /**
@@ -480,8 +525,8 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
     {
         $count = $this->countData();
         $result = array();
-        $start = ($count>$num)?$count-$num:0;
-        for ($i=$start;$i<$count;$i++) {
+        $start = ($count > $num) ? $count - $num : 0;
+        for ($i = $start; $i < $count; $i++) {
             array_push($result, $this->rows[$i]);
         }
         return new DataStore($result, $this->metaData);
@@ -499,7 +544,7 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
     public function bottomByPercent($num)
     {
         $count = $this->countData();
-        return $this->bottom(round($num*$count/100));
+        return $this->bottom(round($num * $count / 100));
     }
 
 
@@ -516,7 +561,7 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
     {
         $sum = 0;
         foreach ($this->rows as $row) {
-            $sum+=$row[$colName];
+            $sum += $row[$colName];
         }
         return $sum;
     }
@@ -532,10 +577,10 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      */
     public function min($colName)
     {
-        
+
         $min = INF;
         foreach ($this->rows as $row) {
-            if ($min>$row[$colName]) {
+            if ($min > $row[$colName]) {
                 $min = $row[$colName];
             }
         }
@@ -554,7 +599,7 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
     {
         $max = -INF;
         foreach ($this->rows as $row) {
-            if ($max<$row[$colName]) {
+            if ($max < $row[$colName]) {
                 $max = $row[$colName];
             }
         }
@@ -572,8 +617,8 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      */
     public function avg($colName)
     {
-        if ($this->countData()>0) {
-            return $this->sum($colName)/$this->countData();
+        if ($this->countData() > 0) {
+            return $this->sum($colName) / $this->countData();
         }
         return false;
     }
@@ -595,7 +640,7 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
         $ds = new DataStore;
         $process->pipe($ds);
         $top_process = $process;
-        while ($top_process->previous()!=null) {
+        while ($top_process->previous() != null) {
             $top_process = $top_process->previous();
         }
         $top_process->receiveMeta($this->metaData, $this);
@@ -655,15 +700,14 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      * 
      * @return DataStore This datastore
      */
-    public function insert($row,$position=INF)
+    public function insert($row, $position = INF)
     {
-        if($position<=0)
-        {
+        if ($position <= 0) {
             $this->prepend($row);
         } else if ($position >= $this->count()) {
             $this->append($row);
-        } else  {
-            array_splice($this->rows,$position,0,[$row]);
+        } else {
+            array_splice($this->rows, $position, 0, [$row]);
         }
         return $this;
     }
@@ -709,11 +753,11 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      */
     public function toTableArray()
     {
-        if ($this->count()>0) {
+        if ($this->count() > 0) {
             $result = array(
                 array_keys($this->rows[0])
             );
-            
+
             foreach ($this->rows as $row) {
                 array_push($result, array_values($row));
             }
@@ -731,7 +775,7 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      */
     public function isEmpty()
     {
-        return $this->count()==0;
+        return $this->count() == 0;
     }
 
 
@@ -742,7 +786,7 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      */
     public function isNotEmpty()
     {
-        return $this->count()>0;
+        return $this->count() > 0;
     }
 
     /**
@@ -759,11 +803,11 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      */
     public function each($cb)
     {
-        foreach ($this->rows as $index=>$row) {
+        foreach ($this->rows as $index => $row) {
             $result = $cb($row, $index);
             if (is_array($result)) {
                 $this->rows[$index] = $result;
-            } else if ($result===false) {
+            } else if ($result === false) {
                 break;
             }
         }
@@ -801,7 +845,7 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
                 }
             }
         }
-        $dstore->meta(array("columns"=>$columnsMeta));
+        $dstore->meta(array("columns" => $columnsMeta));
         return $dstore;
     }
 
@@ -834,7 +878,7 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
                 $newColumnsMeta[$col] = $columnsMeta[$col];
             }
         }
-        $dstore->meta(array("columns"=>$newColumnsMeta));
+        $dstore->meta(array("columns" => $newColumnsMeta));
         return $dstore;
     }
 
@@ -852,8 +896,8 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
         //method filters the collection using the given callback, keeping only those rows that pass a given truth test
         $dstore = new DataStore;
         $dstore->meta($this->metaData);
-        foreach ($this->rows as $index=>$row) {
-            if ($cb($row, $index)===true) {
+        foreach ($this->rows as $index => $row) {
+            if ($cb($row, $index) === true) {
                 $dstore->append($row);
             }
         }
@@ -871,15 +915,15 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      * 
      * @return array The first row that meets condition.
      */
-    public function first($cb=null)
+    public function first($cb = null)
     {
-        if ($cb==null) {
-            return $this->isNotEmpty()?$this->rows[0]:null;
+        if ($cb == null) {
+            return $this->isNotEmpty() ? $this->rows[0] : null;
         } else {
             // method returns the first element in the collection that passes 
             //a given truth test
-            foreach ($this->rows as $index=>$row) {
-                if ($cb($row, $index)===true) {
+            foreach ($this->rows as $index => $row) {
+                if ($cb($row, $index) === true) {
                     return $row;
                 }
             }
@@ -914,16 +958,16 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      * 
      * @return array The last row that meet conditon
      */
-    public function last($cb=null)
+    public function last($cb = null)
     {
-        if ($cb==null) {
-            return $this->isNotEmpty()?$this->rows[$this->count()-1]:null;
+        if ($cb == null) {
+            return $this->isNotEmpty() ? $this->rows[$this->count() - 1] : null;
         } else {
             //method returns the last element in the collection that passes a given truth test:
             $count = $this->count();
-            for ($i=0;$i<$count;$i++) {
-                if ($cb($this->rows[$count-$i], $count-$i)===true) {
-                    return $this->rows[$count-$i];
+            for ($i = 0; $i < $count; $i++) {
+                if ($cb($this->rows[$count - $i], $count - $i) === true) {
+                    return $this->rows[$count - $i];
                 }
             }
         }
@@ -941,8 +985,8 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
     {
         $counts = array();
         foreach ($this->rows as $row) {
-            $counts[$row[$colName]] = isset($counts[$row[$colName]])?
-                $counts[$row[$colName]]+1:1;
+            $counts[$row[$colName]] = isset($counts[$row[$colName]]) ?
+                $counts[$row[$colName]] + 1 : 1;
         }
         arsort($counts);
         $list = array_keys($counts);
@@ -976,8 +1020,8 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
     {
         $dstore = new DataStore;
         $dstore->meta($this->metaData);
-        foreach ($this->rows as $index=>$row) {
-            if ($cb($row, $index)===false) {
+        foreach ($this->rows as $index => $row) {
+            if ($cb($row, $index) === false) {
                 $dstore->append($row);
             }
         }
@@ -995,7 +1039,7 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
     public function slice($offset, $length = null)
     {
         return new DataStore(
-            array_slice($this->rows, $offset, $length), 
+            array_slice($this->rows, $offset, $length),
             $this->metaData
         );
     }
@@ -1013,14 +1057,15 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      */
     public function sort($sorts)
     {
-        usort($this->rows, 
+        usort(
+            $this->rows,
             function ($a, $b) use ($sorts) {
                 $cmp = 0;
                 foreach ($sorts as $sort => $direction) {
                     if (is_string($direction)) {
-                        $cmp = is_numeric($a[$sort]) && is_numeric($b[$sort]) ? 
+                        $cmp = is_numeric($a[$sort]) && is_numeric($b[$sort]) ?
                             $a[$sort] - $b[$sort] : strcmp($a[$sort], $b[$sort]);
-                        $cmp = $direction === 'asc' ? $cmp : - $cmp;
+                        $cmp = $direction === 'asc' ? $cmp : -$cmp;
                     } else if (is_callable($direction)) {
                         $cmp = $direction($a[$sort], $b[$sort]);
                     }
@@ -1042,9 +1087,9 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      * 
      * @return DataStore This datastore after sorted 
      */
-    public function sortBy($key,$direction='asc')
+    public function sortBy($key, $direction = 'asc')
     {
-        return $this->sort(array($key=>$direction));
+        return $this->sort(array($key => $direction));
     }
 
     /**
@@ -1089,7 +1134,7 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
     {
         if (func_num_args() == 1) {
             return new DataStore(
-                array_splice($this->rows, $offset), 
+                array_splice($this->rows, $offset),
                 $this->metaData
             );
         }
@@ -1135,12 +1180,12 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      * 
      * @return DataStore New dataStore containing results
      */
-    public function where($key,$value)
+    public function where($key, $value)
     {
-        $dstore= new DataStore;
+        $dstore = new DataStore;
         $dstore->meta($this->metaData);
         foreach ($this->rows as $row) {
-            if ($row[$key]==$value) {
+            if ($row[$key] == $value) {
                 $dstore->append($row);
             }
         }
@@ -1155,9 +1200,9 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      * 
      * @return DataStore New datastore containing results.
      */
-    public function whereIn($key,$values=array())
+    public function whereIn($key, $values = array())
     {
-        $dstore= new DataStore;
+        $dstore = new DataStore;
         $dstore->meta($this->metaData);
         foreach ($this->rows as $row) {
             if (in_array($row[$key], $values)) {
@@ -1174,9 +1219,9 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      * 
      * @return DataStore New datastore containing results.
      */
-    public function whereNotIn($key,$values)
+    public function whereNotIn($key, $values)
     {
-        $dstore= new DataStore;
+        $dstore = new DataStore;
         $dstore->meta($this->metaData);
         foreach ($this->rows as $row) {
             if (!in_array($row[$key], $values)) {
@@ -1193,13 +1238,13 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      * 
      * @return array Return new map
      */
-    private function _mapKeyIndex($arr,$keys)
+    private function _mapKeyIndex($arr, $keys)
     {
         $maps = array();
-        foreach ($arr as $index=>$row) {
+        foreach ($arr as $index => $row) {
             $key = "n";
             foreach ($keys as $cName) {
-                $key.=$row[$cName];
+                $key .= $row[$cName];
             }
             if (!isset($maps[$key])) {
                 $maps[$key] = array();
@@ -1231,18 +1276,18 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      * 
      * @return DataStore New datastore containing results.
      */
-    public function join($secondStore,$matching)
+    public function join($secondStore, $matching)
     {
         $dstore = new DataStore;
         // join with other datasource to produce new one with above condition
         $firstKeys = array_keys($matching);
         $secondKeys = array_values($matching);
-        
-        
+
+
         $firstMaps = $this->_mapKeyIndex($this->rows, $firstKeys);
         $secondMaps = $this->_mapKeyIndex($secondStore->all(), $secondKeys);
-        
-        foreach ($firstMaps as $key=>$indices) {
+
+        foreach ($firstMaps as $key => $indices) {
             if (isset($secondMaps[$key])) {
                 foreach ($indices as $i) {
                     foreach ($secondMaps[$key] as $j) {
@@ -1258,7 +1303,7 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
         }
 
         $columnMeta = array_merge($this->metaData["columns"], $secondStore->meta()["columns"]);
-        $dstore->meta(array("columns"=>$columnMeta));
+        $dstore->meta(array("columns" => $columnMeta));
         return $dstore;
     }
 
@@ -1274,23 +1319,23 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      * 
      * @return DataStore New datastore containing results.
      */
-    public function leftJoin($secondStore,$matching)
+    public function leftJoin($secondStore, $matching)
     {
         $dstore = new DataStore;
         // join with other datasource to produce new one with above condition
         $firstKeys = array_keys($matching);
         $secondKeys = array_values($matching);
-        
-        
+
+
         $firstMaps = $this->_mapKeyIndex($this->rows, $firstKeys);
         $secondMaps = $this->_mapKeyIndex($secondStore->all(), $secondKeys);
 
         $secondNullRow = array();
-        foreach ($secondStore->first() as $k=>$v) {
+        foreach ($secondStore->first() as $k => $v) {
             $secondNullRow[$k] = null;
         }
-        
-        foreach ($firstMaps as $key=>$indices) {
+
+        foreach ($firstMaps as $key => $indices) {
             foreach ($indices as $i) {
                 if (isset($secondMaps[$key])) {
                     foreach ($secondMaps[$key] as $j) {
@@ -1313,10 +1358,10 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
         }
 
         $columnMeta = array_merge(
-            $this->metaData["columns"], 
+            $this->metaData["columns"],
             $secondStore->meta()["columns"]
         );
-        $dstore->meta(array("columns"=>$columnMeta));
+        $dstore->meta(array("columns" => $columnMeta));
         return $dstore;
     }
 
@@ -1330,8 +1375,7 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
     public function distinct($key)
     {
         $list = array();
-        foreach($this->rows as $row)
-        {
+        foreach ($this->rows as $row) {
             $list[$row[$key]] = 1;
         }
         return array_keys($list);
@@ -1354,7 +1398,7 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      */
     public function columnMeta($settings)
     {
-        foreach ($settings as $cName=>$cMeta) {
+        foreach ($settings as $cName => $cMeta) {
             if (isset($this->metaData["columns"]) && $this->metaData["columns"][$cName]) {
                 $this->metaData["columns"][$cName] = array_merge(
                     $this->metaData["columns"][$cName],
@@ -1369,11 +1413,12 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      * 
      * @return null
      */
-    public function getIterator() 
+    // #[\ReturnTypeWillChange]
+    public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->rows);
     }
-    
+
     /**
      * Implement offsetSet for ArrayAccess interface
      * 
@@ -1382,7 +1427,8 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      * 
      * @return null
      */
-    public function offsetSet($index, $row) 
+    // #[\ReturnTypeWillChange]
+    public function offsetSet($index, $row): void
     {
         if (is_null($index)) {
             $this->rows[] = $row;
@@ -1398,7 +1444,8 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      * 
      * @return null
      */
-    public function offsetExists($index) 
+    // #[\ReturnTypeWillChange]
+    public function offsetExists($index): bool
     {
         return isset($this->rows[$index]);
     }
@@ -1410,7 +1457,7 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      * 
      * @return null
      */
-    public function offsetUnset($index) 
+    public function offsetUnset($index): void
     {
         unset($this->rows[$index]);
     }
@@ -1422,6 +1469,7 @@ class DataStore extends Node implements IteratorAggregate, ArrayAccess
      * 
      * @return array The row data at the context
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($index)
     {
         return isset($this->rows[$index]) ? $this->rows[$index] : null;
