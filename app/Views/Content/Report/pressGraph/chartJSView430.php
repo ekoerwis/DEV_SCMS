@@ -63,6 +63,10 @@ function chartJSView430(){
             <canvas id="myChart2" style="width:100%; height:300px;"></canvas>
 
           </div>
+
+            <div>
+                <canvas id="myChart" style="width:100%; height:300px;"></canvas>
+            </div>
         </div>
       </div>
 
@@ -107,8 +111,8 @@ function fetchData() {
 
   
   function generateChart(xValues, yValues) {
-    var canvar_bar = document.getElementById("myChart2");
-    new Chart(canvar_bar, {
+    var canvar_bar = document.getElementById("myChart2").getContext('2d');
+    var myChart = new Chart(canvar_bar, {
       type: "line",
       data: {
         labels: xValues,
@@ -132,7 +136,38 @@ function fetchData() {
         //   yAxes: [{ticks: {min: 6, max:16}}],
         // xAxes: [{ticks: {display: false}}],
         },
-        animation: false,
+        // animation: false,
+        // animations: {
+        //     tension: {
+        //         duration: 1000,
+        //         easing: 'linear',
+        //         from: 0,
+        //         to: 1,
+        //         loop: true
+        //     }
+        // },
+        transitions: {
+            show: {
+                animations: {
+                x: {
+                    from: 0
+                },
+                y: {
+                    from: 0
+                }
+                }
+            },
+            hide: {
+                animations: {
+                x: {
+                    to: 0
+                },
+                y: {
+                    to: 0
+                }
+                }
+            }
+        }
       }
     });
 
@@ -151,52 +186,28 @@ function fetchData() {
     }
 </script>
    
-    <?php
-    Table::create(array(
-        "dataStore"=>$dataGraph1,
-            "columns"=>array(
-                "PRSHR"=>array(
-                    "label"=>"Jam"
-                ),
-                "PRSDG_TMP1"=>array(
-                    "type"=>"float",
-                    "label"=>"TEMP 1",
-                    // "prefix"=>"$",
-                ),
-                "PRSDG_TMP2"=>array(
-                    "type"=>"float",
-                    "label"=>"TEMP 2",
-                    // "prefix"=>"$",
-                    "emphasis"=>true
-                ),
-                "PRSDG_TMP3"=>array(
-                    "type"=>"float",
-                    "label"=>"TEMP 3",
-                    // "prefix"=>"$",
-                    "emphasis"=>true
-                ),
-                "PRSDG_TMP4"=>array(
-                    "type"=>"float",
-                    "label"=>"TEMP 4",
-                    // "prefix"=>"$",
-                    "emphasis"=>true
-                ),
-                "PRSDG_TMP5"=>array(
-                    "type"=>"float",
-                    "label"=>"TEMP 5",
-                    // "prefix"=>"$",
-                    "emphasis"=>true
-                ),
-                "PRSDG_TMP6"=>array(
-                    "type"=>"float",
-                    "label"=>"TEMP 6",
-                    // "prefix"=>"$",
-                    "emphasis"=>true
-                )
-            ),
-        "cssClass"=>array(
-            "table"=>"table table-hover table-bordered"
-        )
-    ));
-    ?>
+
+<script>
+  const ctx2 = document.getElementById('myChart').getContext('2d');
+
+  new Chart(ctx2, {
+    type: 'bar',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+    
 </div>

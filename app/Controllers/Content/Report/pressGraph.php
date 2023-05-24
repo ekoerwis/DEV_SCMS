@@ -40,9 +40,12 @@ class pressGraph extends \App\Controllers\BaseController
 		// tambahan untuk client paging
         $this->addJs($this->config->baseURL . 'public/themes/modern/js/easyui-dg-client-pagination-custom.js');
 
-        
-        $this->addJs (  $this->config->baseURL . 'public/vendors/chartJs/2.9.4/Chart.js');
-		
+        // mengaktifkan chartJS 2.9.4 pilih salat satu yang perlu diaktifkan 2.9.4 atau versi 4.3.0
+        // $this->addJs (  $this->config->baseURL . 'public/vendors/chartJs/2.9.4/Chart.js');
+		// mengaktifkan chartJS 4.3.0
+        $this->addJs (  $this->config->baseURL . 'public/vendors/chartJs/4.3.0/chart.js');
+        // $this->addJs (  'https://cdn.jsdelivr.net/npm/chart.js');
+
 		helper(['cookie', 'form', 'stringSQLrep', 'mpdfCustom']);
 	}
 
@@ -86,6 +89,27 @@ class pressGraph extends \App\Controllers\BaseController
         $data['dataGraph1']=$this->pressGraphModel->dataGraph1();
 
 		$this->view('Content/Report/pressGraph/chartJSView.php', $data);
+	}
+
+    public function chartJSView430(){
+		$this->cekHakAkses('READ_DATA');
+		$data = $this->data;
+		// berfungsi untuk nilai otorisasi berdasarkan role
+		$data['auth_tambah']=$this->actionUser['CREATE_DATA'];
+		$data['auth_ubah']=$this->actionUser['UPDATE_DATA'];
+		$data['auth_hapus']=$this->actionUser['DELETE_DATA'];
+
+		$tinggiContent = 0;
+		$data['tinggi_dg']='';
+		$tinggiContent = $this->session->get('dg_height');
+		
+		if(intval($tinggiContent) > 0) {
+			$data['tinggi_dg']= 'height:'.$tinggiContent.'px';
+		}
+
+        $data['dataGraph1']=$this->pressGraphModel->dataGraph1();
+
+		$this->view('Content/Report/pressGraph/chartJSView430.php', $data);
 	}
 
     public function pdfView_test(){
