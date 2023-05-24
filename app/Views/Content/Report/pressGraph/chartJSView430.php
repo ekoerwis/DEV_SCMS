@@ -117,6 +117,7 @@ function fetchData() {
       data: {
         labels: xValues,
         datasets: [{
+            label : 'Suhu',
           fill: false,
           backgroundColor: "#FF6384",
           borderColor: "#FF6384",
@@ -137,15 +138,15 @@ function fetchData() {
         // xAxes: [{ticks: {display: false}}],
         },
         // animation: false,
-        // animations: {
-        //     tension: {
-        //         duration: 1000,
-        //         easing: 'linear',
-        //         from: 0,
-        //         to: 1,
-        //         loop: true
-        //     }
-        // },
+        animations: {
+            tension: {
+                duration: 1000,
+                easing: 'linear',
+                from: 0,
+                to: 1,
+                loop: true
+            }
+        },
         transitions: {
             show: {
                 animations: {
