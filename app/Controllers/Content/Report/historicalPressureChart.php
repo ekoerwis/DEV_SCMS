@@ -41,7 +41,10 @@ class historicalPressureChart extends \App\Controllers\BaseController
         $this->addJs($this->config->baseURL . 'public/themes/modern/js/easyui-dg-client-pagination-custom.js');
 
         
-        $this->addJs (  $this->config->baseURL . 'public/vendors/chartJs/2.9.4/Chart.js');
+        // mengaktifkan chartJS 2.9.4 pilih salat satu yang perlu diaktifkan 2.9.4 atau versi 4.3.0
+        // $this->addJs (  $this->config->baseURL . 'public/vendors/chartJs/2.9.4/Chart.js');
+		// mengaktifkan chartJS 4.3.0
+        $this->addJs (  $this->config->baseURL . 'public/vendors/chartJs/4.3.0/chart.js');
 		
 		helper(['cookie', 'form', 'stringSQLrep', 'mpdfCustom']);
 	}

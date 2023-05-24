@@ -19,25 +19,25 @@
           <div class="card-content">
             
             <div class="col-xl-12 col-lg-12 col-md-12 row">
-                <div class="col-xl-6 col-lg-6 col-md-6 " style="height: 250px" >
+                <div class="col-xl-6 col-lg-6 col-md-6 myChart1 d-flex justify-content-center" style="height: 250px" >
                     <canvas id="myChart1" style="width:100%;"></canvas>
                 </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 " style="height: 250px" >
+                <div class="col-xl-6 col-lg-6 col-md-6 myChart2 d-flex justify-content-center" style="height: 250px" >
                     <canvas id="myChart2" style="width:100%;"></canvas>
                 </div>
             </div>
 
             <div class="col-xl-12 col-lg-12 col-md-12 row">
-                <div class="col-xl-6 col-lg-6 col-md-6 " style="height: 250px" >
+                <div class="col-xl-6 col-lg-6 col-md-6 myChart3 d-flex justify-content-center" style="height: 250px" >
                     <canvas id="myChart3" style="width:100%;"></canvas>
                 </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 " style="height: 250px" >
+                <div class="col-xl-6 col-lg-6 col-md-6 myChart4 d-flex justify-content-center" style="height: 250px" >
                     <canvas id="myChart4" style="width:100%;"></canvas>
                 </div>
             </div>
 
             <div class="col-xl-12 col-lg-12 col-md-12 row">
-                <div class="col-xl-6 col-lg-6 col-md-6 " style="height: 250px" >
+                <div class="col-xl-6 col-lg-6 col-md-6 myChart5 d-flex justify-content-center" style="height: 250px" >
                     <canvas id="myChart5" style="width:100%;"></canvas>
                 </div>
                 <!-- <div class="col-xl-6 col-lg-6 col-md-6 " style="height: 250px" >
@@ -101,11 +101,9 @@
             exit;   
         } 
         
-        // document.getElementsByClassName('paramDateChart')[0].innerHTML = dateParam;
-        // fetchData(dateParam);
         for(i=1;i<6;i++){
             fetchData(dateParam,i);
-            console.log('chart:'+i);
+            // console.log('chart:'+i);
         }
         
     }    
@@ -117,6 +115,9 @@
         data : {
             TDATE : tdate,
             DIVID : iNumbers,
+        },
+        beforeSend: function (){
+            $(".myChart"+iNumbers).append('<i class="fa fa-spin fa-spinner myChartSpinner'+iNumbers+'" style="font-size:30px; position:absolute; top:100px;z-index: 2;"></i>');
         },
         success: function(response) {
             if (response.length < 1) {
@@ -188,49 +189,37 @@
     }
     
     function generateChart1(xValues1, yValues1, tdate,iNumbers) {
+
+        // $(".myChart"+iNumbers).html('<canvas id="myChart'+iNumbers+'" style="width:100%;"></canvas>'); 
+        $(".myChartSpinner"+iNumbers).remove();
         config1 = 
         {
             type: "line",
             data: {
                 labels: xValues1,
                 datasets: [{
-                fill: false,
-                backgroundColor: "#2873d0",
-                borderColor: "#2873d0",
-                borderWidth: 2,
-                data: yValues1
+                    label : '',
+                    fill: false,
+                    backgroundColor: "#2873d0",
+                    borderColor: "#2873d0",
+                    borderWidth: 2,
+                    data: yValues1
                 }]
             },
             options: {
-                title: {
-                    display: true,
-                    text: 'Historical Pressure '+iNumbers+' Graphic : '+tdate,
-                    fontSize : 14
-                },
-                legend: {
-                    display: false
-                },
-                elements: {
-                    point:{
-                        radius: 0
-                    }
-                },
-                scales: {
-                //   yAxes: [{ticks: {min: 6, max:16}}],
-                // xAxes: [{ticks: {display: false}}],
-                },
                 responsive: true,
                 maintainAspectRatio: false,
-                animation: {
-                    duration : 1000,
-                    easing : 'easeOutCubic',
-                    onProgress: function(animation) {
-                        // console.log('Animati');
+                pointStyle :false,
+                plugins :{
+                    title: {
+                        display: true,
+                        text: 'Historical Pressure '+iNumbers+' Graphic : '+tdate,
+                        fontSize : 14,
                     },
-                    onComplete : function(animation){
-                        // console.log('2');
-                    }
-                },
+                    legend: {
+                        display: false
+                    },
+                }
             }
         };
         if(myLineChart1){
@@ -241,6 +230,9 @@
     }
 
     function generateChart2(xValues2, yValues2, tdate,iNumbers) {
+        // $(".myChart"+iNumbers).html('<canvas id="myChart'+iNumbers+'" style="width:100%;"></canvas>'); 
+        $(".myChartSpinner"+iNumbers).remove();
+
         config2 = 
         {
             type: "line",
@@ -255,35 +247,19 @@
                 }]
             },
             options: {
-                title: {
-                    display: true,
-                    text: 'Historical Pressure '+iNumbers+' Graphic : '+tdate,
-                    fontSize : 14
-                },
-                legend: {
-                    display: false
-                },
-                elements: {
-                    point:{
-                        radius: 0
-                    }
-                },
-                scales: {
-                //   yAxes: [{ticks: {min: 6, max:16}}],
-                // xAxes: [{ticks: {display: false}}],
-                },
                 responsive: true,
                 maintainAspectRatio: false,
-                animation: {
-                    duration : 1000,
-                    easing : 'easeOutCubic',
-                    onProgress: function(animation) {
-                        // console.log('Animati');
+                pointStyle :false,
+                plugins :{
+                    title: {
+                        display: true,
+                        text: 'Historical Pressure '+iNumbers+' Graphic : '+tdate,
+                        fontSize : 14,
                     },
-                    onComplete : function(animation){
-                        // console.log('2');
-                    }
-                },
+                    legend: {
+                        display: false
+                    },
+                }
             }
         };
         if(myLineChart2){
@@ -294,6 +270,9 @@
     }
 
     function generateChart3(xValues3, yValues3, tdate,iNumbers) {
+        // $(".myChart"+iNumbers).html('<canvas id="myChart'+iNumbers+'" style="width:100%;"></canvas>'); 
+        $(".myChartSpinner"+iNumbers).remove();
+
         config3 = 
         {
             type: "line",
@@ -308,35 +287,19 @@
                 }]
             },
             options: {
-                title: {
-                    display: true,
-                    text: 'Historical Pressure '+iNumbers+' Graphic : '+tdate,
-                    fontSize : 14
-                },
-                legend: {
-                    display: false
-                },
-                elements: {
-                    point:{
-                        radius: 0
-                    }
-                },
-                scales: {
-                //   yAxes: [{ticks: {min: 6, max:16}}],
-                // xAxes: [{ticks: {display: false}}],
-                },
                 responsive: true,
                 maintainAspectRatio: false,
-                animation: {
-                    duration : 1000,
-                    easing : 'easeOutCubic',
-                    onProgress: function(animation) {
-                        // console.log('Animati');
+                pointStyle :false,
+                plugins :{
+                    title: {
+                        display: true,
+                        text: 'Historical Pressure '+iNumbers+' Graphic : '+tdate,
+                        fontSize : 14,
                     },
-                    onComplete : function(animation){
-                        // console.log('2');
-                    }
-                },
+                    legend: {
+                        display: false
+                    },
+                }
             }
         };
         if(myLineChart3){
@@ -347,6 +310,9 @@
     }
 
     function generateChart4(xValues4, yValues4, tdate,iNumbers) {
+        // $(".myChart"+iNumbers).html('<canvas id="myChart'+iNumbers+'" style="width:100%;"></canvas>'); 
+        $(".myChartSpinner"+iNumbers).remove();
+
         config4 = 
         {
             type: "line",
@@ -361,35 +327,19 @@
                 }]
             },
             options: {
-                title: {
-                    display: true,
-                    text: 'Historical Pressure '+iNumbers+' Graphic : '+tdate,
-                    fontSize : 14
-                },
-                legend: {
-                    display: false
-                },
-                elements: {
-                    point:{
-                        radius: 0
-                    }
-                },
-                scales: {
-                //   yAxes: [{ticks: {min: 6, max:16}}],
-                // xAxes: [{ticks: {display: false}}],
-                },
                 responsive: true,
                 maintainAspectRatio: false,
-                animation: {
-                    duration : 1000,
-                    easing : 'easeOutCubic',
-                    onProgress: function(animation) {
-                        // console.log('Animati');
+                pointStyle :false,
+                plugins :{
+                    title: {
+                        display: true,
+                        text: 'Historical Pressure '+iNumbers+' Graphic : '+tdate,
+                        fontSize : 14,
                     },
-                    onComplete : function(animation){
-                        // console.log('2');
-                    }
-                },
+                    legend: {
+                        display: false
+                    },
+                }
             }
         };
         if(myLineChart4){
@@ -400,6 +350,9 @@
     }
 
     function generateChart5(xValues5, yValues5, tdate,iNumbers) {
+        // $(".myChart"+iNumbers).html('<canvas id="myChart'+iNumbers+'" style="width:100%;"></canvas>'); 
+        $(".myChartSpinner"+iNumbers).remove();
+
         config5 = 
         {
             type: "line",
@@ -414,35 +367,19 @@
                 }]
             },
             options: {
-                title: {
-                    display: true,
-                    text: 'Historical Pressure '+iNumbers+' Graphic : '+tdate,
-                    fontSize : 14
-                },
-                legend: {
-                    display: false
-                },
-                elements: {
-                    point:{
-                        radius: 0
-                    }
-                },
-                scales: {
-                //   yAxes: [{ticks: {min: 6, max:16}}],
-                // xAxes: [{ticks: {display: false}}],
-                },
                 responsive: true,
                 maintainAspectRatio: false,
-                animation: {
-                    duration : 1000,
-                    easing : 'easeOutCubic',
-                    onProgress: function(animation) {
-                        // console.log('Animati');
+                pointStyle :false,
+                plugins :{
+                    title: {
+                        display: true,
+                        text: 'Historical Pressure '+iNumbers+' Graphic : '+tdate,
+                        fontSize : 14,
                     },
-                    onComplete : function(animation){
-                        // console.log('2');
-                    }
-                },
+                    legend: {
+                        display: false
+                    },
+                }
             }
         };
         if(myLineChart5){
@@ -453,6 +390,9 @@
     }
 
     function generateChart6(xValues6, yValues6, tdate,iNumbers) {
+        // $(".myChart"+iNumbers).html('<canvas id="myChart'+iNumbers+'" style="width:100%;"></canvas>'); 
+        $(".myChartSpinner"+iNumbers).remove();
+
         config6 = 
         {
             type: "line",
@@ -467,35 +407,19 @@
                 }]
             },
             options: {
-                title: {
-                    display: true,
-                    text: 'Historical Pressure '+iNumbers+' Graphic : '+tdate,
-                    fontSize : 14
-                },
-                legend: {
-                    display: false
-                },
-                elements: {
-                    point:{
-                        radius: 0
-                    }
-                },
-                scales: {
-                //   yAxes: [{ticks: {min: 6, max:16}}],
-                // xAxes: [{ticks: {display: false}}],
-                },
                 responsive: true,
                 maintainAspectRatio: false,
-                animation: {
-                    duration : 1000,
-                    easing : 'easeOutCubic',
-                    onProgress: function(animation) {
-                        // console.log('Animati');
+                pointStyle :false,
+                plugins :{
+                    title: {
+                        display: true,
+                        text: 'Historical Pressure '+iNumbers+' Graphic : '+tdate,
+                        fontSize : 14,
                     },
-                    onComplete : function(animation){
-                        // console.log('2');
-                    }
-                },
+                    legend: {
+                        display: false
+                    },
+                }
             }
         };
         if(myLineChart6){
