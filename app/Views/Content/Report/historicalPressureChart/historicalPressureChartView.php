@@ -278,10 +278,42 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 pointStyle :false,
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Time',
+                            color: '#2873d0',
+                            font: {
+                                // family: 'Comic Sans MS',
+                                // size: 20,
+                                // weight: 'bold',
+                                // lineHeight: 1.2,
+                            },
+                            // padding: {top: 20, left: 0, right: 0, bottom: 0}
+                        }
+                    },
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Pressure(mBarg)',
+                            color: '#2873d0',
+                            font: {
+                                // family: 'Comic Sans MS',
+                                // size: 20,
+                                // weight: 'bold',
+                                // lineHeight: 1.2,
+                            },
+                            // padding: {top: 20, left: 0, right: 0, bottom: 0}
+                        }
+                    },
+                },
                 plugins :{
                     title: {
                         display: true,
-                        text: 'Historical Pressure '+iNumbers+' Graphic : '+tdate,
+                        text: 'Historical Pressure Sterilizer '+iNumbers+' Graphic : '+tdate,
                         fontSize : 14,
                     },
                     legend: {
@@ -318,10 +350,42 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 pointStyle :false,
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Time',
+                            color: '#2873d0',
+                            font: {
+                                // family: 'Comic Sans MS',
+                                // size: 20,
+                                // weight: 'bold',
+                                // lineHeight: 1.2,
+                            },
+                            // padding: {top: 20, left: 0, right: 0, bottom: 0}
+                        }
+                    },
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Pressure(mBarg)',
+                            color: '#2873d0',
+                            font: {
+                                // family: 'Comic Sans MS',
+                                // size: 20,
+                                // weight: 'bold',
+                                // lineHeight: 1.2,
+                            },
+                            // padding: {top: 20, left: 0, right: 0, bottom: 0}
+                        }
+                    },
+                },
                 plugins :{
                     title: {
                         display: true,
-                        text: 'Historical Pressure '+iNumbers+' Graphic : '+tdate,
+                        text: 'Historical Pressure Sterilizer '+iNumbers+' Graphic : '+tdate,
                         fontSize : 14,
                     },
                     legend: {
@@ -358,10 +422,42 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 pointStyle :false,
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Time',
+                            color: '#2873d0',
+                            font: {
+                                // family: 'Comic Sans MS',
+                                // size: 20,
+                                // weight: 'bold',
+                                // lineHeight: 1.2,
+                            },
+                            // padding: {top: 20, left: 0, right: 0, bottom: 0}
+                        }
+                    },
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Pressure(mBarg)',
+                            color: '#2873d0',
+                            font: {
+                                // family: 'Comic Sans MS',
+                                // size: 20,
+                                // weight: 'bold',
+                                // lineHeight: 1.2,
+                            },
+                            // padding: {top: 20, left: 0, right: 0, bottom: 0}
+                        }
+                    },
+                },
                 plugins :{
                     title: {
                         display: true,
-                        text: 'Historical Pressure '+iNumbers+' Graphic : '+tdate,
+                        text: 'Historical Pressure Sterilizer '+iNumbers+' Graphic : '+tdate,
                         fontSize : 14,
                     },
                     legend: {
@@ -398,10 +494,42 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 pointStyle :false,
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Time',
+                            color: '#2873d0',
+                            font: {
+                                // family: 'Comic Sans MS',
+                                // size: 20,
+                                // weight: 'bold',
+                                // lineHeight: 1.2,
+                            },
+                            // padding: {top: 20, left: 0, right: 0, bottom: 0}
+                        }
+                    },
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Pressure(mBarg)',
+                            color: '#2873d0',
+                            font: {
+                                // family: 'Comic Sans MS',
+                                // size: 20,
+                                // weight: 'bold',
+                                // lineHeight: 1.2,
+                            },
+                            // padding: {top: 20, left: 0, right: 0, bottom: 0}
+                        }
+                    },
+                },
                 plugins :{
                     title: {
                         display: true,
-                        text: 'Historical Pressure '+iNumbers+' Graphic : '+tdate,
+                        text: 'Historical Pressure Sterilizer '+iNumbers+' Graphic : '+tdate,
                         fontSize : 14,
                     },
                     legend: {
@@ -438,10 +566,42 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 pointStyle :false,
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Time',
+                            color: '#2873d0',
+                            font: {
+                                // family: 'Comic Sans MS',
+                                // size: 20,
+                                // weight: 'bold',
+                                // lineHeight: 1.2,
+                            },
+                            // padding: {top: 20, left: 0, right: 0, bottom: 0}
+                        }
+                    },
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Pressure(mBarg)',
+                            color: '#2873d0',
+                            font: {
+                                // family: 'Comic Sans MS',
+                                // size: 20,
+                                // weight: 'bold',
+                                // lineHeight: 1.2,
+                            },
+                            // padding: {top: 20, left: 0, right: 0, bottom: 0}
+                        }
+                    },
+                },
                 plugins :{
                     title: {
                         display: true,
-                        text: 'Historical Pressure '+iNumbers+' Graphic : '+tdate,
+                        text: 'Historical Pressure Sterilizer '+iNumbers+' Graphic : '+tdate,
                         fontSize : 14,
                     },
                     legend: {
@@ -478,6 +638,38 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 pointStyle :false,
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Time',
+                            color: '#2873d0',
+                            font: {
+                                // family: 'Comic Sans MS',
+                                // size: 20,
+                                // weight: 'bold',
+                                // lineHeight: 1.2,
+                            },
+                            // padding: {top: 20, left: 0, right: 0, bottom: 0}
+                        }
+                    },
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Pressure(mBarg)',
+                            color: '#2873d0',
+                            font: {
+                                // family: 'Comic Sans MS',
+                                // size: 20,
+                                // weight: 'bold',
+                                // lineHeight: 1.2,
+                            },
+                            // padding: {top: 20, left: 0, right: 0, bottom: 0}
+                        }
+                    },
+                },
                 plugins :{
                     title: {
                         display: true,
@@ -518,6 +710,38 @@ function generateChart7(xValues7, yValues7, tdate,iNumbers) {
             responsive: true,
             maintainAspectRatio: false,
             pointStyle :false,
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Time',
+                            color: '#2873d0',
+                            font: {
+                                // family: 'Comic Sans MS',
+                                // size: 20,
+                                // weight: 'bold',
+                                // lineHeight: 1.2,
+                            },
+                            // padding: {top: 20, left: 0, right: 0, bottom: 0}
+                        }
+                    },
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Pressure(mBarg)',
+                            color: '#2873d0',
+                            font: {
+                                // family: 'Comic Sans MS',
+                                // size: 20,
+                                // weight: 'bold',
+                                // lineHeight: 1.2,
+                            },
+                            // padding: {top: 20, left: 0, right: 0, bottom: 0}
+                        }
+                    },
+                },
             plugins :{
                 title: {
                     display: true,
