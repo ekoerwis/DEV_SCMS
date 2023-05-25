@@ -25,24 +25,27 @@
                 <div class="col-xl-6 col-lg-6 col-md-6 myChart2 d-flex justify-content-center" style="height: 250px" >
                     <canvas id="myChart2" style="width:100%;"></canvas>
                 </div>
-            </div>
-
-            <div class="col-xl-12 col-lg-12 col-md-12 row">
                 <div class="col-xl-6 col-lg-6 col-md-6 myChart3 d-flex justify-content-center" style="height: 250px" >
                     <canvas id="myChart3" style="width:100%;"></canvas>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 myChart4 d-flex justify-content-center" style="height: 250px" >
                     <canvas id="myChart4" style="width:100%;"></canvas>
                 </div>
-            </div>
-
-            <div class="col-xl-12 col-lg-12 col-md-12 row">
                 <div class="col-xl-6 col-lg-6 col-md-6 myChart5 d-flex justify-content-center" style="height: 250px" >
                     <canvas id="myChart5" style="width:100%;"></canvas>
                 </div>
-                <!-- <div class="col-xl-6 col-lg-6 col-md-6 " style="height: 250px" >
+                <div class="col-xl-6 col-lg-6 col-md-6 myChart6 d-flex justify-content-center" style="height: 250px" >
                     <canvas id="myChart6" style="width:100%;"></canvas>
-                </div> -->
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 myChart7 d-flex justify-content-center" style="height: 250px" >
+                    <canvas id="myChart7" style="width:100%;"></canvas>
+                </div>
+            </div>
+
+            <div class="col-xl-12 col-lg-12 col-md-12 row">
+            </div>
+
+            <div class="col-xl-12 col-lg-12 col-md-12 row">
             </div>
 
           </div>
@@ -55,8 +58,8 @@
 
 
 <script>
-     var myLineChart1,myLineChart2,myLineChart3,myLineChart4,myLineChart5,myLineChart6;
-     var config1,config2,config3,config4,config5,config6;
+     var myLineChart1,myLineChart2,myLineChart3,myLineChart4,myLineChart5,myLineChart6,myLineChart7;
+     var config1,config2,config3,config4,config5,config6,config7;
 
     $(document).ready(function() {
         settingCalendarTDATE();    
@@ -66,7 +69,7 @@
     function settingCalendarTDATE(){
 
         var d = new Date();
-        var enddate = d.setDate(d.getDate() - 1);
+        var enddate = d.setDate(d.getDate() - 0);
 
         var paramDate = "<?php if(isset($_GET['POSTDT'])) { echo $_GET['POSTDT'];}  ?>";
         if(paramDate != ''){    
@@ -101,16 +104,34 @@
             exit;   
         } 
         
-        for(i=1;i<6;i++){
-            fetchData(dateParam,i);
+        for(i=1;i<8;i++){
+            if(i==6){
+                fetchData(dateParam,i,'bpv');
+            } else if (i==7){
+                fetchData(dateParam,i,'turbin');
+            } else {
+                fetchData(dateParam,i,'pressure');
+            }
+            
             // console.log('chart:'+i);
         }
         
     }    
 
-    function fetchData(tdate='',iNumbers=0) {
+    function fetchData(tdate='',iNumbers=0, dataHist='') {
+        
+        if(dataHist == 'pressure'){
+            functionData ='getData';
+        } else if (dataHist == 'bpv'){
+            functionData ='getDataBpv';
+        } else if (dataHist == 'turbin'){
+            functionData ='getDataTurbin';
+        } else {
+            functionData ='';
+        }
+
         $.ajax({
-        url:"<?php echo site_url().'/../Content/Report/historicalPressureChart/getData'; ?>",
+        url:"<?php echo site_url().'/../Content/Report/historicalPressureChart/'; ?>"+functionData,
         type: 'post',
         data : {
             TDATE : tdate,
@@ -182,6 +203,16 @@
                         yValues6.push(objHistory[i].MBARG);
                     }
                     generateChart6(xValues6, yValues6, tdate,iNumbers);
+                }
+
+                if(iNumbers==7){
+                    var xValues7 = [];
+                    var yValues7 = [];
+                    for (var i = 0; i < objHistory.length; i++) {
+                        xValues7.push(objHistory[i].TM);
+                        yValues7.push(objHistory[i].MBARG);
+                    }
+                    generateChart7(xValues7, yValues7, tdate,iNumbers);
                 }
             }
         }
@@ -413,7 +444,7 @@
                 plugins :{
                     title: {
                         display: true,
-                        text: 'Historical Pressure '+iNumbers+' Graphic : '+tdate,
+                        text: 'BPV Graphic : '+tdate,
                         fontSize : 14,
                     },
                     legend: {
@@ -428,6 +459,46 @@
         var ctx6 = document.getElementById("myChart6").getContext("2d");
         myLineChart6 = new Chart(ctx6, config6);
     }
+
+function generateChart7(xValues7, yValues7, tdate,iNumbers) {
+    // $(".myChart"+iNumbers).html('<canvas id="myChart'+iNumbers+'" style="width:100%;"></canvas>'); 
+    $(".myChartSpinner"+iNumbers).remove();
+
+    config7 = 
+    {
+        type: "line",
+        data: {
+            labels: xValues7,
+            datasets: [{
+            fill: false,
+            backgroundColor: "#2873d0",
+            borderColor: "#2873d0",
+            borderWidth: 2,
+            data: yValues7
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            pointStyle :false,
+            plugins :{
+                title: {
+                    display: true,
+                    text: 'Turbin Graphic : '+tdate,
+                    fontSize : 14,
+                },
+                legend: {
+                    display: false
+                },
+            }
+        }
+    };
+    if(myLineChart7){
+        myLineChart7.destroy();
+    }
+    var ctx7 = document.getElementById("myChart7").getContext("2d");
+    myLineChart7 = new Chart(ctx7, config7);
+}
 
 
 

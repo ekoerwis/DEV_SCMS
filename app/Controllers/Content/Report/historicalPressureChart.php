@@ -77,6 +77,20 @@ class historicalPressureChart extends \App\Controllers\BaseController
 
 	}
 
+	public function getDataBpv(){
+		$this->cekHakAkses('READ_DATA');
+		
+        echo json_encode($this->historicalPressureChartModel->getDataBpv());
+
+	}
+
+	public function getDataTurbin(){
+		$this->cekHakAkses('READ_DATA');
+		
+        echo json_encode($this->historicalPressureChartModel->getDataTurbin());
+
+	}
+
     // batas pakai
 
 
