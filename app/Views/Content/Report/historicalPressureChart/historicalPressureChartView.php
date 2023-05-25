@@ -1,13 +1,26 @@
+<style>
+
+.switchbutton-off {
+    background-color: #FF6384;
+    color: #fff;
+}
+
+</style>
+
+
 <div id="tb-pv" class="pb-1 pt-1">        
     <div class='col-xl-12 col-lg-12 col-md-12 row'>
         
         <div class="col row">
             <input id="dt-tdate" name="TDATE" class="easyui-datebox" style="width: 150px;"  data-options="required:true">
+            &nbsp;
+            <input id="sb-modeView" style="width:100px;">
         </div>
         
         <div class=" col-md-auto  text-right">
             <button id="btn-search" class="btn btn-primary" style="width: 100px;"  onclick="doSearch()"><i class="fas fa-search"></i> Search</button>
             &nbsp;
+            
         </div>
     </div>
 
@@ -19,25 +32,25 @@
           <div class="card-content">
             
             <div class="col-xl-12 col-lg-12 col-md-12 row">
-                <div class="col-xl-6 col-lg-6 col-md-6 myChart1 d-flex justify-content-center" style="height: 250px" >
+                <div class="col-xl-6 col-lg-6 col-md-6 myChartDiv myChart1 d-flex justify-content-center" style="height: 250px" >
                     <canvas id="myChart1" style="width:100%;"></canvas>
                 </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 myChart2 d-flex justify-content-center" style="height: 250px" >
+                <div class="col-xl-6 col-lg-6 col-md-6 myChartDiv myChart2 d-flex justify-content-center" style="height: 250px" >
                     <canvas id="myChart2" style="width:100%;"></canvas>
                 </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 myChart3 d-flex justify-content-center" style="height: 250px" >
+                <div class="col-xl-6 col-lg-6 col-md-6 myChartDiv myChart3 d-flex justify-content-center" style="height: 250px" >
                     <canvas id="myChart3" style="width:100%;"></canvas>
                 </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 myChart4 d-flex justify-content-center" style="height: 250px" >
+                <div class="col-xl-6 col-lg-6 col-md-6 myChartDiv myChart4 d-flex justify-content-center" style="height: 250px" >
                     <canvas id="myChart4" style="width:100%;"></canvas>
                 </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 myChart5 d-flex justify-content-center" style="height: 250px" >
+                <div class="col-xl-6 col-lg-6 col-md-6 myChartDiv myChart5 d-flex justify-content-center" style="height: 250px" >
                     <canvas id="myChart5" style="width:100%;"></canvas>
                 </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 myChart6 d-flex justify-content-center" style="height: 250px" >
+                <div class="col-xl-6 col-lg-6 col-md-6 myChartDiv myChart6 d-flex justify-content-center" style="height: 250px" >
                     <canvas id="myChart6" style="width:100%;"></canvas>
                 </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 myChart7 d-flex justify-content-center" style="height: 250px" >
+                <div class="col-xl-6 col-lg-6 col-md-6 myChartDiv myChart7 d-flex justify-content-center" style="height: 250px" >
                     <canvas id="myChart7" style="width:100%;"></canvas>
                 </div>
             </div>
@@ -62,6 +75,30 @@
      var config1,config2,config3,config4,config5,config6,config7;
 
     $(document).ready(function() {
+
+        $('#sb-modeView').switchbutton({
+            checked: true,
+            onText:'2 in Row',
+            offText:'1 in Row',
+            onChange: function(checked){
+                if(checked){
+                    // console.log('2');
+                    if($(".myChartDiv").hasClass("col-xl-12 col-lg-12 col-md-12")){
+                        $(".myChartDiv").removeClass("col-xl-12 col-lg-12 col-md-12");
+                    }
+
+                    $(".myChartDiv").addClass("col-xl-6 col-lg-6 col-md-6");
+                } else {
+                    // console.log('1');
+                    if($(".myChartDiv").hasClass("col-xl-6 col-lg-6 col-md-6")){
+                        $(".myChartDiv").removeClass("col-xl-6 col-lg-6 col-md-6");
+                    }
+                    
+                    $(".myChartDiv").addClass("col-xl-12 col-lg-12 col-md-12");
+                }
+            }
+        })
+
         settingCalendarTDATE();    
         doSearch();
     });
@@ -444,7 +481,7 @@
                 plugins :{
                     title: {
                         display: true,
-                        text: 'BPV Graphic : '+tdate,
+                        text: 'Historical BPV Graphic : '+tdate,
                         fontSize : 14,
                     },
                     legend: {
@@ -484,7 +521,7 @@ function generateChart7(xValues7, yValues7, tdate,iNumbers) {
             plugins :{
                 title: {
                     display: true,
-                    text: 'Turbin Graphic : '+tdate,
+                    text: 'Historical Turbin Graphic : '+tdate,
                     fontSize : 14,
                 },
                 legend: {
