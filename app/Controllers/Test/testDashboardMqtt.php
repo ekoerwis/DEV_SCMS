@@ -45,8 +45,9 @@ class testDashboardMqtt extends \App\Controllers\BaseController
         // $this->addJs (  $this->config->baseURL . 'public/vendors/chartJs/2.9.4/Chart.js');
 		// mengaktifkan chartJS 4.3.0
         $this->addJs (  $this->config->baseURL . 'public/vendors/chartJs/4.3.0/chart.js');
-        $this->addJs (  $this->config->baseURL . 'public/vendors/mqttws/mqttws31.min.js');
-        $this->addJs (  $this->config->baseURL . 'public/vendors/mqttws/paramConnectionSMA.js');
+        // $this->addJs (  $this->config->baseURL . 'public/vendors/mqttws/mqttws31.js');
+        // $this->addJs (  $this->config->baseURL . 'public/vendors/mqttws/paramConnectionSMA.js');
+        $this->addJs (  $this->config->baseURL . 'public/vendors/paho-mqtt/paho-mqtt.js');
 		
 		helper(['cookie', 'form', 'stringSQLrep', 'mpdfCustom']);
 	}
