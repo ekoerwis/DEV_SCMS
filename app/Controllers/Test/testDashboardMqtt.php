@@ -77,6 +77,26 @@ class testDashboardMqtt extends \App\Controllers\BaseController
         $data['topic_mqtt_PRSPSSSCP1']="PRSPSSSCP1";
         $data['topic_mqtt_PRSAMPDIG1']="PRSAMPDIG1";
 
+		$data['topic_mqtt_PRSTMPDIG2']="PRSTMPDIG2";
+        $data['topic_mqtt_PRSPSSSCP2']="PRSPSSSCP2";
+        $data['topic_mqtt_PRSAMPDIG2']="PRSAMPDIG2";
+
+		$data['topic_mqtt_PRSTMPDIG3']="PRSTMPDIG3";
+        $data['topic_mqtt_PRSPSSSCP3']="PRSPSSSCP3";
+        $data['topic_mqtt_PRSAMPDIG3']="PRSAMPDIG3";
+
+		$data['topic_mqtt_PRSTMPDIG4']="PRSTMPDIG4";
+        $data['topic_mqtt_PRSPSSSCP4']="PRSPSSSCP4";
+        $data['topic_mqtt_PRSAMPDIG4']="PRSAMPDIG4";
+
+		$data['topic_mqtt_PRSTMPDIG5']="PRSTMPDIG5";
+        $data['topic_mqtt_PRSPSSSCP5']="PRSPSSSCP5";
+        $data['topic_mqtt_PRSAMPDIG5']="PRSAMPDIG5";
+
+		$data['topic_mqtt_PRSTMPDIG6']="PRSTMPDIG6";
+        $data['topic_mqtt_PRSPSSSCP6']="PRSPSSSCP6";
+        $data['topic_mqtt_PRSAMPDIG6']="PRSAMPDIG6";
+
 		$this->view('Test/testDashboardMqtt/testDashboardMqttView.php', $data);
 	}
 
