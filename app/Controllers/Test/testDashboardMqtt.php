@@ -73,7 +73,9 @@ class testDashboardMqtt extends \App\Controllers\BaseController
         $data['hostname_mqtt']= "10.20.38.199";
         $data['port_mqtt']="9001";
         $data['clientID_mqtt']="HARI_TEST_WS1";
-        $data['topic_mqtt']="PRSTMPDIG1";
+        $data['topic_mqtt_PRSTMPDIG1']="PRSTMPDIG1";
+        $data['topic_mqtt_PRSPSSSCP1']="PRSPSSSCP1";
+        $data['topic_mqtt_PRSAMPDIG1']="PRSAMPDIG1";
 
 		$this->view('Test/testDashboardMqtt/testDashboardMqttView.php', $data);
 	}
