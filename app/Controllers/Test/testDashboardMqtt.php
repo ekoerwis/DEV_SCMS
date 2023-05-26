@@ -68,7 +68,12 @@ class testDashboardMqtt extends \App\Controllers\BaseController
 			$data['tinggi_dg']= 'height:'.$tinggiContent.'px';
 		}
 
-        $data['dataGraph']=$this->testDashboardMqttModel->dataGraph();
+        // $data['dataGraph']=$this->testDashboardMqttModel->dataGraph();
+
+        $data['hostname_mqtt']= "10.20.38.199";
+        $data['port_mqtt']="9001";
+        $data['clientID_mqtt']="HARI_TEST_WS1";
+        $data['topic_mqtt']="PRSTMPDIG1";
 
 		$this->view('Test/testDashboardMqtt/testDashboardMqttView.php', $data);
 	}
