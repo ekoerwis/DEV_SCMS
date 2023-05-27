@@ -130,10 +130,13 @@
         if (myChart_1 == null) {
             myChart_1 = new Chart(ctx_1, config_1);
             dataExist_1 = parseFloat(dataPRSTMPDIG1);
-            console.log('status myChart_1 = baru / ' + dataExist_1);
+
+            // dimatikan agar tidak memenuhi console karena data banyak (nyalakan bila diperlukan)
+            // console.log('status myChart_1 = baru / ' + dataExist_1);
         } else {
 
-            console.log(parseFloat(dataExist_1) + ' / ' + parseFloat(dataPRSTMPDIG1));
+            // dimatikan agar tidak memenuhi console karena data banyak (nyalakan bila diperlukan)
+            // console.log(parseFloat(dataExist_1) + ' / ' + parseFloat(dataPRSTMPDIG1));
 
             if (dataExist_1 != parseFloat(dataPRSTMPDIG1)) {
                 myChart_1.destroy();
@@ -192,10 +195,13 @@
         if (myChart_2 == null) {
             myChart_2 = new Chart(ctx_2, config_2);
             dataExist_2 = parseFloat(dataPRSTMPDIG2);
-            console.log('status myChart_2 = baru / ' + dataExist_2);
+
+            // dimatikan agar tidak memenuhi console karena data banyak (nyalakan bila diperlukan)
+            // console.log('status myChart_2 = baru / ' + dataExist_2);
         } else {
 
-            console.log(parseFloat(dataExist_2) + ' / ' + parseFloat(dataPRSTMPDIG2));
+            // dimatikan agar tidak memenuhi console karena data banyak (nyalakan bila diperlukan)
+            // console.log(parseFloat(dataExist_2) + ' / ' + parseFloat(dataPRSTMPDIG2));
 
             if (dataExist_2 != parseFloat(dataPRSTMPDIG2)) {
                 myChart_2.destroy();
@@ -254,10 +260,13 @@
         if (myChart_3 == null) {
             myChart_3 = new Chart(ctx_3, config_3);
             dataExist_3 = parseFloat(dataPRSTMPDIG3);
-            console.log('status myChart_3 = baru / ' + dataExist_3);
+
+            // dimatikan agar tidak memenuhi console karena data banyak (nyalakan bila diperlukan)
+            // console.log('status myChart_3 = baru / ' + dataExist_3);
         } else {
 
-            console.log(parseFloat(dataExist_3) + ' / ' + parseFloat(dataPRSTMPDIG3));
+            // dimatikan agar tidak memenuhi console karena data banyak (nyalakan bila diperlukan)
+            // console.log(parseFloat(dataExist_3) + ' / ' + parseFloat(dataPRSTMPDIG3));
 
             if (dataExist_3 != parseFloat(dataPRSTMPDIG3)) {
                 myChart_3.destroy();
@@ -316,10 +325,13 @@
         if (myChart_4 == null) {
             myChart_4 = new Chart(ctx_4, config_4);
             dataExist_4 = parseFloat(dataPRSTMPDIG4);
-            console.log('status myChart_4 = baru / ' + dataExist_4);
+
+            // dimatikan agar tidak memenuhi console karena data banyak (nyalakan bila diperlukan)
+            // console.log('status myChart_4 = baru / ' + dataExist_4);
         } else {
 
-            console.log(parseFloat(dataExist_4) + ' / ' + parseFloat(dataPRSTMPDIG4));
+            // dimatikan agar tidak memenuhi console karena data banyak (nyalakan bila diperlukan)
+            // console.log(parseFloat(dataExist_4) + ' / ' + parseFloat(dataPRSTMPDIG4));
 
             if (dataExist_4 != parseFloat(dataPRSTMPDIG4)) {
                 myChart_4.destroy();
@@ -378,10 +390,13 @@
         if (myChart_5 == null) {
             myChart_5 = new Chart(ctx_5, config_5);
             dataExist_5 = parseFloat(dataPRSTMPDIG5);
-            console.log('status myChart_5 = baru / ' + dataExist_5);
+
+            // dimatikan agar tidak memenuhi console karena data banyak (nyalakan bila diperlukan)
+            // console.log('status myChart_5 = baru / ' + dataExist_5);
         } else {
 
-            console.log(parseFloat(dataExist_5) + ' / ' + parseFloat(dataPRSTMPDIG5));
+            // dimatikan agar tidak memenuhi console karena data banyak (nyalakan bila diperlukan)
+            // console.log(parseFloat(dataExist_5) + ' / ' + parseFloat(dataPRSTMPDIG5));
 
             if (dataExist_5 != parseFloat(dataPRSTMPDIG5)) {
                 myChart_5.destroy();
@@ -440,10 +455,13 @@
         if (myChart_6 == null) {
             myChart_6 = new Chart(ctx_6, config_6);
             dataExist_6 = parseFloat(dataPRSTMPDIG6);
-            console.log('status myChart_6 = baru / ' + dataExist_6);
+
+            // dimatikan agar tidak memenuhi console karena data banyak (nyalakan bila diperlukan)
+            // console.log('status myChart_6 = baru / ' + dataExist_6);
         } else {
 
-            console.log(parseFloat(dataExist_6) + ' / ' + parseFloat(dataPRSTMPDIG6));
+            // dimatikan agar tidak memenuhi console karena data banyak (nyalakan bila diperlukan)
+            // console.log(parseFloat(dataExist_6) + ' / ' + parseFloat(dataPRSTMPDIG6));
 
             if (dataExist_6 != parseFloat(dataPRSTMPDIG6)) {
                 myChart_6.destroy();
@@ -510,7 +528,10 @@
 
     /*Callback for successful MQTT connection */
     function Connected() {
-        console.log("Connected to broker");
+
+        // dimatikan agar tidak memenuhi console (nyalakan bila diperlukan)
+        // console.log("Connected to broker");
+
         $("#alertDiv").hide();
 
         // var messageUnion = [
@@ -546,7 +567,8 @@
         $("#textAlertDiv").html('Connection Failed, Please Check Your Connection and <a href="" class="alert-link">Refresh Page</a> !');
         $("#alertDiv").show();
 
-        console.log("Connect failed:" + res.errorMessage);
+        // dimatikan agar tidak memenuhi console (nyalakan bila diperlukan)
+        // console.log("Connect failed:" + res.errorMessage);
 
     }
 
@@ -556,14 +578,18 @@
             $("#textAlertDiv").html('Connection Lost, Please Wait for Reconnect or Try <a href="" class="alert-link">Refresh Page</a> !');
             $("#alertDiv").show();
 
-            console.log("Connection lost:" + res.errorMessage);
+            // dimatikan agar tidak memenuhi console (nyalakan bila diperlukan)
+            // console.log("Connection lost:" + res.errorMessage);
+            
             Connect();
         }
     }
 
     /*Callback for incoming message processing */
     function MessageArrived(message) {
-        console.log(message.destinationName + " : " + message.payloadString);
+
+        // dimatikan agar tidak memenuhi console karena data banyak (nyalakan bila diperlukan)
+        // console.log(message.destinationName + " : " + message.payloadString);
 
 
         if (message.destinationName == "<?= $topic_mqtt_PRSTMPDIG1 ?>") {
