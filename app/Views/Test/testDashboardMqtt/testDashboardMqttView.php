@@ -16,6 +16,10 @@
 </div>
 <!-- </div> -->
 
+<div id="alertDiv" class="alert alert-warning"  role="alert" style="display:none;" >
+   <a id="textAlertDiv">xxx</a>
+</div>
+
 <div class="row col-12 mt-3">
     <?php
 
@@ -507,6 +511,7 @@
     /*Callback for successful MQTT connection */
     function Connected() {
         console.log("Connected to broker");
+        $("#alertDiv").hide();
 
         // var messageUnion = [
         mqttClient.subscribe("<?= $topic_mqtt_PRSTMPDIG1 ?>");
@@ -537,12 +542,20 @@
 
     /*Callback for failed connection*/
     function ConnectionFailed(res) {
+        
+        $("#textAlertDiv").html('Connection Failed, Please Check Your Connection and <a href="" class="alert-link">Refresh Page</a> !');
+        $("#alertDiv").show();
+
         console.log("Connect failed:" + res.errorMessage);
+
     }
 
     /*Callback for lost connection*/
     function ConnectionLost(res) {
         if (res.errorCode !== 0) {
+            $("#textAlertDiv").html('Connection Lost, Please Wait for Reconnect or Try <a href="" class="alert-link">Refresh Page</a> !');
+            $("#alertDiv").show();
+
             console.log("Connection lost:" + res.errorMessage);
             Connect();
         }
