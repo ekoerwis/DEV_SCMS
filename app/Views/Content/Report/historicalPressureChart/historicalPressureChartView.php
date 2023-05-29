@@ -32,6 +32,12 @@
           <div class="card-content">
             
             <div class="col-xl-12 col-lg-12 col-md-12 row">
+                <div class="col-xl-6 col-lg-6 col-md-6 myChartDiv myChart7 d-flex justify-content-center" style="height: 250px" >
+                    <canvas id="myChart7" style="width:100%;"></canvas>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 myChartDiv myChart6 d-flex justify-content-center" style="height: 250px" >
+                    <canvas id="myChart6" style="width:100%;"></canvas>
+                </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 myChartDiv myChart1 d-flex justify-content-center" style="height: 250px" >
                     <canvas id="myChart1" style="width:100%;"></canvas>
                 </div>
@@ -46,12 +52,6 @@
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 myChartDiv myChart5 d-flex justify-content-center" style="height: 250px" >
                     <canvas id="myChart5" style="width:100%;"></canvas>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 myChartDiv myChart6 d-flex justify-content-center" style="height: 250px" >
-                    <canvas id="myChart6" style="width:100%;"></canvas>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 myChartDiv myChart7 d-flex justify-content-center" style="height: 250px" >
-                    <canvas id="myChart7" style="width:100%;"></canvas>
                 </div>
             </div>
 
