@@ -72,7 +72,7 @@ class pressureStationDashboard extends \App\Controllers\BaseController
 
         $data['hostname_mqtt']= "10.20.38.199";
         $data['port_mqtt']="9001";
-        $data['clientID_mqtt']="HARI_TEST_WS1";
+        $data['clientID_mqtt']="HARI_TEST_WS1"."_".$this->user['ID_USER'].'_' .strtotime('now');
         $data['topic_mqtt_PRSTMPDIG1']="PRSTMPDIG1";
         $data['topic_mqtt_PRSPSSSCP1']="PRSPSSSCP1";
         $data['topic_mqtt_PRSAMPDIG1']="PRSAMPDIG1";
@@ -96,6 +96,9 @@ class pressureStationDashboard extends \App\Controllers\BaseController
 		$data['topic_mqtt_PRSTMPDIG6']="PRSTMPDIG6";
         $data['topic_mqtt_PRSPSSSCP6']="PRSPSSSCP6";
         $data['topic_mqtt_PRSAMPDIG6']="PRSAMPDIG6";
+
+        // $xxx=strtotime('now');
+        // echo "<script>console.log('".$this->user['ID_USER'].'_' .strtotime('now')."')</script>";
 
 		$this->view('Content/Dashboard/pressureStationDashboard/pressureStationDashboardView.php', $data);
 	}
