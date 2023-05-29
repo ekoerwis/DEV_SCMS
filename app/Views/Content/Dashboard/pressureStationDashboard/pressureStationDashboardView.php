@@ -18,7 +18,7 @@
         <div class=" col-xl-3 col-lg-3 col-md-3 col-sm-12 pr-0 pl-1">
             <div class="card">
                 <div class="card-header text-center" style="padding: 10px 10px 10px 10px;">
-                    <h4> PRESSURE ' . $i . ' </h4>
+                    <h4> PRESS ' . $i . ' </h4>
                 </div>
                 <div class="card-body" style="padding: 10px 10px 10px 10px;">
                     <div class="col-xl-12 col-lg-12 col-md-12 ">
