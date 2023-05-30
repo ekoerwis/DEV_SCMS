@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Controllers\Content;
-use App\Models\Content\logSheetSterilizerModel;
+namespace App\Controllers\Content\LogSheet;
+use App\Models\Content\LogSheet\logSheetSterilizerModel;
 use \Config\App;
 
 use CodeIgniter\HTTP\RequestInterface;
@@ -60,7 +60,7 @@ class logSheetSterilizer extends \App\Controllers\BaseController
 			$data['tinggi_dg']= 'height:'.$tinggiContent.'px';
 		}
 
-		$this->view('Content/logSheetSterilizer/logSheetSterilizerView.php', $data);
+		$this->view('Content/LogSheet/logSheetSterilizer/logSheetSterilizerView.php', $data);
 	}
 
     public function dataList(){
@@ -353,7 +353,7 @@ class logSheetSterilizer extends \App\Controllers\BaseController
 
         $mpdf->AddPage();
 
-        $html = view('Content/logSheetSterilizer/pdfView.php', $data);
+        $html = view('Content/LogSheet/logSheetSterilizer/pdfView.php', $data);
         $mpdf->WriteHTML($html);
         $this->response->setHeader('Content-Type', 'application/pdf');
         $mpdf->Output($data['Judul'].'.pdf', 'I'); // opens in browser

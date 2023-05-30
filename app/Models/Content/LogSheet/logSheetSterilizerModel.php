@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Content;
+namespace App\Models\Content\LogSheet;
 
 class logSheetSterilizerModel extends \App\Models\BaseModel
 {

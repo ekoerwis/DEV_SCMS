@@ -7,7 +7,7 @@
 </style>
     
     <!--- DATA GRID ------------------------------------------------------------------------->
-    <table id="dg" title="" class="easyui-datagrid"  style="<?php  echo $tinggi_dg ; ?>"  url="<?php echo site_url() . '/../Content/logSheetSterilizer/dataList'; ?>" toolbar="#tb-pv" data-options="striped:true,
+    <table id="dg" title="" class="easyui-datagrid"  style="<?php  echo $tinggi_dg ; ?>"  url="<?php echo site_url() . '/../Content/LogSheet/logSheetSterilizer/dataList'; ?>" toolbar="#tb-pv" data-options="striped:true,
                     fitColumns:false,
                     pagination:true,
                     pageSize:50,
@@ -213,7 +213,7 @@
                 exit;   
             } 
 
-            var url = "<?php  echo site_url() . '/../Content/logSheetSterilizer/exportExcelFile?TDATE='; ?>"+dateParam+"&DT_DIV="+dtDivParam;
+            var url = "<?php  echo site_url() . '/../Content/LogSheet/logSheetSterilizer/exportExcelFile?TDATE='; ?>"+dateParam+"&DT_DIV="+dtDivParam;
             window.open(url, "_blank");
         }
 
@@ -228,7 +228,7 @@
                 exit;   
             } 
 
-            var url = "<?php  echo site_url() . '/../Content/logSheetSterilizer/exportPDFFile?TDATE='; ?>"+dateParam+"&DT_DIV="+dtDivParam;
+            var url = "<?php  echo site_url() . '/../Content/LogSheet/logSheetSterilizer/exportPDFFile?TDATE='; ?>"+dateParam+"&DT_DIV="+dtDivParam;
             window.open(url, "_blank");
     }
 
