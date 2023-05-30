@@ -326,4 +326,35 @@ class BaseModel extends \CodeIgniter\Model
 	}
 
 	// BATAS TAMBAHAN 24 NOV 2022
+
+
+	// TAMBAHAN 30 MAY 2023
+
+	public function getSCD_MA_PARAM($prnid='',$prmid=''){
+
+		$w_prn = ' ';
+		$w_prm = ' ';
+
+		if($prnid != ''){
+			$w_prn = " AND PRNID = '$prnid'";
+		}
+
+		if($prmid != ''){
+			$w_prm = " AND PRMID = '$prmid'";
+		}
+
+		try{
+			$sql="SELECT CRTTS, CRTBY, UPDTS, UPDBY, TRM, INACT, INACTBY, ORGID, ORG_CODE_PR, ORG_CODE, PRMID, PRNID, PRNDESC, VALNUM, VALSTR, SEQ FROM SCD_MA_PARAM WHERE ROWNUM > 0 $w_prn $w_prm";
+
+			$result = $this->db->query($sql)->getResultArray();
+
+		}catch (\Exception $e) {
+			$result['status']= '0';
+			$result['message']= 'SQL Error';
+		}
+		
+		return $result;
+	}
+
+	// BATAS TAMBAHAN 30 MAY 2023
 }
