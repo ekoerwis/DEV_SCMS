@@ -27,38 +27,38 @@
                     ">
         <thead>
             <tr>
-                <th rowspan="3" field="TMP1" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>NOZZLE PREASURE</b></th>
-                <th rowspan="3" field="TMP2" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>INLET PREASURE</b></th>
-                <th rowspan="3" field="VCM1" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>EXHAUST PREASURE</b></th>
-                <th rowspan="3" field="VCM2" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>GEAR BOX PREASURE</b></th>
-                <th rowspan="3" field="CSTTMP1" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>TURBIN OIL PREASURE</b></th>
-                <th rowspan="3" field="CSTTMP2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>TEMP STEAM</b></th>
-                <th rowspan="3" field="CSTTMP3" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>TEMP OIL</b></th>
+                <th rowspan="3" field="PWSNZL_PRS" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>NOZZLE PREASURE</b></th>
+                <th rowspan="3" field="PWSINL_PRS" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>INLET PREASURE</b></th>
+                <th rowspan="3" field="PWSEXH_PRS" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>EXHAUST PREASURE</b></th>
+                <th rowspan="3" field="PWSGRB_PRS" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>GEAR BOX PREASURE</b></th>
+                <th rowspan="3" field="PWSTBO_PRS" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>TURBIN OIL PREASURE</b></th>
+                <th rowspan="3" field="PWSSTM_TMP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>TEMP STEAM</b></th>
+                <th rowspan="3" field="PWSOIL_TMP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>TEMP OIL</b></th>
                 <th colspan="4"><b>BEARING OIL TEMP (<span>&#176;</span>C)</b></th>
-                <th rowspan="3" field="CSTTMP4" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>GOVERNOR LOAD LIMIT</b></th>
-                <th rowspan="3" field="CSTTMP5" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>RPM</b></th>
-                <th rowspan="3" field="CSTTMP6" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>HZ</b></th>
-                <th rowspan="3" field="CSTOLY1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>VOLT</b></th>
-                <th rowspan="3" field="CSTOLY2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>COST</b></th>
+                <th rowspan="3" field="PWSGVN_LLM" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>GOVERNOR LOAD LIMIT</b></th>
+                <th rowspan="3" field="PWS_RPM" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>RPM</b></th>
+                <th rowspan="3" field="PWS_HZ" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>HZ</b></th>
+                <th rowspan="3" field="PWS_V" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>VOLT</b></th>
+                <th rowspan="3" field="PWS_COST" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>COST</b></th>
                 <th colspan="3"><b>AMPERE</b></th>
-                <th rowspan="3" field="CSTOLY3" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>KW</b></th>
-                <th rowspan="3" field="CSTOLY4" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>HM</b></th>
-                <th rowspan="3" field="CSTOLY5" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>KWH</b></th>
+                <th rowspan="3" field="PWS_KW" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>KW</b></th>
+                <th rowspan="3" field="PWS_HM" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>HM</b></th>
+                <th rowspan="3" field="PWS_KWH" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>KWH</b></th>
                 <!-- <th rowspan="3" field="TMP1" halign="center" data-options="sortable:false,width:60,align:'center' " ><b>PARAF MANDOR</b></th> -->
                 <!-- <th rowspan="3" field="TMP1" halign="center" data-options="sortable:false,width:160,align:'center' " ><b>KETERANGAN</b></th> -->
             </tr>
             <tr>
                 <th colspan="2"><b>PINION</b></th>
                 <th colspan="2"><b>BULLGEAR</b></th>
-                <th rowspan="2" field="CSTOLY6" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>R</b></th>
-                <th rowspan="2" field="SDTTMP1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>S</b></th>
-                <th rowspan="2" field="SDTTMP2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>T</b></th>
+                <th rowspan="2" field="PWS_I_R" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>R</b></th>
+                <th rowspan="2" field="PWS_I_S" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>S</b></th>
+                <th rowspan="2" field="PWS_I_T" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>T</b></th>
             </tr>
             <tr>
-                <th field="SDTTMP3" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>1</b></th>
-                <th field="SDTTMP4" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>2</b></th>
-                <th field="SDTTMP5" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>3</b></th>
-                <th field="SDTTMP6" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>4</b></th>
+                <th field="PWSBRO_PIN_TMP1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>1</b></th>
+                <th field="PWSBRO_PIN_TMP2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>2</b></th>
+                <th field="PWSBRO_BUL_TMP1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>3</b></th>
+                <th field="PWSBRO_BUL_TMP2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>4</b></th>
             </tr>
         </thead>
     </table>
