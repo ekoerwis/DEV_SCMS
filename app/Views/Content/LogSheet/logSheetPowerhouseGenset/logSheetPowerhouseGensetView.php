@@ -27,26 +27,26 @@
                     ">
         <thead>
             <tr>
-                <th rowspan="2" field="TMP1" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>VOLTAGE</b></th>
+                <th rowspan="2" field="PWS_V" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>VOLTAGE</b></th>
                 <th colspan="3"><b>AMPERE</b></th>
-                <th rowspan="2" field="TMP2" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>KW</b></th>
-                <th rowspan="2" field="VCM1" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>COST</b></th>
-                <th rowspan="2" field="VCM2" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>HZ</b></th>
-                <th rowspan="2" field="CSTTMP1" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>RPM</b></th>
-                <th rowspan="2" field="CSTTMP2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>HM</b></th>
-                <th rowspan="2" field="CSTTMP3" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>KWH</b></th>
-                <th rowspan="2" field="CSTTMP4" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>T OIL</b></th>
+                <th rowspan="2" field="PWS_KWH1" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>KW</b></th>
+                <th rowspan="2" field="PWS_COST" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>COST</b></th>
+                <th rowspan="2" field="PWS_HZ" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>HZ</b></th>
+                <th rowspan="2" field="PWS_RPM" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>RPM</b></th>
+                <th rowspan="2" field="PWS_HM" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>HM</b></th>
+                <th rowspan="2" field="PWS_KWH2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>KWH</b></th>
+                <th rowspan="2" field="PWS_TOIL" halign="center" data-options="sortable:false,width:100,align:'center' " formatter="formatNumberColumnCostum"><b>T OIL</b></th>
                 <th colspan="2"><b>TEMPERATURE</b></th>
-                <th rowspan="2" field="CSTTMP5" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>SOLAR (CM)</b></th>
+                <th rowspan="2" field="PWS_SLR_CM" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>SOLAR (CM)</b></th>
                 <!-- <th rowspan="3" field="TMP1" halign="center" data-options="sortable:false,width:60,align:'center' " ><b>PARAF MANDOR</b></th> -->
                 <!-- <th rowspan="3" field="TMP1" halign="center" data-options="sortable:false,width:160,align:'center' " ><b>KETERANGAN</b></th> -->
             </tr>
             <tr>
-                <th field="CSTTMP6" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>R</b></th>
-                <th field="SDTTMP1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>S</b></th>
-                <th field="SDTTMP2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>T</b></th>
-                <th field="SDTTMP3" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>MESIN</b></th>
-                <th field="SDTTMP4" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>OIL</b></th>
+                <th field="PWS_I_R" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>R</b></th>
+                <th field="PWS_I_S" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>S</b></th>
+                <th field="PWS_I_T" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>T</b></th>
+                <th field="PWS_MSN_TMP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>MESIN</b></th>
+                <th field="PWS_OIL_TMP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>OIL</b></th>
             </tr>
         </thead>
     </table>
@@ -86,7 +86,7 @@
             $('#cb-stationid').combobox({
                 valueField: 'ID',
                 textField: 'DESCRIPTION',
-                prompt:"Press ID",
+                prompt:"Genset ID",
                 required:true,
                 value:"1",
                 url: "<?php  echo site_url() . '/../Content/LogSheet/logSheetPowerhouseGenset/getStationID'; ?>",
@@ -121,10 +121,8 @@
                 var newD = new Date(enddate);
             }
             
-            
             // var newD = new Date(enddate);
             // alert(newD.getDate());
-
 
             $('#dt-tdate').datebox({
                 value :  newD.getDate() + "-"+getMonthName(newD.getMonth()+1) + "-"+newD.getFullYear(),

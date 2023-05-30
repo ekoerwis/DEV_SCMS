@@ -117,20 +117,20 @@
             ?>
             <tr>
                 <td class="tdTable1" ><?= $data_sql[$i]['TIME_DISP'] ?></td>
-                <td class="tdTable1" ><?= number_format($data_sql[$i]['TMP1'],2,".",",") ?></td>
-                <td class="tdTable1" ><?= number_format($data_sql[$i]['TMP2'],2,".",",") ?></td>
-                <td class="tdTable1" ><?= number_format($data_sql[$i]['VCM1'],2,".",",") ?></td>
-                <td class="tdTable1" ><?= number_format($data_sql[$i]['VCM2'],2,".",",") ?></td>
-                <td class="tdTable1" ><?= number_format($data_sql[$i]['CSTTMP1'],2,".",",") ?></td>
-                <td class="tdTable1" ><?= number_format($data_sql[$i]['CSTTMP2'],2,".",",") ?></td>
-                <td class="tdTable1" ><?= number_format($data_sql[$i]['CSTTMP3'],2,".",",") ?></td>
-                <td class="tdTable1" ><?= number_format($data_sql[$i]['CSTTMP4'],2,".",",") ?></td>
-                <td class="tdTable1" ><?= number_format($data_sql[$i]['CSTTMP5'],2,".",",") ?></td>
-                <td class="tdTable1" ><?= number_format($data_sql[$i]['CSTTMP6'],2,".",",") ?></td>
-                <td class="tdTable1" ><?= number_format($data_sql[$i]['CSTOLY1'],2,".",",") ?></td>
-                <td class="tdTable1" ><?= number_format($data_sql[$i]['CSTOLY2'],2,".",",") ?></td>
-                <td class="tdTable1" ><?= number_format($data_sql[$i]['CSTOLY3'],2,".",",") ?></td>
-                <td class="tdTable1" ><?= number_format($data_sql[$i]['CSTOLY4'],2,".",",") ?></td>
+                <td class="tdTable1" ><?= number_format($data_sql[$i]['PWS_V'],2,".",",") ?></td>
+                <td class="tdTable1" ><?= number_format($data_sql[$i]['PWS_I_R'],2,".",",") ?></td>
+                <td class="tdTable1" ><?= number_format($data_sql[$i]['PWS_I_S'],2,".",",") ?></td>
+                <td class="tdTable1" ><?= number_format($data_sql[$i]['PWS_I_T'],2,".",",") ?></td>
+                <td class="tdTable1" ><?= number_format($data_sql[$i]['PWS_KWH1'],2,".",",") ?></td>
+                <td class="tdTable1" ><?= number_format($data_sql[$i]['PWS_COST'],2,".",",") ?></td>
+                <td class="tdTable1" ><?= number_format($data_sql[$i]['PWS_HZ'],2,".",",") ?></td>
+                <td class="tdTable1" ><?= number_format($data_sql[$i]['PWS_RPM'],2,".",",") ?></td>
+                <td class="tdTable1" ><?= number_format($data_sql[$i]['PWS_HM'],2,".",",") ?></td>
+                <td class="tdTable1" ><?= number_format($data_sql[$i]['PWS_KWH2'],2,".",",") ?></td>
+                <td class="tdTable1" ><?= number_format($data_sql[$i]['PWS_TOIL'],2,".",",") ?></td>
+                <td class="tdTable1" ><?= number_format($data_sql[$i]['PWS_MSN_TMP'],2,".",",") ?></td>
+                <td class="tdTable1" ><?= number_format($data_sql[$i]['PWS_OIL_TMP'],2,".",",") ?></td>
+                <td class="tdTable1" ><?= number_format($data_sql[$i]['PWS_SLR_CM'],2,".",",") ?></td>
             </tr>
 <?php
             
