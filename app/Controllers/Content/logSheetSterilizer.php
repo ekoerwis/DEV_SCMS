@@ -22,7 +22,7 @@ class logSheetSterilizer extends \App\Controllers\BaseController
 		
 		$this->logSheetSterilizerModel = new logSheetSterilizerModel;
 
-		$this->data['site_title'] = 'LogSheet Fertilizer ';
+		$this->data['site_title'] = 'LogSheet Sterilizer ';
 
 		$this->addStyle ( $this->config->baseURL . 'public/vendors/jquery-easyui-1.9.12/themes/icon.css');
 		// $this->addStyle ( $this->config->baseURL . 'public/vendors/jquery-easyui-1.9.12/themes/default/easyui.css');
@@ -93,6 +93,11 @@ class logSheetSterilizer extends \App\Controllers\BaseController
 
         $userOrganisasi = $this->session->get('userOrganisasi');
         $userid = $userOrganisasi['LOGINID'];
+
+        
+
+        $titleOrg =$this->logSheetSterilizerModel->getSCD_MA_PARAM('ORG','ORGPRN')[0]['VALSTR'];
+        $titleSite =$this->logSheetSterilizerModel->getSCD_MA_PARAM('ORG','ORGSITELONG')[0]['VALSTR'];
         
 
         $fileName = 'writable/filedownload/logSheetSterilizer_'.$userid.'.xlsx';
@@ -133,9 +138,9 @@ class logSheetSterilizer extends \App\Controllers\BaseController
         
         // HEADER
         $sheet->mergeCells('A1:D1');
-        $sheet->setCellValue('A1', 'UNION SAMPOERNA TRIPUTRA PERSADA');
+        $sheet->setCellValue('A1', $titleOrg);
         $sheet->mergeCells('A2:D2');
-        $sheet->setCellValue('A2', 'PT. .....................');
+        $sheet->setCellValue('A2', $titleSite);
         $sheet->mergeCells('A3:D3');
         $sheet->setCellValue('A3', 'PALM OIL MILL');
 
@@ -269,8 +274,10 @@ class logSheetSterilizer extends \App\Controllers\BaseController
             $hari = $this->indonesiaDays(date("l", strtotime($_GET['TDATE'])));
 		}
 
+        $titleOrg =$this->logSheetSterilizerModel->getSCD_MA_PARAM('ORG','ORGPRN')[0]['VALSTR'];
+        $titleSite =$this->logSheetSterilizerModel->getSCD_MA_PARAM('ORG','ORGSITELONG')[0]['VALSTR'];
 
-		$data['Judul'] = 'Laporan LogSheet ';
+		$data['Judul'] = 'Laporan '.$this->data['site_title'];
 		$data['data_sql'] = $this->logSheetSterilizerModel->dataListExcel();
 
         $mpdf = new \Mpdf\Mpdf([
@@ -287,8 +294,8 @@ class logSheetSterilizer extends \App\Controllers\BaseController
         <tr>
             <td style=" width:33.33%; text-align: left;"> 
                 <table style="font-size: 8pt;">
-                    <tr><td  style="font-size: 7pt;color: #0000ff;"><b>UNION SAMPOERNA TRIPUTRA PERSADA</b></td></tr>
-                    <tr><td>PT. ...........</td></tr>
+                    <tr><td  style="font-size: 7pt;color: #0000ff;"><b>'.$titleOrg.'</b></td></tr>
+                    <tr><td>'.$titleSite.'</td></tr>
                     <tr><td>PALM OIL MILL</td></tr>
                 </table>
             </td>

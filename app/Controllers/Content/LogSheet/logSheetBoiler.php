@@ -22,7 +22,7 @@ class logSheetBoiler extends \App\Controllers\BaseController
 		
 		$this->logSheetBoilerModel = new logSheetBoilerModel;
 
-		$this->data['site_title'] = 'LogSheet Fertilizer ';
+		$this->data['site_title'] = 'LogSheet Boiler ';
 
 		$this->addStyle ( $this->config->baseURL . 'public/vendors/jquery-easyui-1.9.12/themes/icon.css');
 		// $this->addStyle ( $this->config->baseURL . 'public/vendors/jquery-easyui-1.9.12/themes/default/easyui.css');
@@ -95,7 +95,7 @@ class logSheetBoiler extends \App\Controllers\BaseController
 
         // $STG_ID = isset($_GET['STG_ID']) ? strval($_GET['STG_ID']) : '';
 
-		$data['Judul'] = 'Laporan LogSheet ';
+		$data['Judul'] = 'Laporan '.$this->data['site_title'];
 		$data['data_sql'] = $this->logSheetBoilerModel->dataListExcel();
 
         $mpdf = new \Mpdf\Mpdf([
@@ -108,12 +108,15 @@ class logSheetBoiler extends \App\Controllers\BaseController
 
         // $mpdf->shrink_tables_to_fit=-1;
 
+        $titleOrg =$this->logSheetBoilerModel->getSCD_MA_PARAM('ORG','ORGPRN')[0]['VALSTR'];
+        $titleSite =$this->logSheetBoilerModel->getSCD_MA_PARAM('ORG','ORGSITELONG')[0]['VALSTR'];
+
         $headerPdf = '<table style="width:100%;">
         <tr>
             <td style=" width:33.33%; text-align: left;"> 
                 <table style="font-size: 8pt;">
-                    <tr><td  style="font-size: 7pt;color: #0000ff;"><b>UNION SAMPOERNA TRIPUTRA PERSADA</b></td></tr>
-                    <tr><td>PT. ...........</td></tr>
+                    <tr><td  style="font-size: 7pt;color: #0000ff;"><b>'.$titleOrg.'</b></td></tr>
+                    <tr><td>'.$titleSite.'</td></tr>
                     <tr><td>PALM OIL MILL</td></tr>
                 </table>
             </td>

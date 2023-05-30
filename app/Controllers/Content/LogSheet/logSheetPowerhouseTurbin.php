@@ -22,7 +22,7 @@ class logSheetPowerhouseTurbin extends \App\Controllers\BaseController
 		
 		$this->logSheetPowerhouseTurbinModel = new logSheetPowerhouseTurbinModel;
 
-		$this->data['site_title'] = 'LogSheet Fertilizer ';
+		$this->data['site_title'] = 'LogSheet Power House Turbin ';
 
 		$this->addStyle ( $this->config->baseURL . 'public/vendors/jquery-easyui-1.9.12/themes/icon.css');
 		// $this->addStyle ( $this->config->baseURL . 'public/vendors/jquery-easyui-1.9.12/themes/default/easyui.css');
@@ -95,7 +95,10 @@ class logSheetPowerhouseTurbin extends \App\Controllers\BaseController
 
         // $STG_ID = isset($_GET['STG_ID']) ? strval($_GET['STG_ID']) : '';
 
-		$data['Judul'] = 'Laporan LogSheet ';
+        $titleOrg =$this->logSheetPowerhouseTurbinModel->getSCD_MA_PARAM('ORG','ORGPRN')[0]['VALSTR'];
+        $titleSite =$this->logSheetPowerhouseTurbinModel->getSCD_MA_PARAM('ORG','ORGSITELONG')[0]['VALSTR'];
+
+		$data['Judul'] = 'Laporan '.$this->data['site_title'];
 		$data['data_sql'] = $this->logSheetPowerhouseTurbinModel->dataListExcel();
 
         $mpdf = new \Mpdf\Mpdf([
@@ -112,8 +115,8 @@ class logSheetPowerhouseTurbin extends \App\Controllers\BaseController
         <tr>
             <td style=" width:33.33%; text-align: left;"> 
                 <table style="font-size: 8pt;">
-                    <tr><td  style="font-size: 7pt;color: #0000ff;"><b>UNION SAMPOERNA TRIPUTRA PERSADA</b></td></tr>
-                    <tr><td>PT. ...........</td></tr>
+                    <tr><td  style="font-size: 7pt;color: #0000ff;"><b>'.$titleOrg.'</b></td></tr>
+                    <tr><td>'.$titleSite.'</td></tr>
                     <tr><td>PALM OIL MILL</td></tr>
                 </table>
             </td>
