@@ -28,7 +28,7 @@
         <thead>
             <tr>
                 <th colspan="4" rowspan="2"><b>TEMPERATUR KERNEL SILO</b></th>
-                <th colspan="2" rowspan="2"><b>OPERASI HYDROCYCLONE</b></th>
+                <th colspan="12" ><b>OPERASI HYDROCYCLONE</b></th>
                 <th colspan="12"><b>HM RIPPLE MILL</b></th>
                 <!-- <th rowspan="3" field="TMP1" halign="center" data-options="sortable:false,width:60,align:'center' " ><b>PARAF MANDOR</b></th> -->
                 <!-- <th rowspan="3" field="TMP1" halign="center" data-options="sortable:false,width:160,align:'center' " ><b>KETERANGAN</b></th> -->
@@ -40,26 +40,44 @@
                 <th colspan="2" ><b>4</b></th>
                 <th colspan="2" ><b>5</b></th>
                 <th colspan="2" ><b>6</b></th>
+                <th colspan="2" ><b>1</b></th>
+                <th colspan="2" ><b>2</b></th>
+                <th colspan="2" ><b>3</b></th>
+                <th colspan="2" ><b>4</b></th>
+                <th colspan="2" ><b>5</b></th>
+                <th colspan="2" ><b>6</b></th>
             </tr>
             <tr>
-                <th field="TMP1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NO. 1</b></th>
-                <th field="TMP2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NO. 2</b></th>
-                <th field="VCM1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NO. 3</b></th>
-                <th field="VCM2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NO. 4</b></th>
-                <th field="CSTTMP1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>1</b></th>
-                <th field="CSTTMP2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>2</b></th>
-                <th field="CSTTMP3" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>AWAL</b></th>
-                <th field="CSTTMP4" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>AKHIR</b></th>
-                <th field="CSTTMP5" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>AWAL</b></th>
-                <th field="CSTTMP6" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>AKHIR</b></th>
-                <th field="CSTOLY1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>AWAL</b></th>
-                <th field="CSTOLY2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>0</b></th>
-                <th field="CSTOLY3" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>AWAL</b></th>
-                <th field="CSTOLY4" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>AKHIR</b></th>
-                <th field="CSTOLY5" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>AWAL</b></th>
-                <th field="CSTOLY6" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>AKHIR</b></th>
-                <th field="SDTTMP1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>AWAL</b></th>
-                <th field="SDTTMP2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>AKHIR</b></th>
+                <th field="KERSIL_TMP1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NO. 1</b></th>
+                <th field="KERSIL_TMP2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NO. 2</b></th>
+                <th field="KERSIL_TMP3" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NO. 3</b></th>
+                <th field="KERSIL_TMP4" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NO. 4</b></th>
+                
+                <th field="KERHDS_STR1_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
+                <th field="KERHDS_END1_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="basedOnStart_1"><b>STOP</b></th>
+                <th field="KERHDS_STR2_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
+                <th field="KERHDS_END2_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="basedOnStart_2"><b>STOP</b></th>
+                <th field="KERHDS_STR3_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
+                <th field="KERHDS_END3_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="basedOnStart_3"><b>STOP</b></th>
+                <th field="KERHDS_STR4_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
+                <th field="KERHDS_END4_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="basedOnStart_4"><b>STOP</b></th>
+                <th field="KERHDS_STR5_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
+                <th field="KERHDS_END5_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="basedOnStart_5"><b>STOP</b></th>
+                <th field="KERHDS_STR6_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter=""><b>START</b></th>
+                <th field="KERHDS_END6_DISP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="basedOnStart_6"><b>STOP</b></th>
+
+                <th field="KERRPM_HMS1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>AWAL</b></th>
+                <th field="KERRPM_HME1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>AKHIR</b></th>
+                <th field="KERRPM_HMS2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>AWAL</b></th>
+                <th field="KERRPM_HME2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>AKHIR</b></th>
+                <th field="KERRPM_HMS3" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>AWAL</b></th>
+                <th field="KERRPM_HME3" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>AKHIR</b></th>
+                <th field="KERRPM_HMS4" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>AWAL</b></th>
+                <th field="KERRPM_HME4" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>AKHIR</b></th>
+                <th field="KERRPM_HMS5" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>AWAL</b></th>
+                <th field="KERRPM_HME5" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>AKHIR</b></th>
+                <th field="KERRPM_HMS6" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>AWAL</b></th>
+                <th field="KERRPM_HME6" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>AKHIR</b></th>
             </tr>
         </thead>
     </table>
@@ -68,7 +86,6 @@
         <div class='col-xl-12 col-lg-12 col-md-12 row'>
             <div class="col row">
                 <input id="dt-tdate" name="TDATE" class="easyui-datebox" style="width: 150px;"  data-options="required:true">
-                <input id="cb-stationid" name="STATIONID" class="" style="width:100px;" >
                 <!-- <div class="col-xl-3 col-lg-3 col-md-3 row"> -->
                     <!-- <input id="tb-Year" name="YEARNUMBER" class="easyui-numberbox " style="width: 100px;"  data-options="required:true" prompt="Year"> -->
                     <!-- <input id="cg-MonthNumber" name="MONTHNUMBER" class="easyui-combogrid" style="width: 200px;"  data-options="required:true" prompt="Month"> -->
@@ -94,17 +111,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
-            settingCalendarTDATE();            
-
-            $('#cb-stationid').combobox({
-                valueField: 'ID',
-                textField: 'DESCRIPTION',
-                prompt:"Press ID",
-                required:true,
-                value:"1",
-                url: "<?php  echo site_url() . '/../Content/LogSheet/logSheetKernel/getStationID'; ?>",
-            });
-
+            settingCalendarTDATE();      
             doSearch();
 
         });
@@ -161,7 +168,6 @@
         function doSearch() {
 
             var dateParam = $('#dt-tdate').datebox('getValue');
-            var idParam =  $('#cb-stationid').combobox('getValue');
 
             if( dateParam.trim() == '' || dateParam.trim() == null ){
                 // alert('"Tanggal" Harus Di Isi Dahulu');
@@ -173,25 +179,14 @@
                 exit;   
             } 
 
-            if( idParam.trim() == '' || idParam.trim() == null ){
-                // alert('"Storage" Harus Di Isi Dahulu');
-                $.messager.alert({    
-                    title: 'Info',
-                    msg: 'Pilih Press ID Dahulu ! '
-                });
-                $('#cb-stationid').combobox('textbox').focus();
-                exit;   
-            } 
 
             $('#dg').datagrid('load', {
                 TDATE: $('#dt-tdate').datebox('getValue'),
-                STATIONID: $('#cb-stationid').combobox('getValue'),
             });
         }
 
         function doSearchReset() {
             $('#dt-tdate').datebox('reset');
-            $('#cb-stationid').combobox('reset');
 
         }
 
@@ -211,6 +206,72 @@
                 returnVal = parseFloat(val).format(0, 3, ',', '.');
             } 
             return  returnVal;
+        }
+
+        function basedOnStart_1(val,row,lol){
+
+            var startTime = row.KERHDS_STR1_DISP;
+            if( startTime != null){
+                var result = '';
+            } else {
+                var result = val;
+            }
+            return  result;
+        }
+
+        function basedOnStart_2(val,row,lol){
+
+            var startTime = row.KERHDS_STR2_DISP;
+            if( startTime != null){
+                var result = '';
+            } else {
+                var result = val;
+            }
+            return  result;
+        }
+
+        function basedOnStart_3(val,row,lol){
+
+            var startTime = row.KERHDS_STR3_DISP;
+            if( startTime != null){
+                var result = '';
+            } else {
+                var result = val;
+            }
+            return  result;
+        }
+
+        function basedOnStart_4(val,row,lol){
+
+            var startTime = row.KERHDS_STR4_DISP;
+            if( startTime != null){
+                var result = '';
+            } else {
+                var result = val;
+            }
+            return  result;
+        }
+
+        function basedOnStart_5(val,row,lol){
+
+            var startTime = row.KERHDS_STR5_DISP;
+            if( startTime != null){
+                var result = '';
+            } else {
+                var result = val;
+            }
+            return  result;
+        }
+
+        function basedOnStart_6(val,row,lol){
+
+            var startTime = row.KERHDS_STR6_DISP;
+            if( startTime != null){
+                var result = '';
+            } else {
+                var result = val;
+            }
+            return  result;
         }
 
         function imageTrue(val,row){
@@ -235,7 +296,6 @@
         function exportDataExcel() {
         
             var dateParam = $('#dt-tdate').datebox('getValue');
-            var idParam =  $('#cb-stationid').combobox('getValue');
 
             if( dateParam.trim() == '' || dateParam.trim() == null ){
                 $.messager.alert({    
@@ -246,23 +306,14 @@
                 exit;   
             } 
 
-            if( idParam.trim() == '' || idParam.trim() == null ){
-                $.messager.alert({    
-                    title: 'Info',
-                    msg: 'Pilih Press ID Dahulu ! '
-                });
-                $('#cb-stationid').combobox('textbox').focus();
-                exit;   
-            } 
 
-            var url = "<?php  echo site_url() . '/../Content/LogSheet/logSheetKernel/exportExcelFile?TDATE='; ?>"+dateParam+"&STATIONID="+idParam;
+            var url = "<?php  echo site_url() . '/../Content/LogSheet/logSheetKernel/exportExcelFile?TDATE='; ?>"+dateParam;
             window.open(url, "_blank");
         }
 
         function exportDataPDF() {
         
             var dateParam = $('#dt-tdate').datebox('getValue');
-            var idParam =  $('#cb-stationid').combobox('getValue');
 
             if( dateParam.trim() == '' || dateParam.trim() == null ){
                 $.messager.alert({    
@@ -273,17 +324,7 @@
                 exit;   
             } 
 
-            if( idParam.trim() == '' || idParam.trim() == null ){
-                $.messager.alert({    
-                    title: 'Info',
-                    msg: 'Pilih Press ID Dahulu ! '
-                });
-                $('#cb-stationid').combobox('textbox').focus();
-                exit;   
-            } 
-
-             var url = "<?php  echo site_url() . '/../Content/LogSheet/logSheetKernel/exportPDFFile?TDATE='; ?>"+dateParam+"&STATIONID="+idParam;
-            // var url = "<?php // echo site_url() . '/../Content/LogSheet/logSheetKernel/cekPdfView?TDATE='; ?>"+dateParam+"&STATIONID="+idParam;
+             var url = "<?php  echo site_url() . '/../Content/LogSheet/logSheetKernel/exportPDFFile?TDATE='; ?>"+dateParam;
             window.open(url, "_blank");
     }
 
