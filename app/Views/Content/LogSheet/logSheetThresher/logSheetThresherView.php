@@ -33,37 +33,37 @@
                 <!-- <th rowspan="3" field="TMP1" halign="center" data-options="sortable:false,width:160,align:'center' " ><b>KETERANGAN</b></th> -->
             </tr>
             <tr>
-                <th rowspan="3" field="TMP1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>SAMPLE</b></th>
-                <th rowspan="3" field="TMP2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>USB</b></th>
-                <th rowspan="3" field="VCM1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>%</b></th>
+                <th rowspan="3" field="THRSMP" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>SAMPLE</b></th>
+                <th rowspan="3" field="THRUSB" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>USB</b></th>
+                <th rowspan="3" field="THRPER" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>%</b></th>
                 <th colspan="4" ><b>VOLT / AMPERE</b></th>
                 <th colspan="6" ><b>KONDISI GEAR BOX</b></th>
                 <th colspan="2" ><b>POMPA</b></th>
                 <th colspan="4" ><b>HM</b></th>
             </tr>
             <tr>
-                <th rowspan="2" field="VCM2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>EBP I</b></th>
-                <th rowspan="2" field="CSTTMP1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>EBP I</b></th>
-                <th rowspan="2" field="CSTTMP2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>EBP II</b></th>
-                <th rowspan="2" field="CSTTMP3" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>EBP II</b></th>
+                <th rowspan="2" field="THREBP_V1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>EBP I</b></th>
+                <th rowspan="2" field="THREBP_A1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>EBP I</b></th>
+                <th rowspan="2" field="THREBP_V2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>EBP II</b></th>
+                <th rowspan="2" field="THREBP_A2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>EBP II</b></th>
                 <th colspan="3" ><b>EBP I</b></th>
                 <th colspan="3" ><b>EBP II</b></th>
-                <th rowspan="2" field="CSTTMP4" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NO. 1</b></th>
-                <th rowspan="2" field="CSTTMP5" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NO. 2</b></th>
+                <th rowspan="2" field="THRPMP1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NO. 1</b></th>
+                <th rowspan="2" field="THRPMP2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NO. 2</b></th>
                 <th colspan="2" ><b>EBP I</b></th>
                 <th colspan="2" ><b>EBP II</b></th>
             </tr>
             <tr>
-                <th field="CSTTMP6" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>BAIK</b></th>
-                <th field="CSTOLY1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NORMAL</b></th>
-                <th field="CSTOLY2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>KURANG</b></th>
-                <th field="CSTOLY3" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>BAIK</b></th>
-                <th field="CSTOLY4" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NORMAL</b></th>
-                <th field="CSTOLY5" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>KURANG</b></th>
-                <th field="CSTOLY6" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>START</b></th>
-                <th field="SDTTMP1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>STOP</b></th>
-                <th field="SDTTMP2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>START</b></th>
-                <th field="SDTTMP3" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>STOP</b></th>
+                <th field="THREBP_GB1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>BAIK</b></th>
+                <th field="THREBP_GB1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NORMAL</b></th>
+                <th field="THREBP_GB1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>KURANG</b></th>
+                <th field="THREBP_GB2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>BAIK</b></th>
+                <th field="THREBP_GB2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>NORMAL</b></th>
+                <th field="THREBP_GB2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>KURANG</b></th>
+                <th field="THREBP_HMS1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>START</b></th>
+                <th field="THREBP_HME1" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>STOP</b></th>
+                <th field="THREBP_HMS2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>START</b></th>
+                <th field="THREBP_HME2" halign="center" data-options="sortable:false,width:60,align:'center' " formatter="formatNumberColumnCostum"><b>STOP</b></th>
             </tr>
         </thead>
     </table>
