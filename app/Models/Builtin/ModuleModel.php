@@ -114,6 +114,8 @@ class ModuleModel extends \App\Models\BaseModel
 
 			$id_module = $this->request->getPost('id');
 
+			$ID_MODULE = $this->request->getPost('id');
+
 			$tablename = '{prefix_portal}MODULE';
 			$tablename = $this->ubahPrefix($tablename);
 
