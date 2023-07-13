@@ -167,12 +167,18 @@
             functionData ='';
         }
 
+        DIVID_New = iNumbers;
+
+        if(iNumbers >=1 & iNumbers <=5){
+            DIVID_New = iNumbers +130;
+        }
+
         $.ajax({
         url:"<?php echo site_url().'/../Content/Report/historicalPressureChart/'; ?>"+functionData,
         type: 'post',
         data : {
             TDATE : tdate,
-            DIVID : iNumbers,
+            DIVID : DIVID_New,
         },
         beforeSend: function (){
             $(".myChart"+iNumbers).append('<i class="fa fa-spin fa-spinner myChartSpinner'+iNumbers+'" style="font-size:30px; position:absolute; top:100px;z-index: 2;"></i>');
